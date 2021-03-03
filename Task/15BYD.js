@@ -60,21 +60,19 @@ if (typeof $request !== 'undefined') {
 $.msg($.name,"开始🎉🎉🎉")
 
       await checkWaterNum()
+      await zaoWanDkInfo() //早晚打卡ok
+      await sleepStatus()   //晚上再测试
       await pophongbaoyu()
       await checkHomeJin()
       //await helpStatus()  //暂未
       await checkWaterNum()
       await clickTaskStatus()  //任务赚赚界面ok
       await userInfo()
-      if (hour>7 && hour <12){
+      if (hour>7 && hour <15){
         await signIn()  //暂未
         await getNewsId() //阅读新闻+抽奖box ok
         await guaList()  //刮卡ok
         await cashCheck()
-      }
-      if (hour>1 && hour <12){
-      await zaoWanDkInfo() //早晚打卡ok
-      await sleepStatus()   //晚上再测试
       }
       await showmsg()
 
