@@ -119,6 +119,7 @@ if ($.isNode()) {
     console.log($.name, '【提示】请先前往获取cookie📲')
     return;
   }
+  $.msg('现在时间为'+hour+':'+minute)
   console.log(`\n✅ 检查共有多少个账号。。。`)
   await $.wait(4000)
   console.log(`👥 本次执行共${txtokenArr.length}个账号`)

@@ -76,6 +76,15 @@ let max = 30;
 let min = 10;
 
 
+
+if ($.isNode()) {
+  hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
+  minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
+} else {
+  hour = (new Date()).getHours();
+  minute = (new Date()).getMinutes();
+}
+
 if ($.isNode()) {
   if (process.env.YSMURL && process.env.YSMURL.indexOf('#') > -1) {
    ysmurlArr = process.env.YSMURL.split('#');
@@ -150,6 +159,7 @@ if (!ysmhdArr[0]) {
     $.msg($.name, '【提示】请先获取云扫码一cookie')
     return;
   }
+  $.msg('现在时间为'+hour+':'+minute)
     console.log(`------------- 共${ysmhdArr.length}个账号-------------\n`)
       for (let i = 0; i < ysmhdArr.length; i++) {
         if (ysmhdArr[i]) {

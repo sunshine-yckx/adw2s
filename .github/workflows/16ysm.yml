@@ -45,7 +45,7 @@ jobs:
           npm install -g npm
           npm update
 
-      - name: '运行 【dkd】'
+      - name: '运行 【16ysm(云扫码)】'
         if: env.YSMURL
         run: |
           cd ~/Scripts

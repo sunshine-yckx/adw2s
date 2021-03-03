@@ -42,9 +42,14 @@ if ($.isNode()) {
 
 let now = new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000);
 
-var hour = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getHours();
-var minute = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getMinutes();
-$.msg('现在时间为'+hour+':'+minute)
+if ($.isNode()) {
+  var hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
+  var minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
+} else {
+  var hour = (new Date()).getHours();
+  var minute = (new Date()).getMinutes();
+}
+
 
 if (typeof $request !== 'undefined') {
    if ($request && $request.method != `OPTIONS` && $request.url.indexOf('user/profile') != -1) {
@@ -58,6 +63,7 @@ if (typeof $request !== 'undefined') {
 !(async () => {
 
 $.msg($.name,"开始🎉🎉🎉")
+$.msg('现在时间为'+hour+':'+minute)
 
       await checkWaterNum()
       await zaoWanDkInfo() //早晚打卡ok
