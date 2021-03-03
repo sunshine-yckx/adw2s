@@ -138,11 +138,13 @@ async function checkin(){
    $.post(checkin_url,async(error, response, data) =>{
     try{
         const result = JSON.parse(data)
+        $.log(data)
         if(logs)$.log(data)
         if(result.code == 0){
          for(let i = 0; i < 29; i++){
          let day = result.data.record.i == 0 ? (i -1) : i
          }
+	  console.log(`打卡成功：累计打卡${day}天\n`)
 	  console.log(`打卡成功：累计获得${result.data.curMoney}元\n`)
           message += `打卡成功：累计获得${result.data.curMoney}元`
         }else if(result.code == 2){

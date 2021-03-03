@@ -67,14 +67,14 @@ hostname = .*.top
 const $ = new Env('云扫码自动阅读');
 let status;
 status = (status = ($.getval("ysmstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-var  ysmurl,ysmhd,ysmbody,ysm2body,ysmtx
+//var  ysmurl,ysmhd,ysmbody,ysm2body,ysmtx
 const ysmurlArr = [], ysmhdArr = [],ysmbodyArr = [],ysm2bodyArr = [],ysmtxArr = [],ysmcount = ''
-let ysmurl = $.getdata('ysmurl')
-let ysmhd = $.getdata('ysmhd')
-let ysmbody = $.getdata('ysmbody')
-let ysm2body = $.getdata('ysm2body')
-let ysmtx = $.getdata('ysmtx')
-let ysmkey = ''
+var ysmurl = $.getdata('ysmurl')
+var ysmhd = $.getdata('ysmhd')
+var ysmbody = $.getdata('ysmbody')
+var ysm2body = $.getdata('ysm2body')
+var ysmtx = $.getdata('ysmtx')
+var ysmkey = ''
 
 
 if ($.isNode()) {
