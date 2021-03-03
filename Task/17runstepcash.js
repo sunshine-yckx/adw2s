@@ -115,7 +115,7 @@ if ($.isNode()) {
 
 !(async () => {
   cc = (`${jsname}任务执行通知🔔`);
-  if (typeof $.getdata('txtoken') === "undefined") {
+  if (!runsteptokenArr[0]) {
     console.log($.name, '【提示】请先前往获取cookie📲')
     return;
   }
