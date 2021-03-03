@@ -292,7 +292,7 @@ return new Promise((resolve, reject) => {
       //$.log('————dkClick————\n'+data)
       if(clickdk.code == 200) {
           $.log('\n🎉'+clickdk.message+'+ '+clickdk.jinbi+'💰\n')
-          $.message(`${title1}`,`${title2}`,'')
+          $.msg(`${title1}`,`${title2}`,'')
           await checkWaterNum()
            }else{
           $.log('\n⚠️'+clickdk.message)
