@@ -252,7 +252,7 @@ let url = {
        console.log('\n云扫码key提交成功,即将开始领取阅读奖励')
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
-	await $.wait(random);
+      	await $.wait(random);
     //    await $.wait(8000);
         await ysm3();
 

@@ -18,6 +18,8 @@ const $ = new Env('BYD')
 const notify = $.isNode() ?require('./sendNotify') : '';
 let notice = ''
 let CookieVal = $.getdata('byd_ck')
+let max = 50;
+let min = 35;
 
 var  homeJinStr,homeJinStr,redBagStr,goltimestr,boxtimestr,goldEggStr,goldEggId,boxStr,boxtaskid,nonce_str,newsStr,luckyStr,luckyBoxStr,tip,H5ID,H5Str,H5TaskID
 var renwu,tasktaskid,taskclickStr,waterNum,waterSpStr,sleepStr,sleepId,box,noticemsg,signInStr
@@ -144,7 +146,10 @@ return new Promise((resolve, reject) => {
       if(sign.code == 200) {
           $.log('\n🎉'+sign.message+'签到金币+ '+sign.jinbi+'💰\n')
           signInStr = sign.nonce_str
-          await $.wait(15000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(15000)
           await signDouble()
          }else{
           $.log('\n🎉'+sign.message+'\n')
@@ -189,7 +194,10 @@ return new Promise((resolve, reject) => {
         if(pophongbaoyu1.code == 200) {
           if(pophongbaoyu1.hongbaoyu_show == 1 && pophongbaoyu1.hongbaoyu_count != 0){
             $.log('\n🔔红包雨准备好了，开始领取红包雨\n')
-            await $.wait(15000)
+            random = Math.floor(Math.random()*(max-min+1)+min)*1000
+            console.log(random);
+            await $.wait(random);
+            //await $.wait(15000)
             await hongbaoyu()
           }
         }else{
@@ -260,11 +268,15 @@ return new Promise((resolve, reject) => {
      const zwdk = JSON.parse(data)
       //$.log('————zaoWanDk————\n'+data)
       if(zwdk.code == 200) {
-      zwdkStr = zwdk.nonce_str
-          await $.wait(30000)
-          await dkClick()
-           }
-          resolve()
+
+        zwdkStr = zwdk.nonce_str
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+        await $.wait(random);
+        //await $.wait(30000)
+        await dkClick()
+       }
+      resolve()
     })
    })
   }
@@ -314,7 +326,10 @@ return new Promise((resolve, reject) => {
              GID = guaId.id
              $.log('\n🔔查询刮刮卡ID成功,5s后开始查询刮卡签名\n')
              $.log('\nGID: '+GID+'\n')
-             await $.wait(5000)
+             random = Math.floor(Math.random()*(max-min+1)+min)*1000
+             console.log(random);
+             await $.wait(random);
+             //await $.wait(5000)
              await guaDet()
             }
            }
@@ -346,7 +361,10 @@ return new Promise((resolve, reject) => {
           GLID = guasign.glid
           $.log('\nsign: '+SIGN+'\n')
           $.log('\nglid: '+GLID+'\n')
-          await $.wait(5000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(5000)
           await guaPost()
          }
           resolve()
@@ -369,7 +387,10 @@ return new Promise((resolve, reject) => {
      if(typeof guaka.jf === 'number') {
           guaStr = guaka.nonce_str
           $.log('\n🎉刮卡成功\n恭喜您刮出'+guaka.tp+'張相同圖案  获得金币 +'+guaka.jf+'\n等待45s后开始翻倍刮卡奖励')
-          await $.wait(45000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(45000)
           await guaDouble()
          }
           resolve()
@@ -419,7 +440,10 @@ return new Promise((resolve, reject) => {
           if(waternum.next_time == 0){
             if(waternum.is_sp == 1){
                 $.log('\n🎉喝水前需要看广告！,1s后开始看广告\n')
-                await $.wait(1000)
+                //await $.wait(1000)
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
                 await checkWaterSp()
              }else{
                 $.log('\n🎉查询成功,1s后领取喝水奖励\n')
@@ -468,7 +492,10 @@ return new Promise((resolve, reject) => {
      const spwater = JSON.parse(data)
       if(spwater.code == 200) {
           $.log('\n🎉正在观看喝水广告, 30后领取喝水奖励\n')
-          await $.wait(30000)
+          //await $.wait(30000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await waterClick()
            }
           resolve()
@@ -651,7 +678,10 @@ return new Promise((resolve, reject) => {
       if(taskclick.code == 200) {
           $.log('\n🎉任务奖励领取成功,3s后领取翻倍奖励\n')
           taskclickStr = taskclick.nonce_str
-          await $.wait(35000)
+          //await $.wait(35000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await TaskClickDoubleAd()
            }else{
           $.log('\n⚠️任务奖励领取失败:'+taskclick.message+'\n')
@@ -675,7 +705,10 @@ return new Promise((resolve, reject) => {
       //$.log('————TaskClickAd————\n'+data)
       if(taskclickDouble.code == 200) {
           $.log('\n🎉翻倍奖励领取成功,3s后查询赚赚任务状态\n')
-          await $.wait(3000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(3000)
           await clickTaskStatus()
            }else{
           $.log('\n⚠️翻倍奖励领取失败:'+taskclickDouble.message+'\n')
@@ -748,7 +781,10 @@ return new Promise((resolve, reject) => {
           $.log('\n🎉首页金币: 金币2 +'+homejb.jinbi+' ,等待30s后开始翻倍金币\n')
           homeJinStr = homejb.nonce_str
           //$.log('\n'+homeJinStr+'\n')
-          await $.wait(30000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(30000)
           await homeJinCallBack()
     }else{
           $.log('\n⚠️首页金币失败:'+homejb.message+'\n')
@@ -774,7 +810,10 @@ return new Promise((resolve, reject) => {
             $.log('\n🎉首页金币: 金币1 +'+homejb.jinbi+' ,等待30s后开始翻倍金币\n')
             homeJinStr = homejb.nonce_str
             //$.log('\n'+homeJinStr+'\n')
-            await $.wait(30000)
+            random = Math.floor(Math.random()*(max-min+1)+min)*1000
+            console.log(random);
+            await $.wait(random);
+            //await $.wait(30000)
             await homeJinCallBack()
       }else{
             $.log('\n⚠️首页金币失败:'+homejb.message+'\n')
@@ -823,7 +862,10 @@ return new Promise((resolve, reject) => {
       if(code.code == 200) {
           redBagStr = code.nonce_str
           $.log('\n🔔查询首页红包ID成功,等待30s后领取首页红包\n')
-          await $.wait(30000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(30000)
           await redBagCallback()
        }else{
           $.log('\n⚠️首页红包失败:'+code.message+'\n')
@@ -911,7 +953,10 @@ return new Promise((resolve, reject) => {
           //$.log('\n'+goldEggStr+'\n')
           goldEggId = goldeggid.taskid
           //$.log('\n'+goldEggId+'\n')
-          await $.wait(3000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(3000)
           await goldEggDone()
            }else{
           $.log('\n⚠️首页金蛋失败:'+goldeggid.messgae+'\n')
@@ -936,7 +981,10 @@ return new Promise((resolve, reject) => {
       $.log('\n🔔开始领取首页金蛋奖励\n')
       if(goldegg2.code == 200) {
           $.log('\n🎉金蛋领取:'+goldegg2.message+' 金币 +'+goldegg2.jinbi+'\n')
-          await $.wait(30000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(30000)
           await goldEggCallback()
        }else{
       $.log('\n⚠️首页金蛋失败:'+goldegg2.message+'\n')
@@ -990,7 +1038,10 @@ return new Promise((resolve, reject) => {
         if(boxid.code == 200) {
             boxStr = boxid.nonce_str
             boxtaskid = boxid.taskid
-            await $.wait(3000)
+            random = Math.floor(Math.random()*(max-min+1)+min)*1000
+            console.log(random);
+            await $.wait(random);
+            //await $.wait(3000)
             await boxDone()
              }else{
             $.log('\n⚠️盒子失败:'+goldeggid.message+'\n')
@@ -1015,7 +1066,10 @@ return new Promise((resolve, reject) => {
       if(boxxdone2.code == 200) {
           $.log('\n🔔开始领取盒子奖励\n')
           $.log('\n🎉首页盒子:'+boxxdone2.message+' 金币 +'+boxxdone2.jinbi+'\n')
-          await $.wait(30000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(30000)
           await boxCallback()
            }else{
           $.log('\n⚠️首页盒子失败:'+boxxdone2.message+'\n')
@@ -1040,7 +1094,10 @@ return new Promise((resolve, reject) => {
       $.log('\n🔔开始翻倍盒子\n')
       if(boxback.code == 200) {
           $.log('\n🎉盒子翻倍成功\n')
-          await $.wait(5000)
+          //await $.wait(5000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await checkGoldtime()
        }else{
           $.log('\n⚠️盒子翻倍失败:'+boxback.message+'\n')
@@ -1109,8 +1166,11 @@ return new Promise((resolve, reject) => {
      const help = JSON.parse(data)
       //$.log('————helpClick————\n'+data)
       if(help.code == 200) {
-$.log('\n🔔开始观看助力视频, 60s后领取助力视频奖励\n')
-          await $.wait(60000)
+          $.log('\n🔔开始观看助力视频, 60s后领取助力视频奖励\n')
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(60000)
           $.log('\n🎉观看助力视频成功, 1s后领取金币+ '+help.jinbi+'\n')
           await callBack()
            }else{
@@ -1163,7 +1223,10 @@ return new Promise((resolve, reject) => {
           $.log('\n🔔开始查询新闻ID\n')
           newsStr = newsid.nonce_str
           $.log('\n🎉新闻ID查询成功,15s后领取阅读奖励\n')
-          await $.wait(15000)
+          //await $.wait(15000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await autoRead()
           }else{
           $.log('\n⚠️阅读失败: 今日阅读已上限\n')
@@ -1212,7 +1275,10 @@ return new Promise((resolve, reject) => {
       $.log('\n🔔开始查询抽奖次数\n')
       if(num.lucky_num != 0) {
           $.log('\n🎉剩余抽奖次数:'+num.lucky_num+' ,3s后开始抽奖\n')
-          await $.wait(3000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(3000)
           await luckyClick()
          }else if(num.lucky_num == 0) {
           $.log('\n⚠️今日抽奖次数已用完,1s后查询宝箱状态\n')
@@ -1249,7 +1315,10 @@ return new Promise((resolve, reject) => {
           luckyStr = lucky.nonce_str
           //$.log('\n'+luckyStr+'\n')
       if(lucky.jinbi != 0) {
-          await $.wait(10000)
+          //await $.wait(10000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await luckyCallBack()
          }else{
           await checkLuckNum()
@@ -1275,7 +1344,10 @@ return new Promise((resolve, reject) => {
       $.log('\n🔔开始翻倍抽奖\n')
       if(callback.code == 200) {
           $.log('\n🎉抽奖翻倍成功\n')
-          await $.wait(25000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(25000)
           await checkLuckNum()
            }else{
           $.log('\n⚠️抽奖翻倍失败:'+callback.message+'\n')
@@ -1302,7 +1374,10 @@ return new Promise((resolve, reject) => {
           $.log('🎉宝箱: '+boxlucky.message+' 金币+'+boxlucky.jinbi+'\n')
           luckyBoxStr = boxlucky.nonce_str
           $.log('\n🔔宝箱翻倍ID'+luckyBoxStr+'\n')
-          await $.wait(15000)
+          //await $.wait(15000)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await luckyBoxCallBack()
          }else{
           $.log('\n⚠️宝箱失败:'+boxlucky.message+'\n')
@@ -1459,8 +1534,11 @@ return new Promise((resolve, reject) => {
 }
    $.get(uploadtime,async(error, response, data) =>{
      //$.log('————upLoadTime————\n'+data)
-$.log('\nupLoadTime:'+timestamp+'\n'+data+'\n')
-          await $.wait(30000)
+          $.log('\nupLoadTime:'+timestamp+'\n'+data+'\n')
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(30000)
           await h5Done()
           resolve()
     })
@@ -1476,8 +1554,11 @@ return new Promise((resolve, reject) => {
     timeout: 30000,
 }
    $.get(uploadtime,async(error, response, data) =>{
-$.log('\nupLoadTime2:'+data+'\n')
-          await $.wait(30000)
+          $.log('\nupLoadTime2:'+data+'\n')
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+          //await $.wait(30000)
           await h5Done()
           resolve()
     })
