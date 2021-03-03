@@ -67,14 +67,13 @@ hostname = .*.top
 const $ = new Env('云扫码自动阅读');
 let status;
 status = (status = ($.getval("ysmstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-//var  ysmurl,ysmhd,ysmbody,ysm2body,ysmtx
 const ysmurlArr = [], ysmhdArr = [],ysmbodyArr = [],ysm2bodyArr = [],ysmtxArr = [],ysmcount = ''
-var ysmurl = $.getdata('ysmurl')
-var ysmhd = $.getdata('ysmhd')
-var ysmbody = $.getdata('ysmbody')
-var ysm2body = $.getdata('ysm2body')
-var ysmtx = $.getdata('ysmtx')
-var ysmkey = ''
+let ysmurl = $.getdata('ysmurl')
+let ysmhd = $.getdata('ysmhd')
+let ysmbody = $.getdata('ysmbody')
+let ysm2body = $.getdata('ysm2body')
+let ysmtx = $.getdata('ysmtx')
+let ysmkey = ''
 
 
 if ($.isNode()) {
@@ -83,7 +82,7 @@ if ($.isNode()) {
      ysmurl = process.env.YSMURL.split('#');
      console.log(`您選擇的是用"#"隔開\n`)
     }
-    else if (process.env.YSMURLYSMURL && process.env.YSMURL.indexOf('\n') > -1) {
+    else if (process.env.YSMURL && process.env.YSMURL.indexOf('\n') > -1) {
      ysmurl = process.env.YSMURL.split('\n');
      console.log(`您選擇的是用換行隔開\n`)
     } else {
@@ -248,7 +247,7 @@ let url = {
         if(result.data.last_gold >= 3000){
     console.log('\n检测到当前金额可提现，前去执行提现')
 await ysmdh();
-}       await $.wait(6000);
+}       await $.wait(6500);
         await ysm1();
 
 } else {
@@ -326,15 +325,15 @@ let url = {
           //console.log(data)
     const result = JSON.parse(data)
         if(result.errcode == 0){
-         console.log(data)
-        console.log('\n云扫码获取key回执:成功🌝 开始 循环观看💦')
-      if(result.data.link === undefined){
-       console.log('\n🧼来自肥皂的提示:没有匹配到key'+result.data.msg)
-} else {
-        ysmkey = result.data.link
-        await ysm2();
-        await $.wait(1000);
-}
+          console.log(data)
+          console.log('\n云扫码获取key回执:成功🌝 开始 循环观看💦')
+          if(result.data.link === undefined){
+           console.log('\n🧼来自肥皂的提示:没有匹配到key'+result.data.msg)
+          } else {
+                  ysmkey = result.data.link
+                  await $.wait(2000);
+                  await ysm2();
+          }
 
 } else {
 console.log('云扫码获取key回执:失败🚫 '+result.msg+' 已停止当前账号运行!')
