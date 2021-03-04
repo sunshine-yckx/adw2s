@@ -170,8 +170,8 @@ if (!ysmhdArr[0]) {
           ysm2body = ysm2bodyArr[i];
           $.index = i + 1;
           console.log(`\n开始【云扫码${$.index}】`)
-          await ysmdh();
     await ysm1();
+    await ysmdh();
 
   }
   //await ysmtx();
