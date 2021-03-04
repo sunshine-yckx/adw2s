@@ -1,7 +1,7 @@
 //独立COOKIE文件     ck在``里面填写，多账号换行
 
 //let yuedongzutokenVal = ``
-let yuedongzutokenVal = process.env.BYD_CK
+let yuedongzutokenVal = process.env.yuedongzucookie
 
 
 
