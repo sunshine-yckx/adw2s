@@ -170,6 +170,7 @@ if (!ysmhdArr[0]) {
           ysm2body = ysm2bodyArr[i];
           $.index = i + 1;
           console.log(`\n开始【云扫码${$.index}】`)
+          await ysmdh();
     await ysm1();
 
   }
@@ -342,7 +343,7 @@ function ysmdh(timeout = 0) {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/user_gold",
         headers : JSON.parse(ysmhd),
-        body : 'openid='+ysmtx.match(/openid=(.*?)ua/)[1]+'gold=3000',
+        body : 'openid='+ysmtx.match(/openid=(.*?)ua/)[1]+'gold=5000',
 }
       $.post(url, async (err, resp, data) => {
         try {
