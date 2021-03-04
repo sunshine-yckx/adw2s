@@ -16,11 +16,7 @@ on:
 jobs:
   build:
     env:
-      BYD_CK1: ${{ secrets.BYD_CK1 }}
-      BYD_CK2: ${{ secrets.BYD_CK2 }}
-      BYD_CK3: ${{ secrets.BYD_CK3 }}
-      BYD_CK4: ${{ secrets.BYD_CK4 }}
-      BYD_CK5: ${{ secrets.BYD_CK5 }}
+      yuedongzucookie: ${{ secrets.yuedongzucookie }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
       TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
@@ -47,25 +43,9 @@ jobs:
           npm update
 
       - name: '运行 【yuedongzu1】'
-        if: env.BYD_CK1
+        if: env.yuedongzucookie
         run: |
           cd ~/Scripts
           node Task/15yuedongzu.js
         env:
-          BYD_CK: ${{ secrets.BYD_CK1 }}
-
-      - name: '运行 【yuedongzu2】'
-        if: env.BYD_CK2
-        run: |
-          cd ~/Scripts
-          node Task/15yuedongzu.js
-        env:
-          BYD_CK: ${{ secrets.BYD_CK2 }}
-
-      - name: '运行 【yuedongzu3】'
-        if: env.BYD_CK3
-        run: |
-          cd ~/Scripts
-          node Task/15yuedongzu.js
-        env:
-          BYD_CK: ${{ secrets.BYD_CK3 }}
+          yuedongzucookie: ${{ secrets.yuedongzucookie }}
