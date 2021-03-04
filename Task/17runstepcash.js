@@ -156,7 +156,7 @@ function showmsg1() {
 async function showmsg2() {
   if (notifyInterval == 1) {
     if ($.isNode()) {
-      if (hour == 9 || hour == 23) {
+      if (hour == 9 || hour == 22) {
         await notify.sendNotify($.name, tz)
       }
     } else {
@@ -174,7 +174,7 @@ async function runstepcash() {
   await txlog()
   console.log(`\n🇨🇳【开始提现任务】`)
   $.log('👩‍⚕️提现策略:\n账户金额大于50元,优先提现50元,否则提现1元。\n')
-  if (hour == 10 ) {
+  if (hour == 9 || hour == 22) {
     await cash()
   } else {
     $.log(`👧每天提现为：凌晨零点,中午12点,下午5点...请自行设置定时，或者手动执行！\n`)
@@ -265,17 +265,22 @@ async function txlog() {
 //cash
 async function cash() {
   if (usercash >= 50) {
-    $.log(`开始请求提现5元...\n`);
+    $.log(`开始请求提现50元...\n`);
     await cash50()
-  } else if(usercash <= 1) {
+  }else{
+    //$.log(`【请求提现1元】:⛔️目前失效,暂停请求提现1元\n`);
+    $.log(`⛔️还没到提现得时候...\n`);
+  }
+  /*else if(usercash <= 1) {
     $.log(`【请求提现1元】:账户金额不足1元！\n`);
     tz += `【请求提现1元】:账户金额不足1元！\n`
   }else{
     //$.log(`【请求提现1元】:⛔️目前失效,暂停请求提现1元\n`);
     $.log(`开始请求提现1元...\n`);
     await cash1()
-  }
+  }*/
 }
+
 async function cash1() {
   return new Promise((resolve) => {
     let url = {
