@@ -224,15 +224,19 @@ let url = {
         if(result.errcode == 0){
         console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+' 今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
         if(result.data.last_gold >= 3000){
-    console.log('\n检测到当前金额可提现，前去执行提现')
-    console.log('\n提现已被注释')
-//await ysmdh();
-}       await $.wait(2000);
+            console.log('\n检测到当前金额可提现，前去执行提现')
+            //console.log('\n提现已被注释')
+            await ysmdh();
+          }
+        //await $.wait(2000);
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+       	await $.wait(random);
         await ysm1();
 
-} else {
-       console.log('\n云扫码领取阅读奖励回执:失败🚫 '+result.msg)
-}
+        } else {
+               console.log('\n云扫码领取阅读奖励回执:失败🚫 '+result.msg)
+        }
 
         } catch (e) {
           //$.logErr(e, resp);
