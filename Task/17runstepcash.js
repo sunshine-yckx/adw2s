@@ -187,7 +187,6 @@ async function myself() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/myself?appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
-      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -226,7 +225,6 @@ async function txlog() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/txlog?page=1&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Flog%2Flog&platform=miniProgram&env=production`,
-      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -278,7 +276,6 @@ async function cash1() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/applytx?account=1&type=2&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
-      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -307,7 +304,6 @@ async function cash50() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/applytx?account=50&type=2&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
-      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
