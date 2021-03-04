@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 15BYD
+name: 15yuedongzu
 
 on:
   workflow_dispatch:
@@ -46,7 +46,7 @@ jobs:
           npm install -g npm
           npm update
 
-      - name: '运行 【BYD1】'
+      - name: '运行 【yuedongzu1】'
         if: env.BYD_CK1
         run: |
           cd ~/Scripts
@@ -54,7 +54,7 @@ jobs:
         env:
           BYD_CK: ${{ secrets.BYD_CK1 }}
 
-      - name: '运行 【BYD2】'
+      - name: '运行 【yuedongzu2】'
         if: env.BYD_CK2
         run: |
           cd ~/Scripts
@@ -62,7 +62,7 @@ jobs:
         env:
           BYD_CK: ${{ secrets.BYD_CK2 }}
 
-      - name: '运行 【BYD3】'
+      - name: '运行 【yuedongzu3】'
         if: env.BYD_CK3
         run: |
           cd ~/Scripts
