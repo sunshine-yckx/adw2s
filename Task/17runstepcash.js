@@ -12,6 +12,8 @@ let tz = '';
 let version = $.getval('version') || "1.5.1"; //APP版本号,更新请到APP更改
 //////////////////////////////////////////////////////////////////
 //hour&min
+var usercash,userjkb,userstep
+
 var hour = '';
 var minute = '';
 if ($.isNode()) {
@@ -172,7 +174,7 @@ async function runstepcash() {
   await txlog()
   console.log(`\n🇨🇳【开始提现任务】`)
   $.log('👩‍⚕️提现策略:\n账户金额大于50元,优先提现50元,否则提现1元。\n')
-  if (hour == 9 ) {
+  if (hour == 10 ) {
     await cash()
   } else {
     $.log(`👧每天提现为：凌晨零点,中午12点,下午5点...请自行设置定时，或者手动执行！\n`)
@@ -187,6 +189,7 @@ async function myself() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/myself?appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
+      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -225,6 +228,7 @@ async function txlog() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/txlog?page=1&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Flog%2Flog&platform=miniProgram&env=production`,
+      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -276,6 +280,7 @@ async function cash1() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/applytx?account=1&type=2&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
+      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -304,6 +309,7 @@ async function cash50() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/applytx?account=50&type=2&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
+      body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
