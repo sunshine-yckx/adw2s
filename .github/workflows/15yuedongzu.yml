@@ -50,7 +50,7 @@ jobs:
         if: env.BYD_CK1
         run: |
           cd ~/Scripts
-          node Task/15BYD.js
+          node Task/15yuedongzu.js
         env:
           BYD_CK: ${{ secrets.BYD_CK1 }}
 
@@ -58,7 +58,7 @@ jobs:
         if: env.BYD_CK2
         run: |
           cd ~/Scripts
-          node Task/15BYD.js
+          node Task/15yuedongzu.js
         env:
           BYD_CK: ${{ secrets.BYD_CK2 }}
 
@@ -66,6 +66,6 @@ jobs:
         if: env.BYD_CK3
         run: |
           cd ~/Scripts
-          node Task/15BYD.js
+          node Task/15yuedongzu.js
         env:
           BYD_CK: ${{ secrets.BYD_CK3 }}
