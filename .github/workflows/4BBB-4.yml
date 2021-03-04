@@ -49,7 +49,6 @@ jobs:
           npm update
 
       - name: '运行 【B4】'
-        if: env.BBB_CK4
         run: |
           cd ~/Scripts
           node Task/4BBB.js

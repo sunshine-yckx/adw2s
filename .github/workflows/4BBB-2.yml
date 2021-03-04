@@ -42,7 +42,6 @@ jobs:
         with:
           node-version: 12.x
       - name: npm install
-        if: env.BBB_CK2
         run: |
           cd ~/Scripts
           npm install -g npm
