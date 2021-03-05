@@ -130,7 +130,9 @@ if ($.isNode()) {
            	await $.wait(random);
             await xsmmhhb();
             await $.wait(2000);
-            await xsmmtx();
+            if (hour <12){
+              await xsmmtx();
+            }
   }
 }}
 
