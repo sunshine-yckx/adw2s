@@ -225,8 +225,8 @@ let url = {
         console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+' 今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
         if(result.data.last_gold >= 5000){
             console.log('\n检测到当前金额可提现，前去执行提现')
-            //console.log('\n提现已被注释')
             await ysmdh();
+            //console.log('\n提现已被注释')
           }
         //await $.wait(2000);
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -312,14 +312,14 @@ let url = {
         if(result.errcode == 0){
          //console.log(data)
         console.log('\n云扫码获取key回执:成功🌝 开始 循环观看💦')
-      if(result.data.link === undefined){
-       console.log('\n🧼来自肥皂的提示:没有匹配到key'+result.data.msg)
-} else {
-        ysmkey = result.data.link
-        await $.wait(6000);
-        await ysm2();
-        await $.wait(1000);
-}
+        if(result.data.link === undefined){
+         console.log('\n🧼来自肥皂的提示:没有匹配到key'+result.data.msg)
+        } else {
+                ysmkey = result.data.link
+                await $.wait(6000);
+                await ysm2();
+                await $.wait(1000);
+        }
 
 } else {
 console.log('云扫码获取key回执:失败🚫 '+result.msg+' 已停止当前账号运行!')
@@ -347,7 +347,9 @@ let url = {
       $.post(url, async (err, resp, data) => {
         try {
 
-    const result = JSON.parse(data)
+          const result = JSON.parse(data)
+          console.log('\n云扫码提现数据 '+url)
+          console.log('\n云扫码提现数据 '+data)
         if(result.errcode == 0){
         console.log('\n云扫码提现兑换:成功🌝 兑换金额'+result.data.money+'元，前去微信提现')
         await $.wait(1000);
