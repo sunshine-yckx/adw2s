@@ -73,6 +73,16 @@ let xsmmhb = ($.getval('xsmmhb') || '11');  //兑换红包id，id 11 代表兑�
 
 let xsmmdh = ($.getval('xsmmdh') || '14');  //提现id，14代表提现0.3元,15代表提现10元,16代表提现20元,17代表提现50元,18代表提现100元,19代表提现200元，模式提现id 14 提现0.3元，不想看广告想提现其他额度自己修改提现id运行脚本就可以
 
+let max = 50;
+let min = 30;
+
+if ($.isNode()) {
+  hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
+  minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
+} else {
+  hour = (new Date()).getHours();
+  minute = (new Date()).getMinutes();
+}
 
 
 if ($.isNode()) {
@@ -116,10 +126,18 @@ if (!xsmmhdArr[0]) {
           xsmmhd = xsmmhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【悬赏喵喵${$.index}】`)
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await xsmmlb();
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await xsmmhhb();
           await $.wait(2000);
-          await xsmmtx();
+          if (hour <12 ){
+            await xsmmtx();
+          }
   }
 }
 
@@ -154,13 +172,19 @@ let url = {
     const result = JSON.parse(data)
         if(result.status == 1){
         console.log('\n悬赏喵喵[领取视频奖励]回执:成功🌝 \n获得视频奖励: '+result.info.video_currency+' 猫粮')
-           await $.wait(11000);
+           //await $.wait(11000);
+           random = Math.floor(Math.random()*(max-min+1)+min)*1000
+           console.log(random);
+           await $.wait(random);
            await xsmmsp();
 
 
 } else {
 
 console.log('\n悬赏喵喵[领取视频奖励]回执:失败🚫当前无任务\n前去喂养悬赏喵喵🐱')
+random = Math.floor(Math.random()*(max-min+1)+min)*1000
+console.log(random);
+await $.wait(random);
       await xsmmwy();
 }
 
@@ -187,7 +211,10 @@ let url = {
          const result = JSON.parse(data)
         if (result.status == 1) {
           console.log(`\n悬赏喵喵[试玩小程序任务]回执:成功🌝\n`+result.info.msg)
-     await $.wait(2000);
+     //await $.wait(2000);
+     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+     console.log(random);
+     await $.wait(random);
      await xsmmlb();
         } else {
 
@@ -218,6 +245,9 @@ let url = {
 
 if(data.match(/"s":(.*?),/)[1] === '[]'){
 console.log('\n悬赏喵喵当前没有小程序任务了,前去执行视频任务')
+random = Math.floor(Math.random()*(max-min+1)+min)*1000
+console.log(random);
+await $.wait(random);
 await xsmmsp();
 }
     const result = JSON.parse(data)
@@ -228,11 +258,17 @@ await xsmmsp();
 
         console.log('\n悬赏喵喵[获取任务列表]回执:成功🌝  \n[任务ID]: '+xsmmid+' \n[任务名称]: '+xsmmmc+'\n开始领取任务奖励')
      //$.done()
-       await $.wait(2000);
+       //await $.wait(2000);
+       random = Math.floor(Math.random()*(max-min+1)+min)*1000
+       console.log(random);
+       await $.wait(random);
         await xsmmrw();
 
 } else {
 console.log('悬赏喵喵[获取任务列表]回执:失败🚫 当前账号可能没有任务了')
+random = Math.floor(Math.random()*(max-min+1)+min)*1000
+console.log(random);
+await $.wait(random);
      await xsmmsp();
 }
         } catch (e) {
