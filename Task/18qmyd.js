@@ -2007,8 +2007,9 @@ function tixian_html(timeout = 0) {
                                     CASH = 10
                                 } else if ($.user.money > 1 && $.tixian_html.tixian_coupon >= 3) {
                                     CASH = 1
-                                } else if ($.user.money > 0.3 && (jine1.cond == 0 || $.tixian_html.tixian_sign_day >= 3)) {
+                                } else if ($.user.money > 0.3 ) {
                                     CASH = 0.3
+                                    await tixian() //提现
                                 }
                                 if (CASH != 888) {
                                     await tixian() //提现
