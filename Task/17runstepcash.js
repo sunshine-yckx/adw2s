@@ -6,6 +6,7 @@ const $ = Env(jsname)
 //0为关闭日志，1为开启,默认为0
 const logs = 0;
 //0为关闭通知，1为所有通知,默认为0
+const notify = $.isNode() ? require("./sendNotify") : ``;
 const notifyInterval = 1;
 //通知风格
 let tz = '';
@@ -189,7 +190,7 @@ async function myself() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/myself?appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
-      body: ``,
+      //body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -228,7 +229,7 @@ async function txlog() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/txlog?page=1&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Flog%2Flog&platform=miniProgram&env=production`,
-      body: ``,
+      //body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -285,7 +286,7 @@ async function cash1() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/applytx?account=1&type=2&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
-      body: ``,
+      //body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
@@ -314,7 +315,7 @@ async function cash50() {
   return new Promise((resolve) => {
     let url = {
       url: `https://runstep.kujievip.com/runstep/applytx?account=50&type=2&appid=${txtokenVal}=${version}&${runsteptokenVal}&path=p%2Faccount%2Ftake%2Ftake&platform=miniProgram&env=production`,
-      body: ``,
+      //body: ``,
       headers: JSON.parse(txkeyVal),
     };
     $.get(url, async (err, resp, data) => {
