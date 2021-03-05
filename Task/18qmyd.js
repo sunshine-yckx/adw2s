@@ -98,7 +98,7 @@ if (!COOKIE.qmydtokenVal) {
         qmydtokenArr.push($.getdata("qmydtoken"));
         // 根据boxjs中设置的额外账号数，添加存在的账号数据进行任务处理
         if ("qmydCASH") {
-            CASH = $.getval("qmydCASH") || '0';
+            CASH = $.getval("qmydCASH") || '888';
         }
         let qmydCount = ($.getval('qmydCount') || '1') - 0;
         for (let i = 2; i <= qmydCount; i++) {
@@ -351,7 +351,8 @@ function user(timeout = 0) {
                     if (!$.user.uid) {
                         $.msg(O, time(Number(tts())) + "❌❌❌COOKIE失效");
                         if ($.isNode()) {
-                            notify.sendNotify(O, time(Number(tts())) + "❌❌❌COOKIE失效");
+                            $.msg(O, time(Number(tts())) + "❌❌❌COOKIE失效");
+                            //notify.sendNotify(O, time(Number(tts())) + "❌❌❌COOKIE失效");
                         }
                         resolve(false);
                     }
