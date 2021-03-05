@@ -88,17 +88,17 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  if (process.env.xsmmurl && process.env.xsmmurl.indexOf('\n') > -1) {
-   xsmmurlArr = process.env.xsmmurl.split('\n');
+  if (process.env.xsmm_url && process.env.xsmm_url.indexOf('\n') > -1) {
+   xsmmurlArr = process.env.xsmm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   xsmmurlArr = process.env.xsmmurl.split()
+   xsmmurlArr = process.env.xsmm_url.split()
   };
-  if (process.env.xsmmhd && process.env.xsmmhd.indexOf('\n') > -1) {
-   xsmmhdArr = process.env.xsmmhd.split('\n');
+  if (process.env.xsmm_hd && process.env.xsmm_hd.indexOf('\n') > -1) {
+   xsmmhdArr = process.env.xsmm_hd.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   xsmmhdArr = process.env.YSMURL.split()
+   xsmmhdArr = process.env.xsmm_hd.split()
   };
 } else {xsmmurlArr.push($.getdata('xsmmurl'))
   xsmmhdArr.push($.getdata('xsmmhd'))

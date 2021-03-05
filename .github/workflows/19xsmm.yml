@@ -15,8 +15,8 @@ on:
 jobs:
   build:
     env:
-      xsmmurl: ${{ secrets.xsmmurl }}
-      xsmmhd: ${{ secrets.xsmmhd }}
+      xsmm_url: ${{ secrets.xsmm_url }}
+      xsmm_hd: ${{ secrets.xsmm_hd }}
 
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
@@ -48,5 +48,5 @@ jobs:
           cd ~/Scripts
           node Task/19xsmm.js
         env:
-          xsmmurl: ${{ secrets.xsmmurl }}
-          xsmmhd: ${{ secrets.xsmmhd }}
+          xsmm_url: ${{ secrets.xsmm_url }}
+          xsmm_hd: ${{ secrets.xsmm_hd }}
