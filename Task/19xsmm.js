@@ -134,7 +134,7 @@ if ($.isNode()) {
               await xsmmtx();
             }
   }
-}}
+}
 
 })()
   .catch((e) => $.logErr(e))
