@@ -47,7 +47,6 @@ jobs:
           npm update
 
       - name: '运行 【dkd】'
-        if: env.Dkdurl
         run: |
           cd ~/Scripts
           node Task/9dkd.js
