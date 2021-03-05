@@ -4,8 +4,8 @@
 脚本说明：悬赏喵喵自动任务和喂养
 脚本为自动完成悬赏喵喵的视频任务
 试玩小程序任务和自动喂养
-一天可能一块钱左右，100金豆一元
-
+一天可能一块钱左右，30金豆一元
+猫粮足够可能一天两块左右
 
 小程序二维码地址 https://raw.githubusercontent.com/age174/-/main/77D29956-8318-43D2-A7BC-0EF3E09F76AA.png
 微信扫描打开，保存临时码，再去扫码获取数据
@@ -16,10 +16,10 @@
 使用方法:
 打开悬赏喵喵小程序，获得悬赏喵喵的数据，
 如果不行请点击右上角三个点，重新进入小程序
+
 请在登录之后再获取数据，先别多账号，怕有ip限制，慢慢试，提现了再多账号
 数据获取必须要在首页获取的才有效
 
-3.4更新加入自动兑换红包和提现，兑换和提现的id自己修改，可以看下方的注释，自己修改运行一次脚本就可以提现了，默认兑换和提现都是0.3元，id可以到boxjs修改
 
 TG电报群: https://t.me/hahaha802
 
@@ -65,7 +65,7 @@ hostname = vip.75787.com
 const $ = new Env('悬赏喵喵');
 let status;
 status = (status = ($.getval("xsmmstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-const xsmmurlArr = [], xsmmhdArr = [],xsmmcount = ''
+let xsmmurlArr = [], xsmmhdArr = [],xsmmcount = ''
 let xsmmurl = $.getdata('xsmmurl')
 let xsmmhd = $.getdata('xsmmhd')
 let xsmmmc = '',xsmmid = '',xsmm1 = ''
@@ -73,22 +73,10 @@ let xsmmhb = ($.getval('xsmmhb') || '11');  //兑换红包id，id 11 代表兑�
 
 let xsmmdh = ($.getval('xsmmdh') || '14');  //提现id，14代表提现0.3元,15代表提现10元,16代表提现20元,17代表提现50元,18代表提现100元,19代表提现200元，模式提现id 14 提现0.3元，不想看广告想提现其他额度自己修改提现id运行脚本就可以
 
-let max = 50;
-let min = 30;
-
 
 
 if ($.isNode()) {
-  hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
-  minute = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getMinutes();
-} else {
-  hour = (new Date()).getHours();
-  minute = (new Date()).getMinutes();
-}
-
-
-if ($.isNode()) {
-  if (process.env.xsmm_url && process.env.xsmm_url.indexOf('\n') > -1) {
+   if (process.env.xsmm_url && process.env.xsmm_url.indexOf('\n') > -1) {
    xsmmurlArr = process.env.xsmm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
@@ -100,22 +88,27 @@ if ($.isNode()) {
   } else {
    xsmmhdArr = process.env.xsmm_hd.split()
   };
-} else {xsmmurlArr.push($.getdata('xsmmurl'))
-  xsmmhdArr.push($.getdata('xsmmhd'))
-  let xsmmcount = ($.getval('xsmmcount') || '1');
+
+    console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
+    console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
+ } else {xsmmurlArr.push($.getdata('xsmmurl'))
+    xsmmhdArr.push($.getdata('xsmmhd'))
+    let xsmmcount = ($.getval('xsmmcount') || '1');
   for (let i = 2; i <= xsmmcount; i++) {
-  xsmmurlArr.push($.getdata(`xsmmurl${i}`))
-  xsmmhdArr.push($.getdata(`xsmmhd${i}`))
+    xsmmurlArr.push($.getdata(`xsmmurl${i}`))
+    xsmmhdArr.push($.getdata(`xsmmhd${i}`))
+  }
 }
 
 
-!(async () => {
-  if (!xsmmhdArr[0])  {
-    await xsmmck()
-  }
 
-  console.log(`------------- 共${xsmmhdArr.length}个账号-------------\n`)
-  console.log('\n悬赏喵喵当前设置的兑换ID为: '+xsmmhb + '提现ID为: '+xsmmdh)
+!(async () => {
+if (!xsmmhdArr[0]) {
+    $.msg($.name, '【提示】请先获取一cookie')
+    return;
+  }
+    console.log(`------------- 共${xsmmhdArr.length}个账号-------------\n`)
+    console.log('\n悬赏喵喵当前设置的兑换ID为: '+xsmmhb + '提现ID为: '+xsmmdh)
       for (let i = 0; i < xsmmhdArr.length; i++) {
         if (xsmmhdArr[i]) {
 
@@ -123,16 +116,10 @@ if ($.isNode()) {
           xsmmhd = xsmmhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【悬赏喵喵${$.index}】`)
-          //await xsmmhhb();
-            await xsmmlb();
-            random = Math.floor(Math.random()*(max-min+1)+min)*1000
-            console.log(random);
-           	await $.wait(random);
-            await xsmmhhb();
-            await $.wait(2000);
-            if (hour <12){
-              await xsmmtx();
-            }
+          await xsmmlb();
+          await xsmmhhb();
+          await $.wait(2000);
+          await xsmmtx();
   }
 }
 
@@ -140,7 +127,6 @@ if ($.isNode()) {
   .catch((e) => $.logErr(e))
   .finally(() => $.done())
 //悬赏喵喵数据获取
-
 
 function xsmmck() {
    if ($request.url.indexOf("action=index") > -1) {
@@ -168,10 +154,7 @@ let url = {
     const result = JSON.parse(data)
         if(result.status == 1){
         console.log('\n悬赏喵喵[领取视频奖励]回执:成功🌝 \n获得视频奖励: '+result.info.video_currency+' 猫粮')
-           //await $.wait(11000);
-           random = Math.floor(Math.random()*(max-min+1)+min)*1000
-           console.log(random);
-          	await $.wait(random);
+           await $.wait(11000);
            await xsmmsp();
 
 
@@ -204,10 +187,7 @@ let url = {
          const result = JSON.parse(data)
         if (result.status == 1) {
           console.log(`\n悬赏喵喵[试玩小程序任务]回执:成功🌝\n`+result.info.msg)
-     //await $.wait(2000);
-     random = Math.floor(Math.random()*(max-min+1)+min)*1000
-     console.log(random);
-     await $.wait(random);
+     await $.wait(2000);
      await xsmmlb();
         } else {
 
@@ -228,12 +208,6 @@ let url = {
 //悬赏喵喵列表
 function xsmmlb(timeout = 0) {
   return new Promise((resolve) => {
-    setTimeout( ()=>{
-      if (typeof $.getdata('xsmmhd') === "undefined") {
-        $.msg($.name,"",'请先获取悬赏喵喵数据!😓',)
-        $.done()
-      }
-
 let url = {
         url : xsmmurl,
         headers : JSON.parse(xsmmhd),
@@ -254,16 +228,10 @@ await xsmmsp();
 
         console.log('\n悬赏喵喵[获取任务列表]回执:成功🌝  \n[任务ID]: '+xsmmid+' \n[任务名称]: '+xsmmmc+'\n开始领取任务奖励')
      //$.done()
-       //await $.wait(2000);
-       random = Math.floor(Math.random()*(max-min+1)+min)*1000
-       console.log(random);
-       await $.wait(random);
+       await $.wait(2000);
         await xsmmrw();
 
 } else {
-random = Math.floor(Math.random()*(max-min+1)+min)*1000
-console.log(random);
-await $.wait(random);
 console.log('悬赏喵喵[获取任务列表]回执:失败🚫 当前账号可能没有任务了')
      await xsmmsp();
 }
@@ -272,7 +240,6 @@ console.log('悬赏喵喵[获取任务列表]回执:失败🚫 当前账号可�
         } finally {
           resolve()
         }
-      })
     },timeout)
   })
 }
