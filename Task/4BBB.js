@@ -32,8 +32,8 @@ const $ = new Env('步步寶')
 const notify = $.isNode() ?require('./sendNotify') : '';
 let notice = ''
 let CookieVal = $.getdata('bbb_ck')
-let max = 50;
-let min = 35;
+let max = 70;
+let min = 40;
 
 if ($.isNode()) {
       CookieVal = process.env.BBB_ck.split()
@@ -60,17 +60,26 @@ $.msg($.name,"開始🎉🎉🎉")
 
       await cashCheck()
       await signIn()
+      random = Math.floor(Math.random()*(max-min+1)+min)*1000
+      console.log(random);
+      await $.wait(random);
       await checkWaterNum()
       await zaoWanDkInfo()
+      await $.wait(random);
       await sleepStatus()
+      await $.wait(random);
       await clickTaskStatus()
+      await $.wait(random);
       await watchTaskStatus()
       //await helpStatus()
       await getNewsId()
+      await $.wait(random);
       await checkWaterNum()
       await getQuestionId()
+      await $.wait(random);
       await guaList()
       await checkWaterNum()
+      await $.wait(random);
       await checkHomeJin()
       await userInfo()
       await showmsg()

@@ -1,0 +1,118 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: 20mm
+
+on:
+  workflow_dispatch:
+  schedule:
+     - cron: '11 0,3-23/3 * * *'
+  watch:
+    types: started
+#env:
+  #TZ: Asia/Shanghai
+
+jobs:
+  build:
+    env:
+      lm_url: ${{ secrets.lm_url }}
+      lm_hd: ${{ secrets.lm_hd }}
+
+      mm_url: ${{ secrets.mm_url }}
+      mm_hd: ${{ secrets.mm_hd }}
+
+      zqm_url: ${{ secrets.zqm_url }}
+      zqm_hd: ${{ secrets.zqm_hd }}
+
+      ymmzq_url: ${{ secrets.ymmzq_url }}
+      ymmzq_hd: ${{ secrets.ymmzq_hd }}
+
+      ymyzq_url: ${{ secrets.ymyzq_url }}
+      ymyzq_hd: ${{ secrets.ymyzq_hd }}
+
+      ymzq_url: ${{ secrets.ymzq_url }}
+      ymzq_hd: ${{ secrets.ymzq_hd }}
+
+      mxz_url: ${{ secrets.mxz_url }}
+      mxz_hd: ${{ secrets.mxz_hd }}
+
+      mtwmm_url: ${{ secrets.mtwmm_url }}
+      mtwmm_hd: ${{ secrets.mtwmm_hd }}
+
+
+
+      PUSH_KEY: ${{ secrets.PUSH_KEY }}
+      BARK_PUSH: ${{ secrets.BARK_PUSH }}
+      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+      TG_USER_ID: ${{ secrets.TG_USER_ID }}
+      BARK_SOUND: ${{ secrets.BARK_SOUND }}
+      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
+      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
+
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/adw2s/Action.git ~/Scripts
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        run: |
+          cd ~/Scripts
+          npm install -g npm
+          npm update
+
+      - name: '运行 [ 20alm ]'
+        run: |
+          cd ~/Scripts
+          node Task/20alm.js
+
+      - name: '运行 [ 20bmm ]'
+        run: |
+          cd ~/Scripts
+          node Task/20bmm.js
+
+        - name: '运行 [ 20czqm ]'
+          run: |
+            cd ~/Scripts
+            node Task/20czqm.js
+
+
+        - name: '运行 [ 20dymmzq ]'
+          run: |
+            cd ~/Scripts
+            node Task/20dymmzq.js
+
+
+        - name: '运行 [ 20eymyzq ]'
+          run: |
+            cd ~/Scripts
+            node Task/20eymyzq.js
+
+
+        - name: '运行 [ 20fymzq ]'
+          run: |
+            cd ~/Scripts
+            node Task/20fymzq.js
+
+
+        - name: '运行 [ 20gmxz ]'
+          run: |
+            cd ~/Scripts
+            node Task/20gmxz.js
+
+
+        - name: '运行 [ 20gmxz ]'
+          run: |
+            cd ~/Scripts
+            node Task/20gmxz.js
+
+
+        - name: '运行 [ 20hmtwmm ]'
+          run: |
+            cd ~/Scripts
+            node Task/20hmtwmm.js
