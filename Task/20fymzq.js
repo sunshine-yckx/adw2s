@@ -29,17 +29,27 @@ if ($.isNode()) {
 if ($.isNode()) {
 
    if (process.env.ymzq_url && process.env.ymzq_url.indexOf('\n') > -1) {
-   ymzqurlArr = process.env.ymzq_url.split('\n');
+   ymzqurl = process.env.ymzq_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ymzqurlArr = process.env.ymzq_url.split()
+   ymzqurl = process.env.ymzq_url.split()
   };
+  Object.keys(ymzqurl).forEach((item) => {
+        if (ymzqurl[item]) {
+          ymzqurlArr.push(ymzqurl[item])
+        }
+    });
   if (process.env.ymzq_hd && process.env.ymzq_hd.indexOf('\n') > -1) {
-   ymzqhdArr = process.env.ymzq_hd.split('\n');
+   ymzqhd = process.env.ymzq_hd.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   ymzqhdArr = process.env.ymzq_hd.split()
+   ymzqhd = process.env.ymzq_hd.split()
   };
+  Object.keys(ymzqhd).forEach((item) => {
+        if (ymzqhd[item]) {
+          ymzqhdArr.push(ymzqhd[item])
+        }
+    });
 
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)

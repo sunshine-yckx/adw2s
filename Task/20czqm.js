@@ -29,17 +29,27 @@ if ($.isNode()) {
 if ($.isNode()) {
 
    if (process.env.zqm_url && process.env.zqm_url.indexOf('\n') > -1) {
-   zqmurlArr = process.env.zqm_url.split('\n');
+   zqmurl = process.env.zqm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   zqmurlArr = process.env.zqm_url.split()
+   zqmurl = process.env.zqm_url.split()
   };
+  Object.keys(zqmurl).forEach((item) => {
+        if (zqmurl[item]) {
+          zqmurlArr.push(zqmurl[item])
+        }
+    });
   if (process.env.zqm_hd && process.env.zqm_hd.indexOf('\n') > -1) {
    zqmhdArr = process.env.zqm_hd.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
    zqmhdArr = process.env.zqm_hd.split()
   };
+  Object.keys(zqmhd).forEach((item) => {
+        if (zqmhd[item]) {
+          zqmhdArr.push(zqmhd[item])
+        }
+    });
 
 
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
