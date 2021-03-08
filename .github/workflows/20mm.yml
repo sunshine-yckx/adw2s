@@ -70,46 +70,72 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20alm.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
       - name: '运行 [ 20bmm ]'
         run: |
           cd ~/Scripts
           node Task/20bmm.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
       - name: '运行 [ 20czqm ]'
         run: |
           cd ~/Scripts
           node Task/20czqm.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
       - name: '运行 [ 20dymmzq ]'
         run: |
           cd ~/Scripts
           node Task/20dymmzq.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
       - name: '运行 [ 20eymyzq ]'
         run: |
           cd ~/Scripts
           node Task/20eymyzq.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
       - name: '运行 [ 20fymzq ]'
         run: |
           cd ~/Scripts
           node Task/20fymzq.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
       - name: '运行 [ 20gmxz ]'
         run: |
           cd ~/Scripts
           node Task/20gmxz.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
       - name: '运行 [ 20gmxz ]'
         run: |
           cd ~/Scripts
           node Task/20gmxz.js
+        env:  
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          
+          
 
 
         - name: '运行 [ 20hmtwmm ]'
