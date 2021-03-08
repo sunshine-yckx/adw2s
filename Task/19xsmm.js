@@ -482,10 +482,10 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-
+    console.log('\n悬赏喵喵[提现]回执:'+data)
     const result = JSON.parse(data)
         if(result.status == 1){
-        $.msg('悬赏喵喵提现','','悬赏喵喵成功提现至微信0.3元')
+        $.msg('悬赏喵喵提现','','悬赏喵喵成功提现至微信10元')
 
 } else {
        console.log('\n悬赏喵喵[提现]回执:失败🚫 '+result.info)

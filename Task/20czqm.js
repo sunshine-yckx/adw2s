@@ -27,8 +27,6 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  //zqmurlArr = ['https://ph0001.hezyq.com/app/index.php?i=2399&t=0&v=2.0.17&from=wxapp&c=entry&a=wxapp&do=distribute&m=bh_cat&sign=6c2f7c1420db57f5ae5d448eccd2ff48&action=index&contr=task&token=a40484eabd56b9da8cdcb811ab1c5b6f&version=2.0.17']
-  //zqmhdArr = ['{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Referer":"https://servicewechat.com/wxefd90d994d115562/2/page-frame.html","Content-Type":"application/x-www-form-urlencoded","Host":"ph0001.hezyq.com","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.1(0x1800012a) NetType/WIFI Language/zh_CN","Accept-Language":"zh-cn"}']
 
    if (process.env.zqm_url && process.env.zqm_url.indexOf('\n') > -1) {
    zqmurlArr = process.env.zqm_url.split('\n');
@@ -71,17 +69,18 @@ if (!zqmhdArr[0]) {
           zqmhd = zqmhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【喵喵${$.index}】`)
+          await zqmsign();
+          await zqmfood();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
-          await zqmsign();
+
           await zqmlb();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
           await zqmjg();
-          await ymyzqwy();
-          await $.wait(2000);
+          //await ymyzqwy();
           //await zqmhhb();
           //await zqmtx();
   }
@@ -166,6 +165,39 @@ let url = {
     },timeout)
   })
 }
+
+
+//喵喵签到
+function zqmfood(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'https://ph0001.hezyq.com/app/index.php'+zqmurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+zqmurl.match(/token=(\w+)/)[1]+'&version=2.0.17',
+        headers : JSON.parse(zqmhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+              console.log('\n喵喵[领取食物]data回执:'+data)
+              const result = JSON.parse(data)
+                  if(result.status == 1){
+                  console.log('\n喵喵[领取食物]回执:成功🌝 \n')
+                     //await $.wait(11000);
+                     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                     console.log(random);
+                     await $.wait(random);
+
+                  }else {
+                      console.log('\n喵喵[领取食物]回执:失败🚫'+result.info)
+                  }
+
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
 
 //喵喵视频
 function zqmsp(timeout = 0) {

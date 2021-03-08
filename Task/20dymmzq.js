@@ -27,8 +27,6 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  //ymmzqurlArr = ['https://we.linknew.cn/app/index.php?i=6&t=0&v=1.0&from=wxapp&c=entry&a=wxapp&do=distribute&m=bh_cat&sign=aa5b50404e99b1eb1b8c38894a09359d&action=index&contr=task&token=6b10e91a8a99604cd1316d4b365a1ff3&version=1.0.24']
-  //ymmzqhdArr = ['{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Referer":"https://servicewechat.com/wx66b463b425fa2dce/1/page-frame.html","Content-Type":"application/x-www-form-urlencoded","Host":"we.linknew.cn","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.1(0x1800012a) NetType/WIFI Language/zh_CN","Accept-Language":"zh-cn"}']
 
    if (process.env.ymmzq_url && process.env.ymmzq_url.indexOf('\n') > -1) {
    ymmzqurlArr = process.env.ymmzq_url.split('\n');
@@ -70,17 +68,18 @@ if (!ymmzqhdArr[0]) {
           ymmzqhd = ymmzqhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【喵喵${$.index}】`)
+          await ymmzqsign();
+          await ymmzqfood();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
-          await ymmzqsign();
+
           await ymmzqlb();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
           await ymmzqjg();
-          await ymyzqwy();
-          await $.wait(2000);
+          //await ymyzqwy();
           //await zqmhhb();
           //await zqmtx();
   }
@@ -155,6 +154,38 @@ let url = {
                       random = Math.floor(Math.random()*(max-min+1)+min)*1000
                       console.log(random);
                       await $.wait(random);
+                  }
+
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+
+//喵喵签到
+function ymmzqfood(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'https://we.linknew.cn/app/index.php'+ymmzqurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+ymmzqurl.match(/token=(\w+)/)[1]+'&version=1.0.24',
+        headers : JSON.parse(ymmzqhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+              console.log('\n喵喵[领取食物]data回执:'+data)
+              const result = JSON.parse(data)
+                  if(result.status == 1){
+                  console.log('\n喵喵[领取食物]回执:成功🌝 \n')
+                     //await $.wait(11000);
+                     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                     console.log(random);
+                     await $.wait(random);
+
+                  }else {
+                      console.log('\n喵喵[领取食物]回执:失败🚫'+result.info)
                   }
 
         } catch (e) {

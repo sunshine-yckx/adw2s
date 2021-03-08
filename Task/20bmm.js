@@ -27,9 +27,7 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  //mmurlArr = ['https://yelanggs.com/app/index.php?i=3&t=0&v=1.9&from=wxapp&c=entry&a=wxapp&do=distribute&m=bh_cat&sign=629c809b83c8ee96639ab4eb68f24c46&action=index&contr=task&token=bd5fcfdc824e08aaf3f2cdddb510fc87&version=1.0.28']
-  //mmhdArr = ['{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Referer":"https://servicewechat.com/wx5cac1b395e06bf89/1/page-frame.html","Content-Type":"application/x-www-form-urlencoded","Host":"yelanggs.com","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.1(0x1800012a) NetType/WIFI Language/zh_CN","Accept-Language":"zh-cn"}']
-
+  
    if (process.env.mm_url && process.env.mm_url.indexOf('\n') > -1) {
    mmurlArr = process.env.mm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
@@ -70,17 +68,18 @@ if (!mmhdArr[0]) {
           mmhd = mmhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【喵喵${$.index}】`)
+          await mmsign();
+          await mmfood();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
-          await mmsign();
+
           await mmlb();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
           await mmjg();
-          await ymyzqwy();
-          await $.wait(2000);
+          //await ymyzqwy();
           //await zqmhhb();
           //await zqmtx();
   }
@@ -155,6 +154,37 @@ let url = {
                       random = Math.floor(Math.random()*(max-min+1)+min)*1000
                       console.log(random);
                       await $.wait(random);
+                  }
+
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+//喵喵签到
+function mmfood(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'https://yelanggs.com/app/index.php'+mmurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+mmurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        headers : JSON.parse(mmhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+              console.log('\n喵喵[领取食物]data回执:'+data)
+              const result = JSON.parse(data)
+                  if(result.status == 1){
+                  console.log('\n喵喵[领取食物]回执:成功🌝 \n')
+                     //await $.wait(11000);
+                     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                     console.log(random);
+                     await $.wait(random);
+
+                  }else {
+                      console.log('\n喵喵[领取食物]回执:失败🚫'+result.info)
                   }
 
         } catch (e) {

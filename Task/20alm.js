@@ -27,9 +27,7 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  //lmurlArr = ['https://cat.lanyinhuang.cn/app/index.php?i=2&t=1&v=1.9&from=wxapp&c=entry&a=wxapp&do=distribute&m=bh_cat&sign=24b3544411c0809161506f13057ab17b&action=index&contr=task&token=f0307c270e1ca10f42abcae4bf6a11df&version=1.0.28']
-  //lmhdArr = ['{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Referer":"https://servicewechat.com/wx5519ad8d48c434ed/3/page-frame.html","Content-Type":"application/x-www-form-urlencoded","Host":"cat.lanyinhuang.cn","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.1(0x1800012a) NetType/WIFI Language/zh_CN","Accept-Language":"zh-cn"}']
-
+  
    if (process.env.lm_url && process.env.lm_url.indexOf('\n') > -1) {
    lmurlArr = process.env.lm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
@@ -70,10 +68,12 @@ if (!lmhdArr[0]) {
           lmhd = lmhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【喵喵${$.index}】`)
+          await lmsign();
+          await lmfood();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
-          await lmsign();
+
           await lmlb();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
@@ -165,6 +165,38 @@ let url = {
     },timeout)
   })
 }
+
+//喵喵签到
+function lmfood(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'https://cat.lanyinhuang.cn/app/index.php'+lmurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+lmurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        headers : JSON.parse(lmhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+              console.log('\n喵喵[领取食物]data回执:'+data)
+              const result = JSON.parse(data)
+                  if(result.status == 1){
+                  console.log('\n喵喵[领取食物]回执:成功🌝 \n')
+                     //await $.wait(11000);
+                     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                     console.log(random);
+                     await $.wait(random);
+
+                  }else {
+                      console.log('\n喵喵[领取食物]回执:失败🚫'+result.info)
+                  }
+
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
 
 //喵喵视频
 function lmsp(timeout = 0) {

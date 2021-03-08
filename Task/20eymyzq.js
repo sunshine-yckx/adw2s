@@ -27,10 +27,7 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  ymyzqurlArr = ['https://wq.milugou.cn/app/index.php?i=11&t=0&v=1.4&from=wxapp&c=entry&a=wxapp&do=distribute&m=bh_cat&sign=5268247fae1619f4e2e05be760b14963&action=index&contr=task&token=903a13e3a141fe272f4511c73be9b42a&version=1.0.28']
-  ymyzqhdArr = ['{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Referer":"https://servicewechat.com/wxeade80fd2f3ea27e/6/page-frame.html","Content-Type":"application/x-www-form-urlencoded","Host":"wq.milugou.cn","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.1(0x1800012a) NetType/WIFI Language/zh_CN","Accept-Language":"zh-cn"}']
 
-  /*
    if (process.env.ymyzq_url && process.env.ymyzq_url.indexOf('\n') > -1) {
    ymyzqurlArr = process.env.ymyzq_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
@@ -43,7 +40,7 @@ if ($.isNode()) {
   } else {
    ymyzqhdArr = process.env.ymyzq_hd.split()
   };
-  */
+
 
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
@@ -72,17 +69,17 @@ if (!ymyzqhdArr[0]) {
           ymyzqhd = ymyzqhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【喵喵${$.index}】`)
-          /*random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);*/
           await ymyzqsign();
+          await ymyzqfood();
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
           await ymyzqlb();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
           await ymyzqjg();
-          await ymyzqwy();
-          await $.wait(2000);
+          //wait ymyzqwy();
           //await zqmhhb();
           //await zqmtx();
   }
@@ -157,6 +154,37 @@ let url = {
                       /*random = Math.floor(Math.random()*(max-min+1)+min)*1000
                       console.log(random);
                       await $.wait(random);*/
+                  }
+
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+//喵喵签到
+function ymyzqfood(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        headers : JSON.parse(ymyzqhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+              console.log('\n喵喵[领取食物]data回执:'+data)
+              const result = JSON.parse(data)
+                  if(result.status == 1){
+                  console.log('\n喵喵[领取食物]回执:成功🌝 \n')
+                     //await $.wait(11000);
+                     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                     console.log(random);
+                     await $.wait(random);
+
+                  }else {
+                      console.log('\n喵喵[领取食物]回执:失败🚫'+result.info)
                   }
 
         } catch (e) {

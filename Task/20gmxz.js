@@ -27,8 +27,6 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  //mxzurlArr = ['https://tp.yinhua95.com/app/index.php?i=5&t=0&v=1.0.0&from=wxapp&c=entry&a=wxapp&do=distribute&m=bh_cat&sign=a56da9ca13b57ee7ae7be540d82bed37&action=index&contr=task&token=795fdd97947895a91a7ddb59cc00fd30&version=1.0.8']
-  //mxzhdArr = ['{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Referer":"https://servicewechat.com/wxeb7f581061b52113/1/page-frame.html","Content-Type":"application/x-www-form-urlencoded","Host":"tp.yinhua95.com","User-Agent":"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.1(0x1800012a) NetType/WIFI Language/zh_CN","Accept-Language":"zh-cn"}']
 
    if (process.env.mxz_url && process.env.mxz_url.indexOf('\n') > -1) {
    mxzurlArr = process.env.mxz_url.split('\n');
@@ -70,10 +68,12 @@ if (!mxzhdArr[0]) {
           mxzhd = mxzhdArr[i];
           $.index = i + 1;
           console.log(`\n开始【喵喵${$.index}】`)
-          /*random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);*/
           await mxzsign();
+          await mxzfood();
+          random = Math.floor(Math.random()*(max-min+1)+min)*1000
+          console.log(random);
+          await $.wait(random);
+
           await mxzlb();
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
@@ -107,7 +107,7 @@ $.log(mxzhd)
 function mxzsign(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=sign&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=sign&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -139,7 +139,7 @@ let url = {
 function mxzsigndouble(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=signDouble&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=signDouble&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -165,11 +165,44 @@ let url = {
   })
 }
 
+
+//喵喵食物
+function mxzfood(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=2.0.27',
+        headers : JSON.parse(mxzhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+              console.log('\n喵喵[领取食物]data回执:'+data)
+              const result = JSON.parse(data)
+                  if(result.status == 1){
+                  console.log('\n喵喵[领取食物]回执:成功🌝 \n')
+                     //await $.wait(11000);
+                     random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                     console.log(random);
+                     await $.wait(random);
+
+                  }else {
+                      console.log('\n喵喵[领取食物]回执:失败🚫'+result.info)
+                  }
+
+        } catch (e) {
+          //$.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+
 //喵喵视频
 function mxzsp(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=video&contr=food&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=video&contr=food&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -208,7 +241,7 @@ function mxzrw(timeout = 0) {
   return new Promise((resolve) => {
 
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=complete&contr=task&task_id='+mxzid+'&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=complete&contr=task&task_id='+mxzid+'&token='+mxzurl.match(/token=(\w+)/)[1]+'&version=2.0.27',
         headers : JSON.parse(mxzhd),
 
 }
@@ -294,7 +327,7 @@ let url = {
 function mxzwy(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=feed&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=feed&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -323,7 +356,7 @@ let url = {
 function mxzjg(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=upcurrency&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=upcurrency&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -352,7 +385,7 @@ let url = {
 function mxzhhb(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=index&token='+mxzurl.match(/token=(\w+)/)[1]+'&id='+mxzhb+'&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=index&token='+mxzurl.match(/token=(\w+)/)[1]+'&id='+mxzhb+'&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -378,7 +411,7 @@ let url = {
 function mxztx(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://tp.yinhua95.com/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=withdrawals&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&money_id='+mxzdh+'&payment_code=&pwd=&version=1.0.8',
+        url : 'https://x.zz789.cn/app/index.php'+mxzurl.match(/index.php(.*?)action/)[1]+'&action=withdrawals&contr=my&token='+mxzurl.match(/token=(\w+)/)[1]+'&money_id='+mxzdh+'&payment_code=&pwd=&version=2.0.27',
         headers : JSON.parse(mxzhd),
         }
       $.get(url, async (err, resp, data) => {
