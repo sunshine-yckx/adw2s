@@ -27,7 +27,7 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  
+
    if (process.env.lm_url && process.env.lm_url.indexOf('\n') > -1) {
    lmurlArr = process.env.lm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
@@ -79,7 +79,7 @@ if (!lmhdArr[0]) {
           console.log(random);
           await $.wait(random);
           await lmjg();
-          await ymyzqwy();
+          await lmwy();
           await $.wait(2000);
           //await zqmhhb();
           //await zqmtx();

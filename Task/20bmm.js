@@ -27,7 +27,7 @@ if ($.isNode()) {
 
 
 if ($.isNode()) {
-  
+
    if (process.env.mm_url && process.env.mm_url.indexOf('\n') > -1) {
    mmurlArr = process.env.mm_url.split('\n');
    console.log(`您选择的是用换行隔开\n`)
