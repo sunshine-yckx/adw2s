@@ -40,10 +40,10 @@ if ($.isNode()) {
         }
     });
   if (process.env.zqm_hd && process.env.zqm_hd.indexOf('\n') > -1) {
-   zqmhdArr = process.env.zqm_hd.split('\n');
+   zqmhd = process.env.zqm_hd.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   zqmhdArr = process.env.zqm_hd.split()
+   zqmhd = process.env.zqm_hd.split()
   };
   Object.keys(zqmhd).forEach((item) => {
         if (zqmhd[item]) {

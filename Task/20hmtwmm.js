@@ -47,7 +47,7 @@ if ($.isNode()) {
   };
   Object.keys(mtwmmhd).forEach((item) => {
         if (mtwmmhd[item]) {
-          mtwmmhd.push(mtwmmhd[item])
+          mtwmmhdArr.push(mtwmmhd[item])
         }
     });
 
