@@ -359,9 +359,9 @@ function user(timeout = 0) {
                     }
                     if (!$.user.uid) {
                         $.msg(O, time(Number(tts())) + "❌❌❌COOKIE失效");
-                        if ($.isNode()) {
-                            notify.sendNotify(O, time(Number(tts())) + "❌❌❌COOKIE失效");
-                        }
+                        //if ($.isNode()) {
+                            //notify.sendNotify(O, time(Number(tts())) + "❌❌❌COOKIE失效");
+                        //}
                         resolve(false);
                     }
                 } catch (e) {

@@ -139,7 +139,7 @@ if (!xsmmhdArr[0]) {
           await $.wait(random);
 
           await xsmmjg();
-          await xsmmwy();
+          //await xsmmwy();
           await $.wait(2000);
           //await xsmmhb();
           //await xsmmtx();
@@ -168,7 +168,7 @@ $.log(xsmmhd)
 function xsmmsign(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=sign&contr=my&token='+xsmmurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=sign&contr=my&token='+xsmmurl.match(/token=(\w+)/)[1]+'&version=2.0.32',
         headers : JSON.parse(xsmmhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -200,7 +200,7 @@ let url = {
 function xsmmsigndouble(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=signDouble&contr=my&token='+xsmmurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=signDouble&contr=my&token='+xsmmurl.match(/token=(\w+)/)[1]+'&version=2.0.32',
         headers : JSON.parse(xsmmhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -230,7 +230,7 @@ let url = {
 function xsmmfood(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+xsmmurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+xsmmurl.match(/token=(\w+)/)[1]+'&version=2.0.32',
         headers : JSON.parse(xsmmhd),
         }
       $.get(url, async (err, resp, data) => {
@@ -413,7 +413,7 @@ let url = {
 function xsmmjg(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=upcurrency&contr=my&token='+xsmmurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.28',
+        url : 'https://vip.75787.com/app/index.php'+xsmmurl.match(/index.php(.*?)action/)[1]+'&action=upcurrency&contr=my&token='+xsmmurl.match(/token=(\w+)/)[1]+'&collect=1&version=2.0.32',
         headers : JSON.parse(xsmmhd),
         }
       $.get(url, async (err, resp, data) => {
