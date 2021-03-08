@@ -128,7 +128,7 @@ if (!xsmmhdArr[0]) {
           console.log(`\n开始【悬赏喵喵${$.index}】`)
           await xsmmsign();
           await xsmmfood();
-          
+
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
           console.log(random);
           await $.wait(random);
@@ -425,7 +425,7 @@ let url = {
                 var coin = result.info.member.currency
                 console.log('\n🌝现有猫币:'+coin+'个')
                 if (coin > 200){
-                    await xsmmhb();
+                    await xsmmhhb();
                     await xsmmtx();
                 }
 
@@ -445,7 +445,7 @@ let url = {
 }
 
 //悬赏喵喵兑换
-function xsmmhb(timeout = 0) {
+function xsmmhhb(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
         url : 'https://vip.75787.com/app/index.php?i=61&t=0&v=2.0.32&from=wxapp&c=entry&a=wxapp&do=exchange&m=bh_cat&sign=79926608a360d256e0ceee140f6ada8f&token='+xsmmurl.match(/token=(\w+)/)[1]+'&id='+xsmmhb+'&version=2.0.32',
