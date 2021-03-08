@@ -60,7 +60,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20alm.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -68,7 +68,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20bmm.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -76,7 +76,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20czqm.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -84,7 +84,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20dymmzq.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -92,7 +92,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20eymyzq.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -100,7 +100,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20fymzq.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -108,7 +108,7 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20gmxz.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -116,11 +116,14 @@ jobs:
         run: |
           cd ~/Scripts
           node Task/20gmxz.js
-        env:  
+        env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
-    name: '运行 [ 20hmtwmm ]'
-          run: |
-            cd ~/Scripts
-            node Task/20hmtwmm.js
+      - name: '运行 [ 20hmtwmm ]'
+        run: |
+          cd ~/Scripts
+          node Task/20hmtwmm.js
+        env:
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
