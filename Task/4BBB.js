@@ -1361,13 +1361,13 @@ return new Promise((resolve, reject) => {
    $.post(cashcheck,async(error, response, data) =>{
      const cash = JSON.parse(data)
      if(response.statusCode == 200 && cash.code != -1){
-if(cash.jinbi >= 500000){
-     tip = 50
-      await withDraw()
-     }else if(cash.day_jinbi > 5000){
-     tip = 0.3
-      await withDraw()
-     }
+            if(cash.jinbi >= 500000){
+             tip = 50
+              await withDraw()
+             }else if(cash.day_jinbi > 5000){
+             tip = 0.3
+              await withDraw()
+             }
            }
           resolve()
     })
