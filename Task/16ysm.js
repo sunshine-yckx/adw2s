@@ -330,7 +330,7 @@ let url = {
 function ysm1(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
-      if (typeof $.getdata('ysmhd') === "undefined") {
+      if (typeof ysmhd === "undefined") {
         $.msg($.name,"",'请先获取云扫码数据!😓',)
         $.done()
       }
