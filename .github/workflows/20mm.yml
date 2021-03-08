@@ -12,7 +12,7 @@ on:
 #env:
   #TZ: Asia/Shanghai
 
-jobs:
+jobs1:
   build:
     env:
       lm_url: ${{ secrets.lm_url }}
@@ -128,7 +128,7 @@ jobs:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
-jobs:
+jobs2:
   build:
     env:
       lm_url: ${{ secrets.lm_url }}
@@ -181,7 +181,7 @@ jobs:
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
 
-jobs:
+jobs3:
   build:
     env:
       lm_url: ${{ secrets.lm_url }}
