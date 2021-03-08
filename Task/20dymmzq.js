@@ -14,7 +14,7 @@ let ymmzqhb = ($.getval('ymmzqhb') || '48');  //兑换红包id，id 46 代表兑
 let ymmzqdh = ($.getval('ymmzqdh') || '5');  //提现id，14代表提现0.3元,15代表提现10元,16代表提现20元,17代表提现50元,18代表提现100元,19代表提现200元，模式提现id 14 提现0.3元，不想看广告想提现其他额度自己修改提现id运行脚本就可以
 var hour,minute,random
 
-let max = 70;
+let max = 60;
 let min = 35;
 
 if ($.isNode()) {
@@ -70,14 +70,7 @@ if (!ymmzqhdArr[0]) {
           console.log(`\n开始【喵喵${$.index}】`)
           await ymmzqsign();
           await ymmzqfood();
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
-
           await ymmzqlb();
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
           await ymmzqjg();
           //await ymyzqwy();
           //await zqmhhb();
@@ -112,7 +105,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[签到]data回执:'+data)
+              //console.log('\n喵喵[签到]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[签到]回执:成功🌝 \n连续签到: '+result.info.sign_days+' 天')
@@ -144,7 +137,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[签到翻倍]data回执:'+data)
+              //console.log('\n喵喵[签到翻倍]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[签到翻倍]回执:成功🌝')
@@ -175,7 +168,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[领取食物]data回执:'+data)
+              //console.log('\n喵喵[领取食物]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[领取食物]回执:成功🌝 \n')
@@ -206,7 +199,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[领取视频奖励]data回执:'+data)
+              //console.log('\n喵喵[领取视频奖励]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[领取视频奖励]回执:成功🌝 \n获得视频奖励: '+result.info.video_currency+' 猫粮')
@@ -282,7 +275,7 @@ let url = {
 }
       $.get(url, async (err, resp, data) => {
         try {
-          console.log('喵喵[获取任务列表]回执:'+data)
+          //console.log('喵喵[获取任务列表]回执:'+data)
           if(data.match(/"s":(.*?),/)[1] === '[]'){
           console.log('\n喵喵当前没有小程序任务了,前去执行视频任务')
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -331,7 +324,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-    console.log('\n喵喵[喂养]data回执:'+data)
+    //console.log('\n喵喵[喂养]data回执:'+data)
     const result = JSON.parse(data)
         if(result.status == 1){
         console.log('\n喵喵[喂养]回执:成功🌝 \n成功添加喂养进度'+result.info.percentage+'%\n当前金豆余额:'+result.info.member.currency+' 个\n猫粮剩余:'+result.info.member.foodstuff)
@@ -360,10 +353,10 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-    console.log('\n喵喵[进贡]data回执:'+data)
+    //console.log('\n喵喵[进贡]data回执:'+data)
     const result = JSON.parse(data)
         if(result.status == 1){
-                  console.log('\n喵喵[进贡]回执:成功🌝 \n成功收取进贡'+result.info.collec_currency+'金豆')
+                  console.log('\n喵喵[进贡]回执:成功🌝 \n成功收取进贡'+result.info.collect_currency+'金豆')
                   var coin = result.info.member.currency
                   console.log('\n🌝现有猫币:'+coin+'个')
                   if (coin > 570){
@@ -395,7 +388,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('喵喵成功兑换红包data：'+data)
+              //console.log('喵喵成功兑换红包data：'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                         console.log('喵喵成功兑换红包,前往提现')
@@ -421,7 +414,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-            console.log('\n喵喵[提现]data回执:'+data)
+            //console.log('\n喵喵[提现]data回执:'+data)
             const result = JSON.parse(data)
             if(result.status == 1){
                   $.msg('喵喵提现','','喵喵成功提现至微信0.3元')

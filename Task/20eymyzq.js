@@ -14,7 +14,7 @@ let ymyzqhb = ($.getval('ymyzqhb') || '41');  //兑换红包id，id 43 代表兑
 let ymyzqdh = ($.getval('ymyzqdh') || '10');  //提现id，14代表提现0.3元,15代表提现10元,16代表提现20元,17代表提现50元,18代表提现100元,19代表提现200元，模式提现id 14 提现0.3元，不想看广告想提现其他额度自己修改提现id运行脚本就可以
 var hour,minute,random
 
-let max = 70;
+let max = 60;
 let min = 35;
 
 if ($.isNode()) {
@@ -71,13 +71,7 @@ if (!ymyzqhdArr[0]) {
           console.log(`\n开始【喵喵${$.index}】`)
           await ymyzqsign();
           await ymyzqfood();
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
           await ymyzqlb();
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
           await ymyzqjg();
           //wait ymyzqwy();
           //await zqmhhb();
@@ -107,12 +101,12 @@ $.log(ymyzqhd)
 function ymyzqsign(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=sign&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=sign&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[签到]data回执:'+data)
+              //console.log('\n喵喵[签到]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[签到]回执:成功🌝 \n连续签到: '+result.info.sign_days+' 天')
@@ -139,12 +133,12 @@ let url = {
 function ymyzqsigndouble(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=signDouble&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=signDouble&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[签到翻倍]data回执:'+data)
+              //console.log('\n喵喵[签到翻倍]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[签到翻倍]回执:成功🌝')
@@ -169,12 +163,12 @@ let url = {
 function ymyzqfood(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=daily&contr=food&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[领取食物]data回执:'+data)
+              //console.log('\n喵喵[领取食物]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[领取食物]回执:成功🌝 \n')
@@ -200,12 +194,12 @@ let url = {
 function ymyzqsp(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=video&contr=food&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=video&contr=food&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('\n喵喵[领取视频奖励]data回执:'+data)
+              //console.log('\n喵喵[领取视频奖励]data回执:'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                   console.log('\n喵喵[领取视频奖励]回执:成功🌝 \n获得视频奖励: '+result.info.video_currency+' 猫粮')
@@ -239,7 +233,7 @@ function ymyzqrw(timeout = 0) {
   return new Promise((resolve) => {
 
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=complete&contr=task&task_id='+ymyzqid+'&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=complete&contr=task&task_id='+ymyzqid+'&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
 
 }
@@ -281,7 +275,7 @@ let url = {
 }
       $.get(url, async (err, resp, data) => {
         try {
-          console.log('喵喵[获取任务列表]回执:'+data)
+          //console.log('喵喵[获取任务列表]回执:'+data)
           if(data.match(/"s":(.*?),/)[1] === '[]'){
           console.log('\n喵喵当前没有小程序任务了,前去执行视频任务')
           /*random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -325,12 +319,12 @@ let url = {
 function ymyzqwy(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=feed&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=feed&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-    console.log('\n喵喵[喂养]data回执:'+data)
+    //console.log('\n喵喵[喂养]data回执:'+data)
     const result = JSON.parse(data)
         if(result.status == 1){
         console.log('\n喵喵[喂养]回执:成功🌝 \n成功添加喂养进度'+result.info.percentage+'%\n当前金豆余额:'+result.info.member.currency+' 个\n猫粮剩余:'+result.info.member.foodstuff)
@@ -354,15 +348,15 @@ let url = {
 function ymyzqjg(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=upcurrency&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=upcurrency&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&is_remind=2&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-    console.log('\n喵喵[进贡]data回执:'+data)
+    //console.log('\n喵喵[进贡]data回执:'+data)
     const result = JSON.parse(data)
         if(result.status == 1){
-                console.log('\n喵喵[进贡]回执:成功🌝 \n成功收取进贡'+result.info.collec_currency+'金豆')
+                console.log('\n喵喵[进贡]回执:成功🌝 \n成功收取进贡'+result.info.collect_currency+'金豆')
                 var coin = result.info.member.currency
                 console.log('\n🌝现有猫币:'+coin+'个')
                 if (coin > 750){
@@ -389,12 +383,12 @@ let url = {
 function ymyzqhhb(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=index&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&id='+ymyzqhb+'&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=index&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&id='+ymyzqhb+'&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-              console.log('喵喵成功兑换红包data：'+data)
+              //console.log('喵喵成功兑换红包data：'+data)
               const result = JSON.parse(data)
                   if(result.status == 1){
                         console.log('喵喵成功兑换红包,前往提现')
@@ -415,12 +409,12 @@ let url = {
 function ymyzqtx(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
-        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=withdrawals&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&money='+ymyzqdh+'&payment_code=&pwd=&version=1.0.28',
+        url : 'https://wq.milugou.cn/app/index.php'+ymyzqurl.match(/index.php(.*?)action/)[1]+'&action=withdrawals&contr=my&token='+ymyzqurl.match(/token=(\w+)/)[1]+'&money='+ymyzqdh+'&payment_code=&pwd=&version=1.0.24',
         headers : JSON.parse(ymyzqhd),
         }
       $.get(url, async (err, resp, data) => {
         try {
-            console.log('\n喵喵[提现]data回执:'+data)
+            //console.log('\n喵喵[提现]data回执:'+data)
             const result = JSON.parse(data)
             if(result.status == 1){
                   $.msg('喵喵提现','','喵喵成功提现至微信0.3元')
