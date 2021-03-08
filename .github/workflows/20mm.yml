@@ -76,40 +76,40 @@ jobs:
           cd ~/Scripts
           node Task/20bmm.js
 
-        - name: '运行 [ 20czqm ]'
-          run: |
-            cd ~/Scripts
-            node Task/20czqm.js
+      - name: '运行 [ 20czqm ]'
+        run: |
+          cd ~/Scripts
+          node Task/20czqm.js
 
 
-        - name: '运行 [ 20dymmzq ]'
-          run: |
-            cd ~/Scripts
-            node Task/20dymmzq.js
+      - name: '运行 [ 20dymmzq ]'
+        run: |
+          cd ~/Scripts
+          node Task/20dymmzq.js
 
 
-        - name: '运行 [ 20eymyzq ]'
-          run: |
-            cd ~/Scripts
-            node Task/20eymyzq.js
+      - name: '运行 [ 20eymyzq ]'
+        run: |
+          cd ~/Scripts
+          node Task/20eymyzq.js
 
 
-        - name: '运行 [ 20fymzq ]'
-          run: |
-            cd ~/Scripts
-            node Task/20fymzq.js
+      - name: '运行 [ 20fymzq ]'
+        run: |
+          cd ~/Scripts
+          node Task/20fymzq.js
 
 
-        - name: '运行 [ 20gmxz ]'
-          run: |
-            cd ~/Scripts
-            node Task/20gmxz.js
+      - name: '运行 [ 20gmxz ]'
+        run: |
+          cd ~/Scripts
+          node Task/20gmxz.js
 
 
-        - name: '运行 [ 20gmxz ]'
-          run: |
-            cd ~/Scripts
-            node Task/20gmxz.js
+      - name: '运行 [ 20gmxz ]'
+        run: |
+          cd ~/Scripts
+          node Task/20gmxz.js
 
 
         - name: '运行 [ 20hmtwmm ]'
