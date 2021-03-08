@@ -75,7 +75,7 @@ let ysm2body = $.getdata('ysm2body')
 let ysmtx = $.getdata('ysmtx')
 let ysmkey = ''
 let max = 30;
-let min = 15;
+let min = 10;
 
 
 
@@ -261,10 +261,16 @@ let url = {
     const result = JSON.parse(data)
         if(result.errcode == 0){
         console.log('\n云扫码领取阅读奖励回执:成功🌝 '+result.data.gold+'\n今日阅读次数: '+result.data.day_read+' 今日阅读奖励: '+result.data.day_gold+' 当前余额'+result.data.last_gold+'\n')
-        if(result.data.last_gold >= 3000){
+        if(result.data.last_gold >= 100000){
     console.log('\n检测到当前金额可提现，前去执行提现,请去抓取提现的数据，如果没有提现数据脚本会自行终止!')
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
 await ysmdh();
 }       await $.wait(2000);
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+        await $.wait(random);
         await ysm1();
 
 } else {
@@ -305,6 +311,9 @@ let url = {
        console.log('\n云扫码key提交成功,10秒后开始领取阅读奖励')
 
         await $.wait(9000);
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+       	await $.wait(random);
         await ysm3();
 
         }} catch (e) {
@@ -348,6 +357,9 @@ let url = {
         ysmkey = unescape(ysmkey)
 //$.log(unescape(ysmkey))
         await $.wait(1000);
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+       	await $.wait(random);
         await ysm2();
 
 }
@@ -373,7 +385,7 @@ function ysmdh(timeout = 0) {
 let url = {
         url : "http:"+ysmurl.match(/http:(.*?)yunonline/)[1]+"yunonline/v1/user_gold",
         headers : JSON.parse(ysmhd),
-        body : 'openid='+ysmtx.match(/openid=(.*?)ua/)[1]+'gold=3000',
+        body : 'openid='+ysmtx.match(/openid=(.*?)ua/)[1]+'gold=100000',
 }
       $.post(url, async (err, resp, data) => {
         try {
@@ -410,7 +422,7 @@ let url = {
     const result = JSON.parse(data)
         if(result.errcode == 0){
         console.log('\n云扫码微信提现回执:成功🌝 '+result.msg)
-        $.msg($.name,"",'云扫码已成功提现至微信0.3元')
+        $.msg($.name,"",'云扫码已成功提现至微信1元')
         await ysm1();
 } else {
        console.log('\n云扫码微信提现回执:失败🚫 '+result.msg)
