@@ -1045,24 +1045,30 @@ return new Promise((resolve, reject) => {
     body: `type_class=1&`
 }
    $.post(getnewsid,async(error, response, data) =>{
-     const newsid = JSON.parse(data)
-     if(newsid.code == 1){
-       if(newsid.is_max == 0){
-          $.log('\n🔔開始查詢新聞ID\n')
-          newsStr = newsid.nonce_str
-          $.log('\n🎉新聞ID查詢成功,15s後領取閱讀獎勵\n')
-          //await $.wait(15000)
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
-          await autoRead()
-          }else{
-          $.log('\n⚠️閱讀失敗: 今日閱讀已上限\n')
-          await checkLuckNum()
-         }}else{
-          $.log('\n⚠️查詢新聞ID失敗:'+newsid.msg+'\n')
-           }
-          resolve()
+     try {
+             const newsid = JSON.parse(data)
+             if(newsid.code == 1){
+               if(newsid.is_max == 0){
+                  $.log('\n🔔開始查詢新聞ID\n')
+                  newsStr = newsid.nonce_str
+                  $.log('\n🎉新聞ID查詢成功,15s後領取閱讀獎勵\n')
+                  //await $.wait(15000)
+                  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                  console.log(random);
+                  await $.wait(random);
+                  await autoRead()
+                  }else{
+                  $.log('\n⚠️閱讀失敗: 今日閱讀已上限\n')
+                  await checkLuckNum()
+                 }}else{
+                  $.log('\n⚠️查詢新聞ID失敗:'+newsid.msg+'\n')
+                   }
+                  resolve()
+        } catch (e) {
+            $.logErr(e, resp);
+        } finally {
+            resolve()
+        }
     })
    })
   }
@@ -1076,14 +1082,21 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${newsStr}& `,
 }
    $.post(autoread,async(error, response, data) =>{
-     const read = JSON.parse(data)
-      if(read.code == 1) {
-          $.log('\n🎉閱讀成功,金幣+ '+read.jinbi+'💰,開始查詢下一篇新聞ID\n')
-            await getNewsId()
-          }else{
-          $.log('\n⚠️閱讀失敗:'+data+'\n')
-           }
-          resolve()
+     try {
+           const read = JSON.parse(data)
+            if(read.code == 1) {
+                $.log('\n🎉閱讀成功,金幣+ '+read.jinbi+'💰,開始查詢下一篇新聞ID\n')
+                  await getNewsId()
+                }else{
+                $.log('\n⚠️閱讀失敗:'+data+'\n')
+                 }
+                resolve()
+
+        } catch (e) {
+            $.logErr(e, resp);
+        } finally {
+            resolve()
+        }
     })
    })
   }
@@ -1096,27 +1109,33 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(lucknum,async(error, response, data) =>{
-     const num = JSON.parse(data)
-$.log('\n🔔開始查詢抽獎次數\n')
-      if(num.lucky_num != 0) {
-          $.log('\n🎉剩餘抽獎次數:'+num.lucky_num+'1s後開始抽獎\n')
-          await $.wait(1000)
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
-          await luckyClick()
-         }else if(num.lucky_num == 0) {
-          $.log('\n⚠️今日抽獎次數已用完,1s後查詢寶箱狀態\n')
-          await $.wait(1000)
-       for (box of num.lucky_box){
-          //$.log(box)
-          if (box != 2)
-          await luckyBox()
-          if (box == 2)
-          $.log('\n⚠️寶箱已開啟\n')
-         }
-       }
+     try {
+           const num = JSON.parse(data)
+            $.log('\n🔔開始查詢抽獎次數\n')
+            if(num.lucky_num != 0) {
+                $.log('\n🎉剩餘抽獎次數:'+num.lucky_num+'1s後開始抽獎\n')
+                await $.wait(1000)
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+                await luckyClick()
+               }else if(num.lucky_num == 0) {
+                $.log('\n⚠️今日抽獎次數已用完,1s後查詢寶箱狀態\n')
+                await $.wait(1000)
+             for (box of num.lucky_box){
+                //$.log(box)
+                if (box != 2)
+                await luckyBox()
+                if (box == 2)
+                $.log('\n⚠️寶箱已開啟\n')
+               }
+             }
+                resolve()
+      } catch (e) {
+          $.logErr(e, resp);
+      } finally {
           resolve()
+      }
     })
    })
   }
@@ -1129,23 +1148,29 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(luckclick,async(error, response, data) =>{
-     const lucky = JSON.parse(data)
-$.log('\n🔔開始抽獎\n')
-      if(lucky.code == 1) {
-          $.log('\n🎉抽獎:'+lucky.msg+'\n金幣+ '+lucky.jinbi+'\n')
-         luckyStr = lucky.nonce_str
-          //$.log('\n'+luckyStr+'\n')
-      if(lucky.jinbi != 0) {
-          //await $.wait(5000)
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
-          await luckyCallBack()
-         }else{
-          await checkLuckNum()
-         }
-       }
-          resolve()
+     try {
+           const lucky = JSON.parse(data)
+      $.log('\n🔔開始抽獎\n')
+            if(lucky.code == 1) {
+                $.log('\n🎉抽獎:'+lucky.msg+'\n金幣+ '+lucky.jinbi+'\n')
+               luckyStr = lucky.nonce_str
+                //$.log('\n'+luckyStr+'\n')
+            if(lucky.jinbi != 0) {
+                //await $.wait(5000)
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+                await luckyCallBack()
+               }else{
+                await checkLuckNum()
+               }
+             }
+                resolve()
+        } catch (e) {
+            $.logErr(e, resp);
+        } finally {
+            resolve()
+        }
     })
    })
   }
@@ -1160,16 +1185,22 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${luckyStr}&tid=16&pos=1&`,
 }
    $.post(luckycallback,async(error, response, data) =>{
-     const callback = JSON.parse(data)
-$.log('\n🔔開始翻倍抽獎\n')
-      if(callback.code == 1) {
-          $.log('\n🎉抽獎翻倍成功\n')
-          await $.wait(5000)
-          await checkLuckNum()
-           }else{
-          $.log('\n⚠️抽獎翻倍失敗:'+callback.msg+'\n')
-           }
-          resolve()
+     try {
+           const callback = JSON.parse(data)
+      $.log('\n🔔開始翻倍抽獎\n')
+            if(callback.code == 1) {
+                $.log('\n🎉抽獎翻倍成功\n')
+                await $.wait(5000)
+                await checkLuckNum()
+                 }else{
+                $.log('\n⚠️抽獎翻倍失敗:'+callback.msg+'\n')
+                 }
+                resolve()
+        } catch (e) {
+            $.logErr(e, resp);
+        } finally {
+            resolve()
+        }
     })
    })
   }
@@ -1184,18 +1215,24 @@ return new Promise((resolve, reject) => {
 }
 //$.log('\nlockyboxBODY:'+luckybox.body+'\n')
    $.post(luckybox,async(error, response, data) =>{
-     const boxlucky = JSON.parse(data)
-$.log('\n🔔開始打開寶箱\n')
-      if(boxlucky.code == 1) {
-          $.log('🎉寶箱: '+boxlucky.msg+'\n金幣+ '+boxlucky.jinbi+'\n')
-         luckyBoxStr = boxlucky.nonce_str
-          $.log('\n🔔寶箱翻倍ID'+luckyBoxStr+'\n')
-          await $.wait(5000)
-          await luckyBoxCallBack()
-         }else{
-          $.log('\n⚠️寶箱失敗:'+boxlucky.msg+'\n')
-         }
-          resolve()
+     try {
+           const boxlucky = JSON.parse(data)
+      $.log('\n🔔開始打開寶箱\n')
+            if(boxlucky.code == 1) {
+                $.log('🎉寶箱: '+boxlucky.msg+'\n金幣+ '+boxlucky.jinbi+'\n')
+               luckyBoxStr = boxlucky.nonce_str
+                $.log('\n🔔寶箱翻倍ID'+luckyBoxStr+'\n')
+                await $.wait(5000)
+                await luckyBoxCallBack()
+               }else{
+                $.log('\n⚠️寶箱失敗:'+boxlucky.msg+'\n')
+               }
+                resolve()
+        } catch (e) {
+            $.logErr(e, resp);
+        } finally {
+            resolve()
+        }
     })
    })
   }

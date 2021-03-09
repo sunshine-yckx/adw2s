@@ -74,8 +74,8 @@ let ysmbody = $.getdata('ysmbody')
 let ysm2body = $.getdata('ysm2body')
 let ysmtx = $.getdata('ysmtx')
 let ysmkey = ''
-let max = 30;
-let min = 10;
+let max = 15;
+let min = 8;
 
 
 
