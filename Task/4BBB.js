@@ -123,9 +123,9 @@ return new Promise((resolve, reject) => {
     }else{
         notice += '⚠️異常原因: '+userinfo.msg+'\n'
            }
-     if (money >= 50 ){
-       notify.sendNotify(`${$.name}-账号${nickname} 余额${money}元已提现` , `账号${nickname} ${money}元已提现 \n今日收益为${today_gold}`)
-       }
+     //if (money >= 50 ){
+       //notify.sendNotify(`${$.name}-账号${nickname} 余额${money}元已提现` , `账号${nickname} ${money}元已提现 \n今日收益为${today_gold}`)
+       //}
           resolve()
     })
    })
@@ -1402,7 +1402,7 @@ return new Promise((resolve, reject) => {
              tip = 50
               await withDraw()
              }else if(cash.day_jinbi > 5000){
-             tip = 0.3
+             tip = 1
               await withDraw()
              }
            }
