@@ -51,6 +51,16 @@ http://cf-api.douzhuanapi.cn:10002/api/ script-path=https://raw.githubuserconten
 hostname = cf-api.douzhuanapi.cn
 
 
+for (let w = 0; w < 12; w++) {
+  if(ts == 1){
+      return;
+    }
+  $.index = w + 1
+  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
+  await cfzsplb()
+  await $.wait(31000);
+}
+
 */
 
 
@@ -137,15 +147,6 @@ if ($.isNode()) {
                   $.index = i + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                   await cfzqd()
-                  await $.wait(31000);
-                }
-              for (let w = 0; w < 12; w++) {
-                  if(ts == 1){
-                      return;
-                    }
-                  $.index = w + 1
-                  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
-                  await cfzsplb()
                   await $.wait(31000);
                 }
               await cfzrw1()
