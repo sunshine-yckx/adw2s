@@ -144,7 +144,7 @@ if ($.isNode()) {
               await cfzsigninfo();
               await $.wait(3000);
               //await cfzhhb();
-              for (let i = 0; i < 15; i++) {
+              for (let i = 0; i < 18; i++) {
                   if(tc == 1){
                       return;
                     }
@@ -156,7 +156,7 @@ if ($.isNode()) {
                   await $.wait(random);
                   //await $.wait(31000);
                 }
-              for (let i = 0; i < 15; i++) {
+              for (let i = 0; i < 18; i++) {
                   if(ts == 1){
                       return;
                     }
