@@ -380,11 +380,13 @@ let url = {
                 if(result.message == '您的自阅已超过次数'){
                         tc =1
                   }
+                if(result.message == '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570'){
+                        tc =1
+                  }
                 if(result.message=='系统错误！'){
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
                 await cfzxf();
                 }else{
-
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
                 }
             }
@@ -459,7 +461,6 @@ let url = {
         url : 'http://cf-api.douzhuanapi.cn:10002/api/ad_sense/report',
         headers : JSON.parse(cfzhd),
         body : 'ad_source=1&location=3&position=8&report_type=1',
-
         }
       $.post(url, async (err, resp, data) => {
         try {
@@ -543,7 +544,11 @@ let url = {
                 await cfzspread();
             } else {
                 if(result.message == '您的自阅已超过次数'){
-                        tc =1
+                        ts =1
+                  }
+
+                if(result.message == '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570'){
+                        ts =1
                   }
                 if(result.message=='系统错误！'){
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
@@ -583,6 +588,9 @@ let url = {
                 await cfzspsb();
             } else {
                 if(result.message == '您的自阅已超过次数'){
+                        ts =1
+                  }
+                if(result.message == '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570'){
                         ts =1
                   }
                 if(result.message=='系统错误！'){
