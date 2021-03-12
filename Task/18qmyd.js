@@ -1977,8 +1977,10 @@ function tixian_html(timeout = 0) {
 
 
 
-                        if ($.user.wx_username != "" || $.user.is_weixin == 1) {  //if (!day_tixian_tip && ($.user.wx_username != "" || $.user.is_weixin == 1)) {
-
+                        if ($.user.is_weixin == 1) {  //if (!day_tixian_tip && ($.user.wx_username != "" || $.user.is_weixin == 1)) {
+                              CASH == 0.3
+                              await tixian() //提现
+                            /*
                             if (CASH == 0.3 && $.user.money >= CASH && (jine1.cond == 0 || $.tixian_html.tixian_sign_day >= 3)) {
                                 await tixian() //提现
                             }
@@ -2016,7 +2018,8 @@ function tixian_html(timeout = 0) {
                                 if (CASH != 888) {
                                     await tixian() //提现
                                 }
-                            }
+                              }
+                            */
                         }
                     }
                 } catch (e) {
@@ -2039,6 +2042,7 @@ function tixian(timeout = 0) {
             }
             $.post(url, async (err, resp, data) => {
                 try {
+                  console.log(`现金提现${CASH}数据：`+data);
                     if (logs) $.log(`${O}, 现金提现🚩: ${data}`);
                     $.tixian = JSON.parse(data);
                     if ($.tixian.code == 200) {
