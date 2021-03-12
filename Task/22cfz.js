@@ -130,20 +130,20 @@ if ($.isNode()) {
               await cfzsigninfo();
               await $.wait(3000);
               //await cfzhhb();
-              for (let y = 0; y < 12; y++) {
+              for (let y = 0; y < 5; y++) {
                   if(tc == 1){
                       y = 30
                     }
                   y =  y + 1
-                  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
+                  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${y+1}次`)
                   await cfzqd()
                 }
-              for (let w = 0; w < 12; w++) {
+              for (let w = 0; w < 5; w++) {
                 if(ts == 1){
                     w = 30
                   }
                 w = w + 1
-                console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
+                console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${w+1}次`)
                 await cfzsplb()
                 await $.wait(31000);
               }
