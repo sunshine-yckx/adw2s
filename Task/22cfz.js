@@ -57,10 +57,9 @@ hostname = cf-api.douzhuanapi.cn
 const $ = new Env('春风转');
 let status;
 status = (status = ($.getval("cfzstatus") || "1") ) > 1 ? `${status}` : ""; // 账号扩展字符
-const cfzurlArr = [], cfzhdArr = [],cfzsbhdArr = [],cfzcount = ''
+const cfzurlArr = [], cfzhdArr = [],cfzcount = ''
 let cfzurl = $.getdata('cfzurl')
 let cfzhd = $.getdata('cfzhd')
-let cfzsbhd = $.getdata('cfzsbhd')
 var cfzlb = '',cfzid = '',cfzmc = '',page = 1
 let sdid = '';sdlqid = '';tc = 0;ts = 0
 
@@ -101,28 +100,16 @@ if ($.isNode()) {
           cfzhdArr.push(cfzhd[item])
         }
     });
-    if (process.env.cfzsbhd && process.env.cfzsbhd.indexOf('\n') > -1) {
-     cfzsbhd = process.env.cfzsbhd.split('\n');
-     console.log(`您选择的是用换行隔开\n`)
-    } else {
-     cfzsbhd = process.env.cfzsbhd.split()
-    };
-    Object.keys(cfzsbhd).forEach((item) => {
-          if (cfzsbhd[item]) {
-            cfzsbhdArr.push(cfzsbhd[item])
-          }
-      });
+
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
 
  } else {cfzurl.push($.getdata('cfzurl'))
    cfzhdArr.push($.getdata('cfzhd'))
-   cfzsbhdArr.push($.getdata('cfzsbhd'))
    let cfzcount = ($.getval('cfzcount') || '1');
    for (let i = 2; i <= cfzcount; i++) {
        cfzurlArr.push($.getdata(`cfzurl${i}`))
        cfzhdArr.push($.getdata(`cfzhd${i}`))
-       cfzsbhdArr.push($.getdata(`cfzsbhd${i}`))
      }
 }
 
@@ -137,7 +124,6 @@ if ($.isNode()) {
             if (cfzhdArr[i]) {
               cfzurl = cfzurlArr[i];
               cfzhd = cfzhdArr[i];
-              cfzsbhd = cfzsbhdArr[i];
               $.index = i + 1;
               console.log(`\n开始【春风转${$.index}】`)
 
@@ -509,12 +495,12 @@ let url = {
         headers : JSON.parse(cfzhd),
 }
       $.get(url, async (err, resp, data) => {
+      try {
         cfzlb = data.match(/"list":(.*)/)[1]
         cfzid = cfzlb.match(/"id":(\w+),/)[1]
         cfzmc = cfzlb.match(/"title":"(.+?)","/)[1]
         //console.log(cfzmc)
         //$.done()
-        try {
             const result = JSON.parse(data)
             if(result.code == 200){
                 console.log('\n春风转[视频列表]回执:成功🌝  \n📄视频ID:'+cfzid+'\n📑开始观看:'+cfzmc)
@@ -801,16 +787,14 @@ let url = {
           if (err) {
             $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
           } else {
-    const result = JSON.parse(data)
+        const result = JSON.parse(data)
         if(result.code == 200){
         console.log('\n春风转[看广告视频]回执:成功🌝 \n获得奖励: '+result.data)
+        } else {
 
-
-} else {
-
-console.log('\n春风转[看广告视频]回执:失败🌚'+result.message)
-}
-}
+        console.log('\n春风转[看广告视频]回执:失败🌚'+result.message)
+        }
+        }
         } catch (e) {
           $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
         } finally {
@@ -832,16 +816,15 @@ let url = {
           if (err) {
             $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
           } else {
-    const result = JSON.parse(data)
-        if(result.code == 200){
-        console.log('\n春风转[晒图奖励]回执:成功🌝 \n获得奖励: '+result.data)
+            const result = JSON.parse(data)
+            if(result.code == 200){
+            console.log('\n春风转[晒图奖励]回执:成功🌝 \n获得奖励: '+result.data)
 
+            } else {
 
-} else {
-
-console.log('\n春风转[晒图奖励]回执:失败🌚'+result.message)
-}
-}
+            console.log('\n春风转[晒图奖励]回执:失败🌚'+result.message)
+            }
+            }
         } catch (e) {
           $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
         } finally {
