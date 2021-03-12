@@ -1490,8 +1490,8 @@ $.log('\ndoTaskH5:'+data+'\n')
            }
           resolve()
     })
-   })})
-  }
+   })
+ }
 
 function upLoadTime() {
 return new Promise((resolve, reject) => {
