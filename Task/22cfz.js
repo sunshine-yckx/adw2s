@@ -118,8 +118,8 @@ if ($.isNode()) {
    cfzhdArr.push($.getdata('cfzhd'))
    let cfzcount = ($.getval('cfzcount') || '1');
    for (let i = 2; i <= cfzcount; i++) {
-       cfzurlArr.push($.getdata(`cfzurl${i}`))
-       cfzhdArr.push($.getdata(`cfzhd${i}`))
+       cfzurlArr.push($.getdata(`cfzurl`))
+       cfzhdArr.push($.getdata(`cfzhd`))
      }
 }
 
@@ -162,7 +162,7 @@ if ($.isNode()) {
               }
           } catch (e) {
             $.logErr(e)
-            $.logErr(e, `账号${i} 循环执行任务出现异常`)
+            $.logErr(e, `账号 循环执行任务出现异常`)
           } finally {
             resolve()
           }
@@ -651,7 +651,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -663,7 +663,7 @@ console.log('\n春风转[每日任务阅读新闻]回执:失败🌚'+result.mess
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -680,7 +680,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -693,7 +693,7 @@ console.log('\n春风转[每日任务阅读60分钟]回执:失败🌚'+result.me
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -712,7 +712,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -733,7 +733,7 @@ for (let i = 0; i < 3; i++) {
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -751,7 +751,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -772,7 +772,7 @@ for (let i = 0; i < 3; i++) {
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -791,7 +791,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
         const result = JSON.parse(data)
         if(result.code == 200){
@@ -802,7 +802,7 @@ let url = {
         }
         }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -820,7 +820,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
             const result = JSON.parse(data)
             if(result.code == 200){
@@ -832,7 +832,7 @@ let url = {
             }
             }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -850,7 +850,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -864,7 +864,7 @@ console.log('\n春风转[时段ID]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -881,7 +881,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -895,7 +895,7 @@ console.log('\n春风转[时段领取]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
@@ -912,7 +912,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(`❌ 账号${i} API请求失败，请检查网络后重试\n url: ${url.url} \n data: ${JSON.stringify(err, null, 2)}`)
+            $.logErr(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -924,7 +924,7 @@ console.log('\n春风转[时段翻倍]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(`======== 账号 ${i} ========\nurl: ${url.url}\n${e}\ndata: ${resp && resp.body}`);
+          $.logErr(err);
         } finally {
           resolve()
         }
