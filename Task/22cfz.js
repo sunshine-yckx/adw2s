@@ -130,7 +130,7 @@ if ($.isNode()) {
               await cfzsigninfo();
               await $.wait(3000);
               //await cfzhhb();
-              for (let i = 0; i < 18; i++) {
+              for (let i = 0; i < 12; i++) {
                   if(tc == 1){
                       return;
                     }
@@ -142,7 +142,7 @@ if ($.isNode()) {
                   await $.wait(random);
                   //await $.wait(31000);
                 }
-              for (let i = 0; i < 18; i++) {
+              for (let i = 0; i < 12; i++) {
                   if(ts == 1){
                       return;
                     }
@@ -166,6 +166,7 @@ if ($.isNode()) {
 
               }
           } catch (e) {
+            $.logErr(e)
             $.logErr(e, `账号${i} 循环执行任务出现异常`)
           } finally {
             resolve()
@@ -388,6 +389,7 @@ let url = {
                 await cfzxf();
                 }else{
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                return
                 }
             }
 
@@ -556,6 +558,7 @@ let url = {
                 }else{
 
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                return
                 }
             }
 
