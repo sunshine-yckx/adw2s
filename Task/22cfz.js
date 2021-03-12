@@ -134,7 +134,7 @@ if ($.isNode()) {
               //await cfzhhb();
               for (let i = 0; i < 12; i++) {
                   if(tc == 1){
-                      break;
+                      i = 22
                     }
                   $.index = i + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
@@ -142,7 +142,7 @@ if ($.isNode()) {
                 }
               for (let w = 0; w < 12; w++) {
                 if(ts == 1){
-                    break;
+                    w = 22
                   }
                 $.index = w + 1
                 console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
