@@ -112,6 +112,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(userInfo,async(error, resp, data) =>{
+    try {
      const userinfo = JSON.parse(data)
      if(resp.statusCode == 200 && userinfo.code != -1){
 
@@ -127,6 +128,11 @@ return new Promise((resolve, reject) => {
        //notify.sendNotify(`${$.name}-账号${nickname} 余额${money}元已提现` , `账号${nickname} ${money}元已提现 \n今日收益为${today_gold}`)
        //}
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -140,6 +146,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(signin,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始签到\n')
      const sign = JSON.parse(data)
       if(sign.code == 1) {
@@ -150,6 +157,11 @@ $.log('\n🔔開始签到\n')
           $.log('\n🎉'+sign.msg+'\n')
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -163,6 +175,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${signInStr}&tid=2&pos=1&`,
 }
    $.post(signdouble,async(error, resp, data) =>{
+    try {
      const signin2 = JSON.parse(data)
 $.log('\n🔔開始領取每日觀看獎勵\n')
       if(signin2.code == 1) {
@@ -171,6 +184,11 @@ $.log('\n🔔開始領取每日觀看獎勵\n')
           $.log('\n⚠️簽到翻倍失敗敗:'+signin2.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -183,6 +201,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(zaowandkinfo,async(error, resp, data) =>{
+     try {
      const zwdkinfo = JSON.parse(data)
       if(zwdkinfo.code == 1 && zwdkinfo.is_dk == 0) {
       nowTime = zwdkinfo.now_time
@@ -191,6 +210,12 @@ return new Promise((resolve, reject) => {
           await zaoWanDk()
            }
           resolve()
+
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
     })
    })
   }
@@ -206,16 +231,23 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=3&c_type=1&`,
 }
    $.post(zaowandk,async(error, resp, data) =>{
-     const zwdk = JSON.parse(data)
-      if(zwdk.code == 1) {
-      zwdkStr = zwdk.nonce_str
-          //await $.wait(30000)
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
-          await dkClick()
-           }
-          resolve()
+     try {
+       const zwdk = JSON.parse(data)
+        if(zwdk.code == 1) {
+        zwdkStr = zwdk.nonce_str
+            //await $.wait(30000)
+            random = Math.floor(Math.random()*(max-min+1)+min)*1000
+            console.log(random);
+            await $.wait(random);
+            await dkClick()
+             }
+            resolve()
+
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
     })
    })
   }
@@ -229,6 +261,7 @@ return new Promise((resolve, reject) => {
     body: `now_time=${nowTime}&`,
 }
    $.post(dkclick,async(error, resp, data) =>{
+    try {
      const clickdk = JSON.parse(data)
       if(clickdk.code == 1) {
           $.log('\n🎉'+clickdk.msg+'+ '+clickdk.jinbi+'💰\n')
@@ -239,6 +272,11 @@ return new Promise((resolve, reject) => {
           await checkWaterNum()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -252,6 +290,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(gualist,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢刮刮卡ID\n')
      const guaid = JSON.parse(data)
       if(guaid.ka > 0){
@@ -268,6 +307,11 @@ $.log('\n⚠️刮刮卡已用完,請明天再刮吧！\n')
         }
 
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -281,6 +325,7 @@ return new Promise((resolve, reject) => {
     body: `gid=${GID}&`
 }
    $.post(guadet,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢刮卡簽名\n')
      const guasign= JSON.parse(data)
       if(resp.statusCode == 200) {
@@ -292,6 +337,11 @@ $.log('\nglid: '+GLID+'\n')
           await guaPost()
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -305,6 +355,7 @@ return new Promise((resolve, reject) => {
     body: `sign=${SIGN}&gid=${GID}&glid=${GLID}&`
 }
    $.post(guapost,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始刮卡\n')
      const guaka= JSON.parse(data)
       if(typeof guaka.jf === 'number') {
@@ -317,6 +368,11 @@ $.log('\n🔔開始刮卡\n')
           await guaDouble()
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -331,6 +387,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${guaStr}&tid=6&pos=1&`,
 }
    $.post(guadouble,async(error, resp, data) =>{
+    try {
      const guaka2 = JSON.parse(data)
 $.log('\n🔔開始領取刮卡翻倍獎勵\n')
       if(guaka2.code == 1) {
@@ -341,6 +398,11 @@ $.log('\n🔔開始領取刮卡翻倍獎勵\n')
           $.log('\n⚠️刮卡翻倍失敗:'+guaka2.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -355,6 +417,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkwaternum,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢喝水杯數\n')
      const waternum = JSON.parse(data)
       if(waternum.code == 1 && waternum.day_num < 7) {
@@ -371,6 +434,11 @@ $.log('\n🔔開始查詢喝水杯數\n')
           $.log('\n⚠️喝水失敗: 今日喝水已上限\n')
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -384,12 +452,18 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=2&c_type=1&`,
 }
    $.post(checksp,async(error, resp, data) =>{
+    try {
      const sp = JSON.parse(data)
       if(sp.code == 1) {
       waterSpStr = sp.nonce_str
           await WaterSp()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -403,16 +477,22 @@ return new Promise((resolve, reject) => {
     body: `day_num=${waterNum}&`,
 }
    $.post(watersp,async(error, resp, data) =>{
-     const spwater = JSON.parse(data)
-      if(spwater.code == 1) {
-          $.log('\n🎉正在觀看喝水廣告, 30後領取喝水獎勵\n')
-          //await $.wait(30000)
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
-          await waterClick()
-           }
-          resolve()
+     try {
+       const spwater = JSON.parse(data)
+        if(spwater.code == 1) {
+            $.log('\n🎉正在觀看喝水廣告, 30後領取喝水獎勵\n')
+            //await $.wait(30000)
+            random = Math.floor(Math.random()*(max-min+1)+min)*1000
+            console.log(random);
+            await $.wait(random);
+            await waterClick()
+             }
+            resolve()
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
     })
    })
   }
@@ -426,14 +506,20 @@ return new Promise((resolve, reject) => {
     body: `day_num=0${waterNum}&`,
 }
    $.post(waterclick,async(error, resp, data) =>{
-     const clickwater = JSON.parse(data)
-$.log('\n🔔開始領取喝水獎勵\n')
-      if(clickwater.code == 1) {
-          $.log('\n🎉'+clickwater.msg+'喝水金幣+ '+clickwater.jinbi+'💰\n')
-           }else{
-          $.log('\n⚠️喝水失敗:'+clickwater.msg+'\n')
-           }
-          resolve()
+     try {
+           const clickwater = JSON.parse(data)
+           $.log('\n🔔開始領取喝水獎勵\n')
+            if(clickwater.code == 1) {
+                $.log('\n🎉'+clickwater.msg+'喝水金幣+ '+clickwater.jinbi+'💰\n')
+                 }else{
+                $.log('\n⚠️喝水失敗:'+clickwater.msg+'\n')
+                 }
+                resolve()
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
     })
    })
   }
@@ -447,32 +533,38 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(sleepstatus,async(error, resp, data) =>{
-$.log('\n🔔開始查詢睡覺狀態\n')
-     const slpstatus = JSON.parse(data)
-      if(slpstatus.code == 1) {
-      if(slpstatus.is_lq == 1 && now.getHours() >= 8 && now.getHours() <= 18) {
-      sleepStr = slpstatus.nonce_str
-      sleepId = slpstatus.taskid
-     }else{
-$.log('🔔大白天的就不要睡覺啦！')
-      }
-      if(slpstatus.is_sleep == 0 && slpstatus.is_lq == 1 && now.getHours() >= 20) {
-$.log('🔔都幾點了，還不睡？5s後開始睡覺！')
-          await $.wait(5000)
-          await sleepStart()
-         }else if((slpstatus.is_sleep == 1 || slpstatus.is_sleep == 0)&& slpstatus.is_lq == 0 && now.getHours() >= 8 && now.getHours() <= 12){
-$.log('🔔都幾點了，還不起？5s後準備起床！')
-          await $.wait(5000)
-          await sleepEnd()
-         }else if(slpstatus.is_sleep == 0 && slpstatus.is_lq == 1 && now.getHours() >= 8 && now.getHours() <= 12){
-          await sleepDone()
-         }else if(slpstatus.is_sleep == 1 && slpstatus.is_lq == 1 && now.getHours() >= 22){
-          $.log('⚠️睡覺的時候不要玩手機！！！')
-         }else if(slpstatus.is_sleep == 0 &&
-now.getHours() >= 18){
-          $.log('😘這麼早就準備睡覺了嗎？是身體不舒服嗎？要保重身體呀！')
-         }}
+     try {
+          $.log('\n🔔開始查詢睡覺狀態\n')
+               const slpstatus = JSON.parse(data)
+                if(slpstatus.code == 1) {
+                if(slpstatus.is_lq == 1 && now.getHours() >= 8 && now.getHours() <= 18) {
+                sleepStr = slpstatus.nonce_str
+                sleepId = slpstatus.taskid
+               }else{
+          $.log('🔔大白天的就不要睡覺啦！')
+                }
+                if(slpstatus.is_sleep == 0 && slpstatus.is_lq == 1 && now.getHours() >= 20) {
+          $.log('🔔都幾點了，還不睡？5s後開始睡覺！')
+                    await $.wait(5000)
+                    await sleepStart()
+                   }else if((slpstatus.is_sleep == 1 || slpstatus.is_sleep == 0)&& slpstatus.is_lq == 0 && now.getHours() >= 8 && now.getHours() <= 12){
+          $.log('🔔都幾點了，還不起？5s後準備起床！')
+                    await $.wait(5000)
+                    await sleepEnd()
+                   }else if(slpstatus.is_sleep == 0 && slpstatus.is_lq == 1 && now.getHours() >= 8 && now.getHours() <= 12){
+                    await sleepDone()
+                   }else if(slpstatus.is_sleep == 1 && slpstatus.is_lq == 1 && now.getHours() >= 22){
+                    $.log('⚠️睡覺的時候不要玩手機！！！')
+                   }else if(slpstatus.is_sleep == 0 &&
+          now.getHours() >= 18){
+                    $.log('😘這麼早就準備睡覺了嗎？是身體不舒服嗎？要保重身體呀！')
+                   }}
+                    resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
           resolve()
+        }
     })
    })
   }
@@ -487,14 +579,20 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(sleepstart,async(error, resp, data) =>{
-     const startsleep = JSON.parse(data)
-$.log('\n🔔開始睡覺\n')
-      if(startsleep.code == 1) {
-          $.log('\n🎉睡覺成功！早睡早起身體好！\n')
-           }else{
-          $.log('\n⚠️睡覺失敗敗:'+startsleep.msg+'\n')
-           }
+     try {
+           const startsleep = JSON.parse(data)
+      $.log('\n🔔開始睡覺\n')
+            if(startsleep.code == 1) {
+                $.log('\n🎉睡覺成功！早睡早起身體好！\n')
+                 }else{
+                $.log('\n⚠️睡覺失敗敗:'+startsleep.msg+'\n')
+                 }
+                resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
           resolve()
+        }
     })
    })
   }
@@ -507,6 +605,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(sleepend,async(error, resp, data) =>{
+    try {
      const endsleep = JSON.parse(data)
 $.log('\n🔔開始起床\n')
       if(endsleep.code == 1) {
@@ -516,6 +615,11 @@ $.log('\n🔔開始起床\n')
           $.log('\n⚠️起床失敗:'+endsleep.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -529,6 +633,7 @@ return new Promise((resolve, reject) => {
     body: `taskid=${sleepId}&nonce_str=${sleepStr}&`
 }
    $.post(sleepdone,async(error, resp, data) =>{
+    try {
      const donesleep = JSON.parse(data)
 $.log('\n🔔開始領取睡覺金幣\n')
       if(donesleep.code == 1) {
@@ -537,6 +642,11 @@ $.log('\n🔔開始領取睡覺金幣\n')
           $.log('\n⚠️領取睡覺金幣失敗敗:'+donesleep.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -550,6 +660,7 @@ return new Promise((resolve, reject) => {
     body: `idfa=${JSON.parse(CookieVal)['idfa']}&`,
 }
    $.post(clicktaskstatus,async(error, resp, data) =>{
+    try {
      const clicktask = JSON.parse(data)
       if(clicktask.first.admobile_st != 2) {
 $.log('\n🔔開始查詢每日點擊任務狀態\n')
@@ -558,6 +669,11 @@ $.log('\n🔔開始查詢每日點擊任務狀態\n')
           $.log('\n⚠️每日點擊廣告任務已上限\n')
          }
        resolve()
+     } catch (e) {
+       $.logErr(e, resp);
+     } finally {
+       resolve()
+     }
     })
    })
   }
@@ -571,6 +687,7 @@ return new Promise((resolve, reject) => {
     body: `idfa=${JSON.parse(CookieVal)['idfa']}&`,
 }
    $.post(watchtaskstatus,async(error, resp, data) =>{
+    try {
      const watchtask = JSON.parse(data)
 $.log('\n🔔開始查詢每日觀看廣告任務狀態\n')
        if(watchtask.v_st != 2) {
@@ -582,6 +699,11 @@ $.log('\n🔔每日觀看廣告任務狀態查詢成功,1s後查詢每日觀看�
           await checkWaterNum()
          }
        resolve()
+     } catch (e) {
+       $.logErr(e, resp);
+     } finally {
+       resolve()
+     }
     })
    })
   }
@@ -596,6 +718,7 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=0&c_type=1&`,
 }
    $.post(checkdailywatchadid,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢每日觀看廣告ID\n')
      const dailywatchid = JSON.parse(data)
       if(dailywatchid.code == 1) {
@@ -609,6 +732,11 @@ $.log('\n🔔開始查詢每日觀看廣告ID\n')
           await DailyWatchAd()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -623,6 +751,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${dailyWatchStr}&tid=9&pos=1&`,
 }
    $.post(dailywatchad,async(error, resp, data) =>{
+       try {
      const dailywatch = JSON.parse(data)
 $.log('\n🔔開始領取每日觀看獎勵\n')
       if(dailywatch.code == 1) {
@@ -643,6 +772,12 @@ $.log('\n🔔開始領取每日觀看獎勵\n')
           $.log('\n⚠️每日獎勵領取失敗:'+dailywatch.msg+'\n')
            }
           resolve()
+
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve()
+      }
     })
    })
   }
@@ -655,6 +790,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkdailyclickadid,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢每日廣告ID\n')
      const dailyclickid = JSON.parse(data)
       if(dailyclickid.code == 1) {
@@ -665,6 +801,11 @@ $.log('\n🔔開始查詢每日廣告ID\n')
           await checkDailyClickAd()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -679,6 +820,7 @@ return new Promise((resolve, reject) => {
     body: `ad_id=${dailyClickAdId}&`,
 }
    $.post(checkdailyclickad,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢每日廣告點擊ID\n')
      const dailyclick = JSON.parse(data)
       if(dailyclick.code == 1) {
@@ -689,6 +831,11 @@ $.log('\n🔔開始查詢每日廣告點擊ID\n')
           await DailyClickAd()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -702,6 +849,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${dailyClickStr}&ad_id=${dailyClickAdId}&`,
 }
    $.post(dailyclickad,async(error, resp, data) =>{
+    try {
      const dailyclick = JSON.parse(data)
 $.log('\n🔔開始領取每日點擊獎勵\n')
       if(dailyclick.code == 1) {
@@ -712,6 +860,11 @@ $.log('\n🔔開始領取每日點擊獎勵\n')
           $.log('\n⚠️每日點擊領取失敗:'+dailyclick.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -726,6 +879,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkhomejin,async(error, resp, data) =>{
+    try {
      const checkhomejb = JSON.parse(data)
      if(checkhomejb.right_st == 0){
           await homeJin()
@@ -765,6 +919,11 @@ $.log('\n🔔首頁金幣狀態:'+checkhomejb.right_text+'\n🔔首頁紅包狀�
           await checkWaterNum()
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -778,6 +937,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(homejin,async(error, resp, data) =>{
+    try {
      const homejb = JSON.parse(data)
      if(homejb.code == 1){
 $.log('\n🔔開始領取首頁金幣\n')
@@ -793,6 +953,11 @@ $.log('\n🔔開始領取首頁金幣\n')
           $.log('\n⚠️首頁金幣失敗:'+homejb.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -808,6 +973,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${homeJinStr}&tid=21&pos=1&`,
 }
    $.post(homejincallback,async(error, resp, data) =>{
+    try {
      const hmjcallback = JSON.parse(data)
 $.log('\n🔔開始翻倍首頁金幣\n')
       if(hmjcallback.code == 1) {
@@ -817,6 +983,11 @@ $.log('\n🔔開始翻倍首頁金幣\n')
           $.log('\n🔔首頁金幣翻倍失敗'+hmjcallback.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -830,6 +1001,7 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=0&c_type=2&`,
 }
    $.post(checkredbagid,async(error, resp, data) =>{
+    try {
 $.log('\n🔔開始查詢首頁紅包ID\n')
      const code = JSON.parse(data)
       if(code.code == 1) {
@@ -842,6 +1014,11 @@ $.log('\n🔔查詢首頁紅包ID成功,等待30s後領取首頁紅包\n')
           await redBagCallback()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -855,6 +1032,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${redBagStr}&tid=17&pos=1&`,
 }
    $.post(redbagcallback,async(error, resp, data) =>{
+    try {
      const redbag = JSON.parse(data)
 $.log('\n🔔開始領取首頁紅包\n')
       if(redbag.code == 1) {
@@ -865,6 +1043,11 @@ $.log('\n🔔開始領取首頁紅包\n')
           await checkHomeJin()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -877,6 +1060,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(checkgoldeggid,async(error, resp, data) =>{
+    try {
      const goldeggid = JSON.parse(data)
       if(goldeggid.code == 1) {
 $.log('\n🔔金蛋ID data'+data)
@@ -891,6 +1075,11 @@ $.log('\n🔔開始查詢首頁金蛋ID\n')
           await checkHomeJin()
         }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -904,6 +1093,7 @@ return new Promise((resolve, reject) => {
     body: `taskid=${goldEggId}&clicktime=${timestamp}&donetime=${timestamp}+1000&nonce_str=${goldEggStr}&`
 }
    $.post(goldeggdone,async(error, resp, data) =>{
+    try {
      const goldegg2 = JSON.parse(data)
       if(goldegg2.code == 1) {
 $.log('\n🔔開始領取首頁金蛋獎勵\n')
@@ -914,6 +1104,11 @@ $.log('\n🔔開始領取首頁金蛋獎勵\n')
           await checkHomeJin()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -927,6 +1122,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${goldEggStr}&tid=5&pos=1&`,
 }
    $.post(goldeggcallback,async(error, resp, data) =>{
+    try {
      const goldeggback = JSON.parse(data)
 $.log('\n🔔開始翻倍首頁金蛋\n')
       if(goldeggback.code == 1) {
@@ -937,6 +1133,11 @@ $.log('\n🔔開始翻倍首頁金蛋\n')
           await checkHomeJin()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -949,6 +1150,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(helpstatus,async(error, resp, data) =>{
+    try {
      const help = JSON.parse(data)
 $.log('\n🔔開始查詢助力視頻狀態\n')
       if(help.status == 0) {
@@ -958,6 +1160,11 @@ $.log('\n🔔查詢助力視頻狀態成功, 1s後獲取助力視頻ID\n')
 $.log('\n🔔今日助力已上限,請明天再試!\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -972,6 +1179,7 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=5&c_type=1&`,
 }
    $.post(checkcode,async(error, resp, data) =>{
+    try {
      const code = JSON.parse(data)
 $.log('\n🔔開始查詢助力視頻ID\n')
       if(code.code == 1) {
@@ -980,6 +1188,11 @@ $.log('\n🔔查詢助力視頻ID成功, 開始觀看助力視頻\n')
           await helpClick()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -994,6 +1207,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${nonce_str}`,
 }
    $.post(helpclick,async(error, resp, data) =>{
+    try {
      const help = JSON.parse(data)
       if(help.code == 1) {
 $.log('\n🔔開始觀看助力視頻, 60s後領取助力視頻獎勵\n')
@@ -1007,6 +1221,11 @@ $.log('\n🔔開始觀看助力視頻, 60s後領取助力視頻獎勵\n')
           $.log('\n⚠️觀看助力視頻失敗: '+help.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1022,6 +1241,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${nonce_str}&tid=22&pos=1&`,
 }
    $.post(callback,async(error, resp, data) =>{
+    try {
      const back = JSON.parse(data)
 $.log('\n🔔開始領取助力視頻獎勵\n')
       if(back.code == 1) {
@@ -1032,6 +1252,11 @@ $.log('\n🔔開始領取助力視頻獎勵\n')
           $.log('\n⚠️助力視頻獎勵失敗:'+back.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1246,6 +1471,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${luckyBoxStr}&tid=16&pos=1&`,
 }
    $.post(luckyboxcallback,async(error, resp, data) =>{
+    try {
      const boxcallback = JSON.parse(data)
 $.log('\n🔔開始翻倍寶箱\n')
       if(boxcallback.code == 1) {
@@ -1255,6 +1481,11 @@ $.log('\n🔔開始翻倍寶箱\n')
           $.log('\n⚠️寶箱翻倍失敗'+boxcallback.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1269,6 +1500,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(getquestionid,async(error, resp, data) =>{
+    try {
      const question = JSON.parse(data)
       if(question.code == 1 && question.day_num != 0) {
 $.log('\n🔔開始查詢答題ID\n')
@@ -1287,6 +1519,11 @@ $.log('\n🔔開始查詢答題ID\n')
           $.log('\n⚠️查詢答題ID成功,答題失敗: 今日答題已上限\n')
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1300,6 +1537,7 @@ return new Promise((resolve, reject) => {
     body: `mini_pos=1&c_type=1&`,
 }
    $.post(checksp,async(error, resp, data) =>{
+    try {
      const sp = JSON.parse(data)
       if(sp.code == 1) {
       spStr = sp.nonce_str
@@ -1311,6 +1549,11 @@ return new Promise((resolve, reject) => {
           await cySp()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1324,6 +1567,7 @@ return new Promise((resolve, reject) => {
     body: `day_num=${spId}&`,
 }
    $.post(cysp,async(error, resp, data) =>{
+    try {
      const sp = JSON.parse(data)
       if(sp.code == 1) {
          // $.log('\n'+sp.msg+'\n')
@@ -1331,6 +1575,11 @@ return new Promise((resolve, reject) => {
           await answerQue()
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1344,6 +1593,7 @@ return new Promise((resolve, reject) => {
     body: `cy_id=${questionId}&site=${questionSite}&`,
 }
    $.post(answerque,async(error, resp, data) =>{
+    try {
      const answer = JSON.parse(data)
 $.log('\n🔔開始答題\n')
       if(answer.code == 1) {
@@ -1359,6 +1609,11 @@ $.log('\n🔔開始答題\n')
           $.log('\n⚠️答題失敗: '+answer.msg+'\n')
          }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1373,6 +1628,7 @@ return new Promise((resolve, reject) => {
     body: `nonce_str=${answerStr}&tid=18&pos=1&`,
 }
    $.post(answerquecallback,async(error, resp, data) =>{
+    try {
      const answerback = JSON.parse(data)
 $.log('\n🔔開始翻倍答題金幣\n')
       if(answerback.code == 1) {
@@ -1383,6 +1639,11 @@ $.log('\n🔔開始翻倍答題金幣\n')
           $.log('\n⚠️答題金幣翻倍失敗:'+answerback.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1396,6 +1657,7 @@ return new Promise((resolve, reject) => {
     headers: JSON.parse(CookieVal),
 }
    $.post(cashcheck,async(error, resp, data) =>{
+    try {
      const cash = JSON.parse(data)
      if(resp.statusCode == 200 && cash.code != -1){
             if(cash.jinbi >= 500000){
@@ -1409,6 +1671,11 @@ return new Promise((resolve, reject) => {
              }
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1425,6 +1692,7 @@ return new Promise((resolve, reject) => {
     body: `tx=${tip}&`,
 }
    $.post(withdraw,async(error, resp, data) =>{
+    try {
       $.log('\n🔔提现完毕，提示:'+data)
       $.log(data)
      const draw = JSON.parse(data)
@@ -1434,6 +1702,11 @@ return new Promise((resolve, reject) => {
            notice +=draw.tip+'\n'+draw.msg+'\n'
           }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1453,6 +1726,7 @@ return new Promise((resolve, reject) => {
     body: `page=1&page_limit=50&`,
 }
    $.post(checkh5id,async(error, resp, data) =>{
+    try {
      const checkh5 = JSON.parse(data)
       if(resp.statusCode == 200){
          for(ID of checkh5){
@@ -1462,6 +1736,11 @@ return new Promise((resolve, reject) => {
          }
         }
       resolve()
+    } catch (e) {
+      $.logErr(e, resp);
+    } finally {
+      resolve()
+    }
     })
    })
   }
@@ -1476,6 +1755,7 @@ return new Promise((resolve, reject) => {
     body: `mini_id=${H5ID}&`,
 }
    $.post(dotaskh5,async(error, resp, data) =>{
+    try {
      const doh5task = JSON.parse(data)
 $.log('\ndoTaskH5:'+data+'\n')
       if(resp.body.indexOf('nonce_str') != -1) {
@@ -1489,6 +1769,11 @@ $.log('\ndoTaskH5:'+data+'\n')
           $.log('\n'+data+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
  }
@@ -1502,6 +1787,7 @@ return new Promise((resolve, reject) => {
     timeout: 30000,
 }
    $.get(uploadtime,async(error, resp, data) =>{
+    try {
 $.log('\nupLoadTime:'+timestamp+'\n'+data+'\n')
           //await $.wait(30000)
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -1509,6 +1795,11 @@ $.log('\nupLoadTime:'+timestamp+'\n'+data+'\n')
           await $.wait(random);
           await h5Done()
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1522,6 +1813,7 @@ return new Promise((resolve, reject) => {
     timeout: 30000,
 }
    $.get(uploadtime,async(error, resp, data) =>{
+    try {
 $.log('\nupLoadTime2:'+data+'\n')
           //await $.wait(30000)
           random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -1529,6 +1821,11 @@ $.log('\nupLoadTime2:'+data+'\n')
           await $.wait(random);
           await h5Done()
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
@@ -1545,6 +1842,7 @@ return new Promise((resolve, reject) => {
     timeout: 30000,
 }
    $.post(h5done,async(error, resp, data) =>{
+    try {
      const doneh5 = JSON.parse(data)
       if(doneh5.code == 1) {
           $.log('\n看看賺成功, 金幣+ '+          $.log('\n'+doneh5.jinbi+'\n')+'\n')
@@ -1552,6 +1850,11 @@ return new Promise((resolve, reject) => {
           $.log('\n'+doneh5.msg+'\n')
            }
           resolve()
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
     })
    })
   }
