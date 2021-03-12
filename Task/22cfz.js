@@ -122,13 +122,11 @@ if ($.isNode()) {
   }
   console.log(`------------- 共${cfzhdArr.length}个账号-------------\n`)
   for (let i = 0; i < cfzhdArr.length; i++) {
-    try {
             if (cfzhdArr[i]) {
               cfzurl = cfzurlArr[i];
               cfzhd = cfzhdArr[i];
               $.index = i + 1;
               console.log(`\n开始【春风转${$.index}】`)
-
               await cfzsigninfo();
               await $.wait(3000);
               //await cfzhhb();
@@ -136,7 +134,7 @@ if ($.isNode()) {
                   if(tc == 1){
                       y = 30
                     }
-                  y += 1
+                  y =  y + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                   await cfzqd()
                 }
@@ -144,7 +142,7 @@ if ($.isNode()) {
                 if(ts == 1){
                     w = 30
                   }
-                w += 1
+                w = w + 1
                 console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                 await cfzsplb()
                 await $.wait(31000);
@@ -158,14 +156,7 @@ if ($.isNode()) {
               await cfzrw4()
               await $.wait(3000)
               await cfzsdid()
-
               }
-          } catch (e) {
-            $.logErr(e)
-            $.logErr(e, `账号 循环执行任务出现异常`)
-          } finally {
-            resolve()
-          }
   }
 })()
   .catch((e) => $.logErr(e))
