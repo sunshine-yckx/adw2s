@@ -355,6 +355,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
+          console.log('\ncfzyd回执:'+data)
             const result = JSON.parse(data)
             if(result.code == 200){
                 console.log('\n春风转[领取阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.amount+'金币，等待30秒继续领取')
@@ -523,6 +524,7 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
+          console.log('\ncfzspr1回执:'+data)
             const result = JSON.parse(data)
             if(result.code == 200){
                 console.log('\n春风转[领取阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.amount+'金币，等待30秒继续领取')
@@ -535,7 +537,6 @@ let url = {
                 if(result.message == '您的自阅已超过次数'){
                         ts =1
                   }
-
                 if(result.message == '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570'){
                         ts =1
                   }
@@ -543,7 +544,6 @@ let url = {
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
                 await cfzxf();
                 }else{
-
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
                 ts =1
                 }
