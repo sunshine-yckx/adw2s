@@ -384,7 +384,7 @@ let url = {
                 await cfzxf();
                 }else{
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
-                ts =1
+                tc =1
                 break
                 }
             }
@@ -598,6 +598,7 @@ let url = {
                 }else{
 
                 console.log('\n春风转[阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                ts =1
                 }
             }
 
