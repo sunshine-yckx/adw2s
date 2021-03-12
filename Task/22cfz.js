@@ -62,7 +62,7 @@ let cfzurl = $.getdata('cfzurl')
 let cfzhd = $.getdata('cfzhd')
 let cfzsbhd = $.getdata('cfzsbhd')
 var cfzlb = '',cfzid = '',cfzmc = '',page = 1
-let sdid = '';sdlqid = '';tc = 0
+let sdid = '';sdlqid = '';tc = 0;ts = 0
 
 var hour,minute,random
 var max = 50;
@@ -151,6 +151,18 @@ if ($.isNode()) {
                   $.index = i + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                   await cfzqd()
+                  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                  console.log(random);
+                  await $.wait(random);
+                  //await $.wait(31000);
+                }
+              for (let i = 0; i < 15; i++) {
+                  if(ts == 1){
+                      return;
+                    }
+                  $.index = i + 1
+                  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
+                  await cfzsplb()
                   random = Math.floor(Math.random()*(max-min+1)+min)*1000
                   console.log(random);
                   await $.wait(random);
@@ -324,7 +336,7 @@ let url = {
 
 
 
-//春风转列表
+//春风转文章列表
 function cfzqd(timeout = 0) {
   return new Promise((resolve) => {
     setTimeout( ()=>{
@@ -361,7 +373,7 @@ let url = {
   })
 }
 
-//春风转阅读
+//春风转文章阅读
 function cfzyd(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
@@ -400,7 +412,7 @@ let url = {
   })
 }
 
-//春风转上报数据
+//春风转文章上报数据
 function cfzsb(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
@@ -426,7 +438,7 @@ let url = {
   })
 }
 
-//春风转上报提交数据
+//春风转文章上报提交数据
 function cfztj(timeout = 0) {
   return new Promise((resolve) => {
 let url = {
@@ -483,6 +495,116 @@ let url = {
 }
 
 
+
+//春风转视频列表
+function cfzsplb(timeout = 0) {
+  return new Promise((resolve) => {
+    setTimeout( ()=>{
+//let sjs = Math.floor(Math.random()*1000); //生成随机数
+//let sjs = Math.floor(Math.random()*(5-1+1)+1)*1000
+let sjs = Math.floor(Math.random() * 100); //生成随机数
+let sj = Math.floor(Math.random() * 100); //生成随机数
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/article/list?city_type=1&page='+sjs+'&slide='+sj+'&tag_id=0&type=2',
+        headers : JSON.parse(cfzhd),
+}
+      $.get(url, async (err, resp, data) => {
+        cfzlb = data.match(/"list":(.*)/)[1]
+        cfzid = cfzlb.match(/"id":(\w+),/)[1]
+        cfzmc = cfzlb.match(/"title":"(.+?)","/)[1]
+        //console.log(cfzmc)
+        //$.done()
+        try {
+            const result = JSON.parse(data)
+            if(result.code == 200){
+                console.log('\n春风转[视频列表]回执:成功🌝  \n📄视频ID:'+cfzid+'\n📑开始观看:'+cfzmc)
+                //await $.wait(36000);
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+                await cfzspread();
+            } else {
+                console.log('春风转[视频列表]回执:失败🚫 '+result.message)
+            }
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+      })
+    },timeout)
+  })
+}
+
+//春风转视频阅读
+function cfzspread(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/self_read_init?item_id='+cfzid,
+        headers : JSON.parse(cfzhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+            const result = JSON.parse(data)
+            if(result.code == 200){
+                console.log('\n春风转[领取阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.single_award_total_time+'金币，等待30秒继续领取')
+                //await $.wait(30000);
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+                await cfzspsb();
+            } else {
+                if(result.message == '您的自阅已超过次数'){
+                        ts =1
+                  }
+                if(result.message=='系统错误！'){
+                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
+                await cfzxf();
+                }else{
+
+                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                }
+            }
+
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+
+//春风转视频上报提交数据
+function cfzspsb(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/ad_sense/report',
+        headers : JSON.parse(cfzhd),
+        body : 'ad_source=1&location=4&position=10&report_type=1',
+
+        }
+      $.post(url, async (err, resp, data) => {
+        try {
+            const result = JSON.parse(data)
+            if(result.code == 200){
+                console.log('\n春风转[视频数据上报]回执:成功🌝'+result.data)
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+            } else {
+                console.log('\n春风转[视频上报数据]回执:失败🌚'+result.message)
+            }
+
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
 
 
 //春风转每日任务阅读新闻
