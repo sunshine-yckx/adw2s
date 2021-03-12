@@ -4,15 +4,11 @@
 脚本说明：春风转
 脚本为自动阅读新闻
 每天三元上限？
-脚本运行时间未知，我也不知道啥时候能跑完
-每日任务我慢慢添加，暂时没加入
 
 
 下载地址
 
-https://ss.tblk.me/L8UkS
-
-二维码地址 https://raw.githubusercontent.com/age174/-/main/4705AE1B-41ED-4341-9CCD-5E06F3372D30.jpeg
+https://ss.tblk.me/tPwrE
 
 本脚本以学习为主！
 使用方法:
