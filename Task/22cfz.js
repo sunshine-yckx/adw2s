@@ -137,22 +137,16 @@ if ($.isNode()) {
                   $.index = i + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                   await cfzqd()
-                  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-                  console.log(random);
-                  await $.wait(random);
-                  //await $.wait(31000);
+                  await $.wait(31000);
                 }
-              for (let i = 0; i < 12; i++) {
+              for (let w = 0; w < 12; w++) {
                   if(ts == 1){
                       return;
                     }
-                  $.index = i + 1
+                  $.index = w + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                   await cfzsplb()
-                  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-                  console.log(random);
-                  await $.wait(random);
-                  //await $.wait(31000);
+                  await $.wait(31000);
                 }
               await cfzrw1()
               await $.wait(3000)
