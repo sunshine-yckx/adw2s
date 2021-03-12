@@ -6,7 +6,7 @@ name: 22cfz(春风转)
 on:
   workflow_dispatch:
   schedule:
-     - cron: '35 0,4-16/2,22 * * *'
+     - cron: '0,35  0-16,23 * * *'
   watch:
     types: started
 #env:
