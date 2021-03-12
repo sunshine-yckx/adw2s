@@ -51,15 +51,7 @@ http://cf-api.douzhuanapi.cn:10002/api/ script-path=https://raw.githubuserconten
 hostname = cf-api.douzhuanapi.cn
 
 
-for (let w = 0; w < 12; w++) {
-  if(ts == 1){
-      return;
-    }
-  $.index = w + 1
-  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
-  await cfzsplb()
-  await $.wait(31000);
-}
+
 
 */
 
@@ -142,13 +134,21 @@ if ($.isNode()) {
               //await cfzhhb();
               for (let i = 0; i < 12; i++) {
                   if(tc == 1){
-                      return;
+                      break;
                     }
                   $.index = i + 1
                   console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
                   await cfzqd()
-                  await $.wait(31000);
                 }
+              for (let w = 0; w < 12; w++) {
+                if(ts == 1){
+                    break;
+                  }
+                $.index = w + 1
+                console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${i+1}次`)
+                await cfzsplb()
+                await $.wait(31000);
+              }
               await cfzrw1()
               await $.wait(3000)
               await cfzrw2()
@@ -384,7 +384,7 @@ let url = {
                 await cfzxf();
                 }else{
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
-                return
+                break
                 }
             }
 
@@ -553,7 +553,7 @@ let url = {
                 }else{
 
                 console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
-                return
+                break
                 }
             }
 
