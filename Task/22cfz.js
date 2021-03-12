@@ -522,7 +522,7 @@ let url = {
                 random = Math.floor(Math.random()*(max-min+1)+min)*1000
                 console.log(random);
                 await $.wait(random);
-                await cfzspread();
+                await cfzspr1();
             } else {
                 console.log('春风转[视频列表]回执:失败🚫 '+result.message)
             }
@@ -536,6 +536,48 @@ let url = {
   })
 }
 
+
+
+//春风转文章阅读
+function cfzspr1(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/self_read_report?item_id='+cfzid,
+        headers : JSON.parse(cfzhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+            const result = JSON.parse(data)
+            if(result.code == 200){
+                console.log('\n春风转[领取阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.amount+'金币，等待30秒继续领取')
+                //await $.wait(30000);
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+                await cfzspread();
+            } else {
+                if(result.message == '您的自阅已超过次数'){
+                        tc =1
+                  }
+                if(result.message=='系统错误！'){
+                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
+                await cfzxf();
+                }else{
+
+                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                }
+            }
+
+        } catch (e) {
+          $.logErr(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+
 //春风转视频阅读
 function cfzspread(timeout = 0) {
   return new Promise((resolve) => {
@@ -547,7 +589,7 @@ let url = {
         try {
             const result = JSON.parse(data)
             if(result.code == 200){
-                console.log('\n春风转[领取阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.single_award_total_time+'金币，等待30秒继续领取')
+                console.log('\n春风转[阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.single_award_total_time+'金币，等待30秒继续领取')
                 //await $.wait(30000);
                 random = Math.floor(Math.random()*(max-min+1)+min)*1000
                 console.log(random);
@@ -558,11 +600,11 @@ let url = {
                         ts =1
                   }
                 if(result.message=='系统错误！'){
-                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
+                console.log('\n春风转[阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
                 await cfzxf();
                 }else{
 
-                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                console.log('\n春风转[阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
                 }
             }
 
