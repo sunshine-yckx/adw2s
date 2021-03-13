@@ -63,11 +63,11 @@ const cfzurlArr = [], cfzhdArr = [],cfzcount = ''
 let cfzurl = $.getdata('cfzurl')
 let cfzhd = $.getdata('cfzhd')
 var cfzlb = '',cfzid = '',cfzmc = '',page = 1
-let sdid = '';sdlqid = '';tc = 0;ts = 0
+var sdid = '',sdlqid = '',tc = 0,ts = 0
 
 var hour,minute,random
-var max = 50;
-var min = 35;
+var max = 90;cfzhdArr
+var min = 60;
 
 if ($.isNode()) {
   hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();
@@ -128,6 +128,7 @@ if ($.isNode()) {
               $.index = i + 1;
               console.log(`\n开始【春风转${$.index}】`)
               await cfzsigninfo();
+              //await cfzrwlist();
               await $.wait(3000);
               //await cfzhhb();
               for (let y = 0; y < 5; y++) {
@@ -135,7 +136,7 @@ if ($.isNode()) {
                       y = 30
                     }
                   y =  y + 1
-                  console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${y+1}次`)
+                  console.log('\n'+`春风转开始执行循环阅读文章，本次共执行5次，已执行${y+1}次`)
                   await cfzqd()
                 }
               for (let w = 0; w < 5; w++) {
@@ -143,7 +144,7 @@ if ($.isNode()) {
                     w = 30
                   }
                 w = w + 1
-                console.log('\n'+`春风转开始执行循环阅读，本次共执行20次，已执行${w+1}次`)
+                console.log('\n'+`春风转开始执行循环观看视频，本次共执行5次，已执行${w+1}次`)
                 await cfzsplb()
                 await $.wait(31000);
               }
@@ -159,7 +160,7 @@ if ($.isNode()) {
               }
   }
 })()
-  .catch((e) => $.logErr(e))
+  .catch((e) => $.log(e))
   .finally(() => $.done())
 
 
@@ -200,6 +201,9 @@ let url = {
                 console.log('\n春风转[查询签到]回执:成功🌝 \n累计签到: '+result.data.sign_days+'天\n今日收益: '+result.data.today_gold_gain+'金币\n')
                 if(result.data.today_sign_status == 1){
                    console.log('\n今天已签到🌝 \n')
+                }else {
+                  console.log('\n开始签到🌝 \n')
+                  await cfzsign();
                 }
                 if(result.data.double_sign_status == 0){
                     console.log('\n开始领取[签到翻倍]🌝 \n')
@@ -215,7 +219,7 @@ let url = {
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -224,6 +228,35 @@ let url = {
 }
 
 //春风转签到
+function cfzsign(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/gold_sign?type=1',
+        headers : JSON.parse(cfzhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+            const result = JSON.parse(data)
+            if(result.code == 200){
+                console.log('\n春风转[签到]回执:成功🌝 \n获得: '+result.data.amount+'金币')
+                doublesignstr = result.data.gold_gain_id;
+                //await $.wait(35000);
+                random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                console.log(random);
+                await $.wait(random);
+                await cfzsigndouble();
+            } else {
+                console.log('\n春风转[签到]回执:失败🌚'+result.message)
+            }
+
+        } catch (e) {
+          $.log(e, resp);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
 
 //春风转签到翻倍
 function cfzsigndouble(timeout = 0) {
@@ -241,13 +274,13 @@ let url = {
                 console.log(random);
                 await $.wait(random);
                 //await $.wait(3000);
-                await cfzsigndouble();
+                await cfzsigndoubletj();
             } else {
                 console.log('\n春风转[签到翻倍]回执:失败🌚'+result.message)
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -274,7 +307,7 @@ let url = {
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -299,7 +332,7 @@ let url = {
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -315,8 +348,8 @@ function cfzqd(timeout = 0) {
     setTimeout( ()=>{
 //let sjs = Math.floor(Math.random()*1000); //生成随机数
 //let sjs = Math.floor(Math.random()*(5-1+1)+1)*1000
-let sjs = Math.floor(Math.random() * 100); //生成随机数
-let sj = Math.floor(Math.random() * 100); //生成随机数
+let sjs = Math.floor(Math.random() * 300); //生成随机数
+let sj = Math.floor(Math.random() * 300); //生成随机数
 let url = {
         url : 'http://cf-api.douzhuanapi.cn:10002/api/article/list?city_type=1&page='+sjs+'&slide='+sj+'&tag_id=0&type=1',
         headers : JSON.parse(cfzhd),
@@ -337,7 +370,7 @@ let url = {
                 console.log('春风转[阅读列表]回执:失败🚫 '+result.message)
             }
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -365,10 +398,7 @@ let url = {
                 await $.wait(random);
                 await cfzsb();
             } else {
-                if(result.message == '您的自阅已超过次数'){
-                        tc =1
-                  }
-                if(result.message == '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570'){
+                if(result.message == '您的自阅已超过次数' || '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570' || '请稍后再试' || '\u8bf7\u7a0d\u540e\u518d\u8bd5'){
                         tc =1
                   }
                 if(result.message=='系统错误！'){
@@ -377,12 +407,11 @@ let url = {
                 }else{
                     console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
                     tc =1
-                    break
                 }
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -408,7 +437,7 @@ let url = {
                 console.log('\n春风转[上报数据]回执:失败🌚'+result.message)
             }
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -435,7 +464,7 @@ let url = {
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -463,7 +492,7 @@ let url = {
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -479,8 +508,8 @@ function cfzsplb(timeout = 0) {
     setTimeout( ()=>{
 //let sjs = Math.floor(Math.random()*1000); //生成随机数
 //let sjs = Math.floor(Math.random()*(5-1+1)+1)*1000
-let sjs = Math.floor(Math.random() * 100); //生成随机数
-let sj = Math.floor(Math.random() * 100); //生成随机数
+let sjs = Math.floor(Math.random() * 300); //生成随机数
+let sj = Math.floor(Math.random() * 300); //生成随机数
 let url = {
         url : 'http://cf-api.douzhuanapi.cn:10002/api/article/list?city_type=1&page='+sjs+'&slide='+sj+'&tag_id=0&type=2',
         headers : JSON.parse(cfzhd),
@@ -504,7 +533,7 @@ let url = {
                 console.log('春风转[视频列表]回执:失败🚫 '+result.message)
             }
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -524,33 +553,30 @@ let url = {
         }
       $.get(url, async (err, resp, data) => {
         try {
-          console.log('\ncfzspr1回执:'+data)
+          //console.log('\ncfzspr1回执:'+data)
             const result = JSON.parse(data)
             if(result.code == 200){
-                console.log('\n春风转[领取阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.amount+'金币，等待30秒继续领取')
+                console.log('\n春风转[领取视频奖励]回执:成功🌝 \n获得奖励: '+result.data.amount+'金币，等待30秒继续领取')
                 //await $.wait(30000);
                 random = Math.floor(Math.random()*(max-min+1)+min)*1000
                 console.log(random);
                 await $.wait(random);
                 await cfzspread();
             } else {
-                if(result.message == '您的自阅已超过次数'){
-                        ts =1
-                  }
-                if(result.message == '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570'){
-                        ts =1
+                if(result.message == '您的自阅已超过次数' || '\u60a8\u7684\u81ea\u9605\u5df2\u8d85\u8fc7\u6b21\u6570' || '请稍后再试' || '\u8bf7\u7a0d\u540e\u518d\u8bd5'){
+                        tc =1
                   }
                 if(result.message=='系统错误！'){
-                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
+                console.log('\n春风转[领取视频奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
                 await cfzxf();
                 }else{
-                console.log('\n春风转[领取阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                console.log('\n春风转[领取视频奖励]回执:失败🌚'+result.message+'脚本已停止运行')
                 ts =1
                 }
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -570,7 +596,7 @@ let url = {
         try {
             const result = JSON.parse(data)
             if(result.code == 200){
-                console.log('\n春风转[阅读奖励]回执:成功🌝 \n获得奖励: '+result.data.single_award_total_time+'金币，等待30秒继续领取')
+                console.log('\n春风转[视频奖励]回执:成功🌝 \n获得奖励: '+result.data.single_award_total_time+'金币，等待30秒继续领取')
                 //await $.wait(30000);
                 random = Math.floor(Math.random()*(max-min+1)+min)*1000
                 console.log(random);
@@ -584,17 +610,17 @@ let url = {
                         ts =1
                   }
                 if(result.message=='系统错误！'){
-                console.log('\n春风转[阅读奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
+                console.log('\n春风转[视频奖励]回执:失败🌚'+result.message+'\n恭喜您，您的账号黑了，尝试上报数据修复，提示上报数据成功请关闭脚本等待一分钟再次运行试试')
                 await cfzxf();
                 }else{
 
-                console.log('\n春风转[阅读奖励]回执:失败🌚'+result.message+'脚本已停止运行')
+                console.log('\n春风转[视频奖励]回执:失败🌚'+result.message+'脚本已停止运行')
                 ts =1
                 }
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
@@ -625,13 +651,65 @@ let url = {
             }
 
         } catch (e) {
-          $.logErr(e, resp);
+          $.log(e, resp);
         } finally {
           resolve()
         }
     },timeout)
   })
 }
+
+
+
+//春风转任务列表
+function cfzrwlist(timeout = 0) {
+  return new Promise((resolve) => {
+    setTimeout( ()=>{
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/gold_red_task_info?osType=IOS',
+        headers : JSON.parse(cfzhd),
+}
+      $.get(url, async (err, resp, data) => {
+      try {
+        console.log('春风转[阅读列表]回执:🚫 '+data)
+        const data2 =JSON.parse(data)
+        data1 = data2.data.common_task
+        console.log('春风转data1回执:'+data1)
+        cfzrwlb = data.match(/"list":(.*)/)[1]
+        console.log('春风转cfzrwlb回执:'+cfzrwlb)
+        cfzrwid = cfzrwlb.match(/"id":(\w+),/)
+        cfzrwstate = cfzrwlb.match(/"state":(\w+),/)
+        cfzrwmc = cfzrwlb.match(/"title":"(.+?)","/)
+        //console.log(cfzmc)
+        //$.done()
+            const result = JSON.parse(data)
+            if(result.code == 200){
+              for (var i = 0; i < cfzrwid.length; i++) {
+                cfzrwid[i]
+                console.log('春风转[cfzrwid[i]]回执:'+i+cfzrwid[i])
+                cfzrwmc[i]
+                console.log('春风转[cfzrwmc[i]]回执:'+i+cfzrwmc[i])
+                cfzrwstate[i]
+                console.log('春风转[cfzrwmc[i]]回执:'+i+cfzrwstate[i])
+
+              }
+                console.log('\n春风转[阅读列表]回执:成功🌝  \n📄阅读ID:'+cfzid+'\n📑开始阅读:'+cfzmc)
+                await $.wait(3000);
+                await cfzyd();
+            } else {
+                console.log('春风转[阅读列表]回执:失败🚫 '+result.message)
+            }
+        } catch (e) {
+          $.log(e, resp);
+        } finally {
+          resolve()
+        }
+      })
+    },timeout)
+  })
+}
+
+
 
 
 //春风转每日任务阅读新闻
@@ -644,19 +722,19 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
-        console.log('\n春风转[每日任务阅读新闻]回执:成功🌝 \n获得奖励: '+result.data.amount)
+        console.log('\n春风转[领取每日任务阅读新闻]回执:成功🌝 \n获得奖励: '+result.data.amount)
 
 } else {
 
-console.log('\n春风转[每日任务阅读新闻]回执:失败🌚'+result.message)
+console.log('\n春风转[领取每日任务阅读新闻]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
@@ -673,20 +751,20 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
-        console.log('\n春风转[每日任务阅读60分钟]回执:成功🌝 \n获得奖励: '+result.data.amount)
+        console.log('\n春风转[领取每日任务阅读60分钟]回执:成功🌝 \n获得奖励: '+result.data.amount)
 
 
 } else {
 
-console.log('\n春风转[每日任务阅读60分钟]回执:失败🌚'+result.message)
+console.log('\n春风转[领取每日任务阅读60分钟]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
@@ -705,67 +783,31 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
-        console.log('\n春风转[每日任务福利视频]回执:成功🌝 \n获得奖励: '+result.data.amount)
+        console.log('\n春风转[领取每日任务福利视频]回执:成功🌝 \n获得奖励: '+result.data.amount)
 
 
 } else {
 
 if(result.message =='该任务您还未完成'){
-console.log('\n春风转[每日任务福利视频]回执:失败🌚'+result.message)
+console.log('\n春风转[领取每日任务福利视频]回执:失败🌚'+result.message)
 for (let i = 0; i < 3; i++) {
 
         $.log(`春风转开始执行观看福利视频，本次共执行3次，已执行${i+1}次`)
         await cfzrwsp()
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+        await $.wait(random);
       }
 }else{console.log('\n春风转[每日任务福利视频]回执:失败🌚'+result.message)}
 
 }
 }
         } catch (e) {
-          $.logErr(err);
-        } finally {
-          resolve()
-        }
-    },timeout)
-  })
-}
-
-//春风转每日任务晒图奖励
-function cfzrw4(timeout = 0) {
-  return new Promise((resolve) => {
-let url = {
-        url : 'http://cf-api.douzhuanapi.cn:10002/api/get_red_task_gold?id=5',
-        headers : JSON.parse(cfzhd),
-        }
-      $.get(url, async (err, resp, data) => {
-        try {
-          if (err) {
-            $.logErr(err)
-          } else {
-    const result = JSON.parse(data)
-        if(result.code == 200){
-        console.log('\n春风转[每日任务晒图奖励]回执:成功🌝 \n获得奖励: '+result.data.amount)
-
-
-} else {
-
-if(result.message =='该任务您还未完成'){
-console.log('\n春风转[每日任务晒图奖励]回执:失败🌚'+result.message)
-for (let i = 0; i < 3; i++) {
-
-        $.log(`春风转开始执行观看福利视频，本次共执行3次，已执行${i+1}次`)
-        await cfzrwst()
-      }
-}else{console.log('\n春风转[每日任务晒图奖励]回执:失败🌚'+result.message)}
-
-}
-}
-        } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
@@ -784,7 +826,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
         const result = JSON.parse(data)
         if(result.code == 200){
@@ -795,13 +837,58 @@ let url = {
         }
         }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
     },timeout)
   })
 }
+
+
+//春风转每日任务晒图奖励
+function cfzrw4(timeout = 0) {
+  return new Promise((resolve) => {
+let url = {
+        url : 'http://cf-api.douzhuanapi.cn:10002/api/get_red_task_gold?id=5',
+        headers : JSON.parse(cfzhd),
+        }
+      $.get(url, async (err, resp, data) => {
+        try {
+          if (err) {
+            $.log(err)
+          } else {
+    const result = JSON.parse(data)
+        if(result.code == 200){
+        console.log('\n春风转[每日任务晒图奖励]回执:成功🌝 \n获得奖励: '+result.data.amount)
+
+
+} else {
+
+if(result.message =='该任务您还未完成'){
+console.log('\n春风转[领取每日任务晒图奖励]回执:失败🌚'+result.message)
+for (let i = 0; i < 3; i++) {
+
+        $.log(`春风转开始执行观看福利视频，本次共执行3次，已执行${i+1}次`)
+        await cfzrwst()
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+        await $.wait(random);
+      }
+}else{console.log('\n春风转[领取每日任务晒图奖励]回执:失败🌚'+result.message)}
+
+}
+}
+        } catch (e) {
+          $.log(err);
+        } finally {
+          resolve()
+        }
+    },timeout)
+  })
+}
+
+
 
 //春风转每日任务晒图
 function cfzrwst(timeout = 0) {
@@ -813,7 +900,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
             const result = JSON.parse(data)
             if(result.code == 200){
@@ -825,7 +912,7 @@ let url = {
             }
             }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
@@ -843,13 +930,13 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
- sdid = result.data.treasureBox_id
-        console.log('\n春风转[时段ID]回执:成功🌝 \n时段ID: '+sdid)
-           await cfzsdlq();
+            sdid = result.data.treasureBox_id
+            console.log('\n春风转[时段ID]回执:成功🌝 \n时段ID: '+sdid)
+            await cfzsdlq();
 
 } else {
 
@@ -857,13 +944,14 @@ console.log('\n春风转[时段ID]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
     },timeout)
   })
 }
+
 //时段领取
 function cfzsdlq(timeout = 0) {
   return new Promise((resolve) => {
@@ -874,27 +962,29 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
-    const result = JSON.parse(data)
-        if(result.code == 200){
- sdlqid = result.data.gold_gain_id
-        console.log('\n春风转[时段领取]回执:成功🌝 \n时段ID: '+result.data.gold_amount)
-           await cfzsdfb();
-
-} else {
-
-console.log('\n春风转[时段领取]回执:失败🌚'+result.message)
-}
-}
+            const result = JSON.parse(data)
+            if(result.code == 200){
+               sdlqid = result.data.gold_gain_id
+               console.log('\n春风转[时段领取]回执:成功🌝 \n时段ID: '+result.data.gold_amount)
+               random = Math.floor(Math.random()*(max-min+1)+min)*1000
+               console.log(random);
+               await $.wait(random);
+               await cfzsdfb();
+            } else {
+              console.log('\n春风转[时段领取]回执:失败🌚'+result.message)
+            }
+        }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
     },timeout)
   })
 }
+
 //时段翻倍领取
 function cfzsdfb(timeout = 0) {
   return new Promise((resolve) => {
@@ -905,7 +995,7 @@ let url = {
       $.get(url, async (err, resp, data) => {
         try {
           if (err) {
-            $.logErr(err)
+            $.log(err)
           } else {
     const result = JSON.parse(data)
         if(result.code == 200){
@@ -917,7 +1007,7 @@ console.log('\n春风转[时段翻倍]回执:失败🌚'+result.message)
 }
 }
         } catch (e) {
-          $.logErr(err);
+          $.log(err);
         } finally {
           resolve()
         }
