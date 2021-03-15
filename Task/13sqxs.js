@@ -384,7 +384,7 @@ function withdrawinfo(k) {
 	$.post(request, async(error, request, data) =>{
       try {
 		const result=JSON.parse(data)
-		//$.log(data);
+		$.log(data);
 		if(result.status==200)
 		{
 			ableCash = result.data.withdrawableCash
@@ -458,7 +458,7 @@ function userinfo() {
 
 	$.post(request, async(error, request, data) =>{
       try {
-		  //$.log(data);
+		  $.log(data);
 		  const result=JSON.parse(data);
 		if(result.status==200)
 		{
