@@ -1664,7 +1664,7 @@ return new Promise((resolve, reject) => {
               $.log('\n🔔金幣查询满足500000金幣\n')
               tip = 50
               await withDraw()
-             }else if(cash.day_jinbi > 5000){
+            }else if(cash.day_jinbi > 50000){
               $.log('\n🔔金幣查询满足5000金幣\n')
               tip = 1
               await withDraw()
