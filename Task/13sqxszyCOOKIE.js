@@ -99,17 +99,10 @@ let cookie2 = {
 $.console.log(queue);
 $.console.log(modulees);
 
-if (queue == 2) {
-  if (modulees == 1) {
-      module.exports = cookie11
-  }
-}else {
-  if (modulees == 1) {
-      module.exports = cookie1
-  }
+
+if (modulees == 1) {
+    module.exports = cookie1
 }
-
-
 
 
 if (modulees == 2) {
