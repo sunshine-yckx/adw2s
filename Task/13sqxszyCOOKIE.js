@@ -18,7 +18,7 @@ boxjs链接  https://raw.githubusercontent.com/6Svip120apk69/gitee_q8qsTAUA_cThx
 */
 
 
-//modulees = 1 //1 选择方式一 2 选择方式二
+modulees = 1 //1 选择方式一 2 选择方式二
 queue = process.env.queue //1 选择方式一 2 选择方式二
 
 //方式一
@@ -96,7 +96,8 @@ let cookie2 = {
 
 }
 
-
+$.console.log(queue);
+$.console.log(modulees);
 
 if (queue == 2) {
   if (modulees == 1) {
