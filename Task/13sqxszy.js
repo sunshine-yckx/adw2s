@@ -119,13 +119,16 @@ GXRZ = '3.14 修复极速版书城报错'
 const $ = Env("书旗小说");
 $.idx = ($.idx = ($.getval('shuqiSuffix') || '1') - 1) > 0 ? ($.idx + 1 + '') : ''; // 账号扩展字符
 const notify = $.isNode() ? require("./sendNotify") : ``;
-var COOKIE
-$.log(COOKIE);
+const COOKIE2 = $.isNode() ? require("./13sqxszyCOOKIE2") : ``;
+const COOKIE1 = $.isNode() ? require("./13sqxszyCOOKIE1") : ``;
+$.log(process.env.duilie);
+
 if (process.env.duilie == 2){
-  const COOKIE = $.isNode() ? require("./13sqxszyCOOKIE2") : ``;
+  const COOKIE = COOKIE2
 }else {
-  const COOKIE = $.isNode() ? require("./13sqxszyCOOKIE1") : ``;
+  const COOKIE = COOKIE1
 }
+
 
 $.log(COOKIE);
 
