@@ -15,7 +15,7 @@ on:
 jobs:
   build:
     env:
-      queue: 2
+      duilie: 2
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -42,6 +42,7 @@ jobs:
           cd ~/Scripts
           node Task/13sqxszy.js
         env:
+          duilie: 1
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -51,6 +52,6 @@ jobs:
           cd ~/Scripts
           node Task/13sqxszy.js
         env:
-          queue: 2
+          duilie: 2
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
