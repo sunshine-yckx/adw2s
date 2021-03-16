@@ -201,11 +201,45 @@ async function fqkkck() {
 }
 
 async function fqkkCkMove() {
-  let fqkkcount = ($.getval('fqkkcount') || '0') - 0;
+  /*
+  let fqkkcount = ($.getval('fqkkcount') || '1') - 0;
   for (let i = 1; i <= fqkkcount; i++) {
     fqkkurlArr.push($.getdata(`fqkkurl${i>1?i:''}`))
     fqkkhdArr.push($.getdata(`fqkkhd${i>1?i:''}`))
   }
+  */
+
+  if (process.env.fqkkurl && process.env.fqkkurl.indexOf('#') > -1) {
+  fqkkkurl = process.env.fqkkkurl.split('#');
+  console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.fqkkurl && process.env.fqkkurl.indexOf('\n') > -1) {
+   fqkkkurl = process.env.fqkkurl.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   fqkkkurl = process.env.fqkkurl.split()
+  };
+  Object.keys(fqkkkurl).forEach((item) => {
+        if (fqkkkurl[item]) {
+          fqkkurlArr.push(fqkkkurl[item])
+        }
+    });
+
+  if (process.env.fqkkhd && process.env.fqkkhd.indexOf('#') > -1) {
+  fqkkkhd = process.env.fqkkhd.split('#');
+  console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.fqkkhd && process.env.fqkkhd.indexOf('\n') > -1) {
+   fqkkkhd = process.env.fqkkhd.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   fqkkkhd = process.env.fqkkhd.split()
+  };
+  Object.keys(fqkkkhd).forEach((item) => {
+        if (fqkkkhd[item]) {
+          fqkkhdArr.push(fqkkkhd[item])
+        }
+    });
   if (fqkkhdArr.length > 0) {
     let existsId = fqkk.map(o => o.uid - 0);
     for (let i = 0, len = fqkkhdArr.length; i < len; i++) {
