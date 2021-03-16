@@ -124,11 +124,10 @@ const COOKIE1 = $.isNode() ? require("./13sqxszyCOOKIE1") : ``;
 $.log(process.env.duilie);
 
 if (process.env.duilie == 2){
-  const COOKIE = COOKIE2
+  var COOKIE = COOKIE2
 }else {
-  const COOKIE = COOKIE1
+  var COOKIE = COOKIE1
 }
-
 
 $.log(COOKIE);
 
