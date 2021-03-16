@@ -68,7 +68,7 @@ jobs:
           cd ~/Scripts
           npm install -g npm
           npm update
-          
+
       - name: '运行 【shu旗小说2】'
         run: |
           cd ~/Scripts
