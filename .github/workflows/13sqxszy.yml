@@ -13,9 +13,9 @@ on:
   #TZ: Asia/Shanghai
 
 jobs:
-  build:
+  build1:
     env:
-      duilie: 2
+      duilie: 1
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
@@ -37,7 +37,6 @@ jobs:
           npm update
 
       - name: '运行 【shu旗小说1】'
-        if: env.Dkdurl
         run: |
           cd ~/Scripts
           node Task/13sqxszy.js
@@ -46,8 +45,31 @@ jobs:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
 
+
+  build2:
+    env:
+      duilie: 2
+      PUSH_KEY: ${{ secrets.PUSH_KEY }}
+      BARK_PUSH: ${{ secrets.BARK_PUSH }}
+
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - name: Checkout
+        run: |
+          git clone https://github.com/adw2s/Action.git ~/Scripts
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: npm install
+        run: |
+          cd ~/Scripts
+          npm install -g npm
+          npm update
+          
       - name: '运行 【shu旗小说2】'
-        if: env.Dkdurl
         run: |
           cd ~/Scripts
           node Task/13sqxszy.js
