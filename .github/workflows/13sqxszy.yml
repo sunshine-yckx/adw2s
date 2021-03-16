@@ -6,7 +6,7 @@ name: 13sqxszy(shu旗小说)
 on:
   workflow_dispatch:
   schedule:
-     - cron: '5,35 10-16/1 * * *'
+     - cron: '8 0-16/1 * * *'
   watch:
     types: started
 #env:

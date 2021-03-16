@@ -122,14 +122,11 @@ const notify = $.isNode() ? require("./sendNotify") : ``;
 const COOKIE2 = $.isNode() ? require("./13sqxszyCOOKIE2") : ``;
 const COOKIE1 = $.isNode() ? require("./13sqxszyCOOKIE1") : ``;
 $.log(process.env.duilie);
-
 if (process.env.duilie == 2){
   var COOKIE = COOKIE2
 }else {
   var COOKIE = COOKIE1
 }
-
-$.log(COOKIE);
 
 const logs = 0; // 0为关闭日志，1为开启
 const notifyttt = 1 // 0为关闭外部推送，1为12 23 点外部推送
@@ -137,6 +134,12 @@ const notifyInterval = 2; // 0为关闭通知，1为所有通知，2为12 23 点
 $.message = '', COOKIES_SPLIT = '', CASH = '', XH = 0, ddtime = '';
 CZ = 10
 Length = 0
+
+
+let max = 60;
+let min = 30;
+
+
 const shuqiuserurlArr = [];
 const shuqisyurlArr = [];
 const shuqisybodyArr = [];
@@ -1819,25 +1822,47 @@ async function all() {
         if (shuqisyurlVal && shuqisybodyVal && shuqisyurlVal != '' && shuqisybodyVal != '') {
             await coin() //用户收益
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
         await readlist(); //阅读时长
         if (shuqirwbodyVal && shuqirwbodyVal != '') {
             await resource() //任务列表
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
         if (shuqisprwurlVal && shuqisprwurlVal != '') {
             await videolist(); //视频任务
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
+
         if (shuqicjyurlVal && shuqicjyurlVal != '') {
             await lotteryinfo(); //抽奖页面
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
         if (shuqijsrwbodyVal && shuqijsrwbodyVal != '') {
             await jsresource() //极速版任务列表
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
         if (shuqijssprwurlVal && shuqijssprwurlVal != '') {
             await jsvideolist() //极速版视频任务
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
         if (shuqijsqdspyurlVal && shuqijsqdspyurlVal != '') {
             await jsqdvideolist(); //极速版签到视频任务
         }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
         if (shuqijlbodyVal && shuqijlbodyVal != '') {
             await bubble(); //奖励页面
         }
@@ -2307,6 +2332,9 @@ function lotteryinfo(timeout = 0) {
                         console.log(`抽奖页面：${$.lotteryinfo.data.actInfo.totalNum}/${$.lotteryinfo.data.actInfo.dailyLotteryLimit}\n`);
                         $.message += `【抽奖页面】：${$.lotteryinfo.data.actInfo.totalNum}/${$.lotteryinfo.data.actInfo.dailyLotteryLimit}\n`;
                         if (shuqicjcsbodyVal && shuqicjcsbodyVal != '' && $.lotteryinfo.data.actInfo.totalNum < $.lotteryinfo.data.actInfo.dailyLotteryLimit) {
+                            random = Math.floor(Math.random()*(max-min+1)+min)*1000
+                            console.log(random);
+                            await $.wait(random);
                             await prizelottery(); //抽奖次数
                         }
                     }
