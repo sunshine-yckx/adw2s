@@ -96,13 +96,9 @@ let cookie2 = {
 
 }
 
-$.console.log(modulees);
-
 if (modulees == 1) {
     module.exports = cookie1
 }
-
-
 if (modulees == 2) {
     module.exports = cookie2
 }
