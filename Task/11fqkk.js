@@ -145,7 +145,6 @@ function execTask(ac, i) {
   return new Promise(resolve => {
     setTimeout(async () => {
       try {
-        await fqkk111(ac);
         let msg = await fqkk3(ac, '');
         if (ac.rest) {
    let skip = false;
