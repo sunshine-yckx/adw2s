@@ -70,7 +70,8 @@ hostname = m.*
 
 const $ = new Env('番茄看看');
 const fqkkurlArr = [], fqkkhdArr = []
-let fqkk = [JSON.parse(process.env.fqkkhd)]
+
+let fqkk = $.getjson('fqkk', [])
 let fqkkBanfirstTask = $.getval('fqkkBanfirstTask') || 'false' // 禁止脚本执行首个任务，避免每日脚本跑首次任务导致微信限制
 let fqkkCkMoveFlag = $.getval('fqkkCkMove') || ''
 let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.3元等于30，默认为提现一元，也就是100
@@ -79,10 +80,28 @@ concurrency = concurrency < 1 ? 1 : concurrency;
 let fqkktz = ''
 
 
+if ($.isNode()) {
+
+  if (process.env.fqkkhd && process.env.fqkkhd.indexOf('#') > -1) {
+  fqkkhd = process.env.fqkkhd.split('#');
+  console.log(`您选择的是用"#"隔开\n`)
+  }
+  else if (process.env.fqkkhd && process.env.fqkkhd.indexOf('\n') > -1) {
+   fqkkhd = process.env.fqkkhd.split('\n');
+   console.log(`您选择的是用换行隔开\n`)
+  } else {
+   fqkkhd = process.env.fqkkhd.split()
+  };
+  Object.keys(fqkkhd).forEach((item) => {
+        if (fqkkhd[item]) {
+          fqkk.push(JSON.parse(fqkkhd[item]))
+        }
+    });
+
+}
+
 !(async () => {
   $.log('fqkk');
-  $.log(fqkk);
-  $.log(process.env.fqkkhd);
   if (fqkk == "") {
     await fqkkck();
   } else if (fqkkCkMoveFlag == 'true') {
@@ -126,6 +145,7 @@ function execTask(ac, i) {
   return new Promise(resolve => {
     setTimeout(async () => {
       try {
+        await fqkk111(ac);
         let msg = await fqkk3(ac, '');
         if (ac.rest) {
    let skip = false;
@@ -326,6 +346,7 @@ function fqkk2(ac, fqkey) {
     })
   })
 }
+
 
 //番茄看看key
 function fqkk1(ac, fqjs, timeout = 0) {
