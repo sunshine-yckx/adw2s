@@ -131,19 +131,17 @@ if ($.isNode()) {
               //await cfzrwlist();
               await $.wait(3000);
               //await cfzhhb();
-              for (let y = 0; y < 5; y++) {
+              for (let y = 0; y < 10; y++) {
                   if(tc == 1){
                       y = 30
                     }
-                  y =  y + 1
                   console.log('\n'+`春风转开始执行循环阅读文章，本次共执行5次，已执行${y+1}次`)
                   await cfzqd()
                 }
-              for (let w = 0; w < 5; w++) {
+              for (let w = 0; w < 10; w++) {
                 if(ts == 1){
                     w = 30
                   }
-                w = w + 1
                 console.log('\n'+`春风转开始执行循环观看视频，本次共执行5次，已执行${w+1}次`)
                 await cfzsplb()
                 await $.wait(31000);
