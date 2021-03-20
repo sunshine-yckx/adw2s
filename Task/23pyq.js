@@ -120,7 +120,11 @@ if (!pyqUAArr[0] && !pyqadArr[0]) {
       pyqad = pyqadArr[i];
       $.index = i + 1;
       console.log(`\n开始【评有圈${$.index}】`)
-      await control()
+
+      for (let y = 0; y < 5; y++) {
+          console.log('\n'+`开始【评有圈${$.index}】循环阅读，本次共执行5次，已执行${y+1}次`)
+        await control()
+        }
       //await showmsg()
   }
  }
@@ -156,45 +160,32 @@ async function control(){
   console.log(random);
   await $.wait(random);
 
-  random1 = Math.floor(Math.random()*(10-2+1)+2)*1000
-  for (let y = 0; y < random1; y++) {
-    await tp_d()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
+  await tp_d()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-    await tp()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
+  await tp()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
+  await comment()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-    id = Number(id) + Math.floor(Math.random()*(600-2+1)+2)*1000;
-    $.setdata(`${id}`,'last_id')
-    }
+  await comment_list()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
+  await fx()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-  random2 = Math.floor(Math.random()*(6-2+1)+2)*1000
-  for (let y = 0; y < random2; y++) {
-    await comment()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
-
-    await comment_list()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
-
-    await fx()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
-
-    await ad()
-    id = Number(id) + Math.floor(Math.random()*(600-2+1)+2)*1000;
-    $.setdata(`${id}`,'last_id')
-    }
+  await ad()
 
 }
 
@@ -220,6 +211,7 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(qd_url,async(error, response, data) =>{
     try{
+        console.log("签到"+data+'\n')
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log("签到"+result.msg+'\n')
@@ -251,6 +243,7 @@ $.log('点赞图文id为：'+id)
     	}
    $.post(tp_url,async(error, response, data) =>{
     try{
+        console.log("点赞图文"+data+'\n')
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
@@ -282,6 +275,7 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(tp_d_url,async(error, response, data) =>{
     try{
+        console.log("取消点赞"+data+'\n')
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')

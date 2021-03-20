@@ -6,7 +6,7 @@ name: 20mm
 on:
   workflow_dispatch:
   schedule:
-     - cron: '11,40 0,2-16/2,23 * * *'
+     - cron: '40 2-16/4 * * *'
   watch:
     types: started
 #env:
@@ -21,11 +21,6 @@ jobs:
 
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -58,11 +53,6 @@ jobs:
       lm_hd: ${{ secrets.lm_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -96,11 +86,6 @@ jobs:
       mm_hd: ${{ secrets.mm_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -133,11 +118,6 @@ jobs:
       zqm_hd: ${{ secrets.zqm_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -170,11 +150,6 @@ jobs:
       ymmzq_hd: ${{ secrets.ymmzq_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -207,11 +182,6 @@ jobs:
       ymyzq_hd: ${{ secrets.ymyzq_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -244,11 +214,6 @@ jobs:
       ymzq_hd: ${{ secrets.ymzq_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -281,11 +246,6 @@ jobs:
       mxz_hd: ${{ secrets.mxz_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -318,11 +278,6 @@ jobs:
       mtwmm_hd: ${{ secrets.mtwmm_hd }}
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
