@@ -220,9 +220,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(qd_url,async(error, response, data) =>{
     try{
-        console.log('签到data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log("签到"+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -252,9 +251,8 @@ $.log('点赞图文id为：'+id)
     	}
    $.post(tp_url,async(error, response, data) =>{
     try{
-        console.log('点赞图文data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -284,9 +282,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(tp_d_url,async(error, response, data) =>{
     try{
-        console.log('取消点赞data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -321,9 +318,8 @@ ${uid}
     	}
    $.post(comment_url,async(error, response, data) =>{
     try{
-        console.log('评论data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -353,9 +349,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(comment_list_url,async(error, response, data) =>{
     try{
-        console.log('删除评论data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         let commentArr = result.list.find(item => item.uid == uid)
         commentid = commentArr.id
         if(commentid){
@@ -389,9 +384,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(commentdel_url,async(error, response, data) =>{
     try{
-        console.log('删除评论data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log('评论'+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -420,9 +414,8 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(fx_url,async(error, response, data) =>{
     try{
-        console.log('分享data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log('分享'+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -450,9 +443,8 @@ async function ad(){
     	}
    $.post(ad_url,async(error, response, data) =>{
     try{
-        console.log('观看广告data为：'+data+'\n')
-        //const result = JSON.parse(data)
-        //if(logs)$.log(data)
+        const result = JSON.parse(data)
+        if(logs)$.log(data)
         console.log('广告'+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);

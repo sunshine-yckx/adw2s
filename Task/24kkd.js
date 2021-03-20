@@ -146,7 +146,7 @@ if (!kkdcookieArr[0]) {
       console.log(`\n开始【快看点${$.index}】`)
       await userinfo()
       await signin()
-      await control()
+      //await control()
       await intervalAward()
       await lotteryTable()
       await lotteryTable_getcoins()
@@ -185,6 +185,7 @@ if($request&&$request.url.indexOf("signIn")>=0) {
     $.msg(`获取kkdsign: 成功🎉`, ``)
     }
   }
+
 async function control(){
    if(invite == 1){
       await invitation();
@@ -209,6 +210,7 @@ return new Promise((resolve, reject) => {
     })
    })
   }
+
 //个人信息
 function userinfo() {
 return new Promise((resolve, reject) => {
@@ -224,15 +226,20 @@ return new Promise((resolve, reject) => {
      body:'{}'
 }
    $.post(userinfourl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs) $.log(data)
-      if(result.message == 'success') {
-          message +='🎉'+result.data.userInfo.nickname+'-今日已得:'+result.data.userInfo.todayCoins+'-现有余额:'+result.data.userInfo.coins+'\n'
+      try{
+         const result = JSON.parse(data)
+          if(logs) $.log(data)
+          if(result.message == 'success') {
+              message +='🎉'+result.data.userInfo.nickname+'-今日已得:'+result.data.userInfo.todayCoins+'-现有余额:'+result.data.userInfo.coins+'\n'
 
-}     else{
-          message += '⚠️异常'+result.message+'\n'
-}
-          resolve()
+          }else{
+              message += '⚠️异常'+result.message+'\n'
+          }
+      } catch (e) {
+        $.log(e, resp);
+      } finally {
+        resolve()
+      }
     })
    })
   }
@@ -251,16 +258,21 @@ return new Promise((resolve, reject) => {
      body:'{}'
 }
    $.get(signinurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs) $.log(data)
-      message += '📣签到\n'
-      if(result.message == 'success') {
-          message +='🎉'+result.data.title+','+result.data.subtitle+'\n'
+      try{
+          const result = JSON.parse(data)
+          if(logs) $.log(data)
+          message += '📣签到\n'
+          if(result.message == 'success') {
+              message +='🎉'+result.data.title+','+result.data.subtitle+'\n'
 
-}     else{
-          message += '⚠️异常'+result.message+'\n'
-}
+          }     else{
+                    message += '⚠️异常'+result.message+'\n'
+          }
+        } catch (e) {
+          $.log(e, resp);
+        } finally {
           resolve()
+        }
     })
    })
   }
@@ -280,17 +292,22 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(lotteryTableurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs) $.log(data)
-        message += '📣超级大转盘\n'
-      if(result.message == 'success') {
-        message += '🔔恭喜获得:'+result.data.content+','
-        lTadlist = result.data.adPondInfo.adInfos[0].adLlsid
-        }
-      else{
-        message += '⚠️异常:'+result.message+'\n'
-        }
-          resolve()
+      try{
+           const result = JSON.parse(data)
+            if(logs) $.log(data)
+              message += '📣超级大转盘\n'
+            if(result.message == 'success') {
+              message += '🔔恭喜获得:'+result.data.content+','
+              lTadlist = result.data.adPondInfo.adInfos[0].adLlsid
+              }
+            else{
+              message += '⚠️异常:'+result.message+'\n'
+              }
+          } catch (e) {
+            $.log(e, resp);
+          } finally {
+            resolve()
+          }
     })
    })
   }
@@ -314,15 +331,20 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(lotteryTable_getcoinsurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs)  $.log(data)
-      if(result.message == 'success') {
-        message += +result.data.coins+'金币\n'
-        }
-      else{
-        message +='⚠️异常:'+result.message+'\n'
-           }
-          resolve()
+     try{
+         const result = JSON.parse(data)
+          if(logs)  $.log(data)
+          if(result.message == 'success') {
+            message += +result.data.coins+'金币\n'
+            }
+          else{
+            message +='⚠️异常:'+result.message+'\n'
+               }
+       } catch (e) {
+         $.log(e, resp);
+       } finally {
+         resolve()
+       }
     })
    })
   }
@@ -340,16 +362,21 @@ return new Promise((resolve, reject) => {
           }
 }
    $.post(intervalAwardurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-       if(logs)  $.log(data)
-       message +='📣时段奖励\n'
-      if(result.message == 'success') {
-        message += result.data.title+',获得:'+result.data.coins+'金币\n'
-        }
-      else{
-        message +='⚠️异常:'+result.message+'\n'
-           }
-          resolve()
+     try{
+         const result = JSON.parse(data)
+           if(logs)  $.log(data)
+           message +='📣时段奖励\n'
+          if(result.message == 'success') {
+            message += result.data.title+',获得:'+result.data.coins+'金币\n'
+            }
+          else{
+            message +='⚠️异常:'+result.message+'\n'
+               }
+         } catch (e) {
+           $.log(e, resp);
+         } finally {
+           resolve()
+         }
     })
    })
   }
@@ -369,16 +396,21 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(giftRainurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs)  $.log(data)
-      message +='📣红包雨\n'
-      if(result.message == 'success') {
-        message += result.data.adPondInfo.buttonText+'\n'
-        gRadlist = result.data.adPondInfo.adInfos[0].adLlsid
-        }else{
-        message +='⚠️异常:'+result.message+'\n'
-           }
-          resolve()
+     try{
+         const result = JSON.parse(data)
+          if(logs)  $.log(data)
+          message +='📣红包雨\n'
+          if(result.message == 'success') {
+            message += result.data.adPondInfo.buttonText+'\n'
+            gRadlist = result.data.adPondInfo.adInfos[0].adLlsid
+            }else{
+            message +='⚠️异常:'+result.message+'\n'
+               }
+       } catch (e) {
+         $.log(e, resp);
+       } finally {
+         resolve()
+       }
     })
    })
   }
@@ -397,15 +429,20 @@ return new Promise((resolve, reject) => {
    body:`{"adPositionType":"GIFTRAIN_INCENTIVE","insertCnt":0,"adCodeId":"1300213002003","serverEcpm":0,"ttl":0,"requestCnt":0,"adProvider":"KS_NEW","adRet":true,"resultExpire":0,"keyString":"1300213002003KS_NEW","endAd":false,"requestStartTime":0,"renderType":0,"adToken":"","adLlsid":"${gRadlist}","isPreload":false,"adAward":0}`
 }
    $.post(giftRain_getcoinsurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs)  $.log(data)
-      if(result.message == 'success') {
-        message += result.data.coins+'金币\n'
-        }
-      else{
-        message +='⚠️异常:'+result.message+'\n'
-           }
-          resolve()
+     try{
+         const result = JSON.parse(data)
+          if(logs)  $.log(data)
+          if(result.message == 'success') {
+            message += result.data.coins+'金币\n'
+            }
+          else{
+            message +='⚠️异常:'+result.message+'\n'
+               }
+       } catch (e) {
+         $.log(e, resp);
+       } finally {
+         resolve()
+       }
     })
    })
   }
@@ -425,17 +462,22 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(lotteryTableurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs) $.log(data)
-        //message += '📣超级大转盘\n'
-      if(result.message == 'success') {
-        //message += '🔔恭喜获得:'+result.data.content+','
-        eXadlist = result.data.adPondInfo.adInfos[0].adLlsid
-        }
-      else{
-        //message += '⚠️异常:'+result.message+'\n'
-        }
+     try{
+          const result = JSON.parse(data)
+          if(logs) $.log(data)
+            //message += '📣超级大转盘\n'
+          if(result.message == 'success') {
+            //message += '🔔恭喜获得:'+result.data.content+','
+            eXadlist = result.data.adPondInfo.adInfos[0].adLlsid
+            }
+          else{
+            //message += '⚠️异常:'+result.message+'\n'
+            }
+        } catch (e) {
+          $.log(e, resp);
+        } finally {
           resolve()
+        }
     })
    })
   }
@@ -455,19 +497,25 @@ return new Promise((resolve, reject) => {
    body:`{"adRet":true,"adCodeId":"1300213002001","adProvider":"KS_NEW","adLlsid":"${eXadlist}","adToken":"","adPositionType":"COIN_REWARD_INCENTIVE","adBizType":"COIN_REWARD"}`
 }
    $.post(giftRain_getcoinsurl,(error, response, data) =>{
-     const result = JSON.parse(data)
-      if(logs)  $.log(data)
-      message +='📣金币悬赏任务\n'
-      if(result.message == 'success') {
-        message += result.data.toast+'\n'
-        }
-      else{
-        message +='⚠️异常:'+result.message+'\n'
-           }
-          resolve()
+     try{
+        const result = JSON.parse(data)
+        if(logs)  $.log(data)
+        message +='📣金币悬赏任务\n'
+        if(result.message == 'success') {
+          message += result.data.toast+'\n'
+          }
+        else{
+          message +='⚠️异常:'+result.message+'\n'
+             }
+       } catch (e) {
+         $.log(e, resp);
+       } finally {
+         resolve()
+       }
     })
    })
   }
+
 var Time = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
 async function showmsg(){
 if(tz==1){
