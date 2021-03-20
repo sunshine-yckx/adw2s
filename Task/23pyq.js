@@ -254,7 +254,7 @@ $.log('点赞图文id为：'+id)
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
-        }catch(e) {
+      }catch(e) {
           $.logErr(e, response);
       } finally {
         resolve();

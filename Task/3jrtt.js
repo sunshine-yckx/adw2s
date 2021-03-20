@@ -215,7 +215,7 @@ if (!signurlArr[0]) {
       readkey = readkeyArr[i];
       $.index = i + 1;
       console.log(`\n开始【今日头条极速版${$.index}】`)
-      await invite()
+      //await invite()
       await userinfo()
       await profit()
       await sign_in()
@@ -323,10 +323,12 @@ async function control(){
    if(collect == 3){
       await collectcoins(coins);
    }
-   if(invited == 4 && invit== 1){
-      await invitation();
-   }
+
+   //if(invited == 4 && invit== 1){
+      //await invitation();
+   //}
 }
+
 function invite() {
 return new Promise((resolve, reject) => {
   let inviteurl ={
@@ -347,6 +349,7 @@ return new Promise((resolve, reject) => {
     })
    })
   }
+
 function invitation() {
 return new Promise((resolve, reject) => {
   let invitatonurl ={
@@ -373,6 +376,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(userinfourl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
       //$.log(signurl+'\n'+signkey+'\n'+farmurl+'\n'+farmkey+'\n'+readurl+'\n'+readkey)
        if(logs) $.log(data)
@@ -384,7 +388,11 @@ return new Promise((resolve, reject) => {
            }else{
           other += '⚠️异常'
 }
-          resolve()
+      }catch(e) {
+          $.logErr(e, response);
+      } finally {
+        resolve();
+      }
     })
    })
   }
@@ -398,6 +406,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(profiturl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
         if(logs)$.log(data)
       if(result.err_no == 0) {
@@ -405,10 +414,15 @@ return new Promise((resolve, reject) => {
 }else{
           other += '⚠️异常\n'
            }
-          resolve()
+       }catch(e) {
+           $.logErr(e, response);
+       } finally {
+         resolve();
+       }
     })
    })
   }
+
 
 //文章阅读30篇每天
 function reading() {
@@ -421,6 +435,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(readurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
       if(logs)  $.log(data)
       other +='📣文章阅读\n'
@@ -435,7 +450,11 @@ return new Promise((resolve, reject) => {
        if(result.err_no == 1028){
           other +='这篇文章已经读过了\n'
         }
-          resolve()
+      }catch(e) {
+          $.logErr(e, response);
+      } finally {
+        resolve();
+      }
     })
    })
   }
@@ -449,6 +468,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(farm_sign_inurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs) $.log(data)
        other +='📣农场签到\n'
@@ -458,7 +478,11 @@ return new Promise((resolve, reject) => {
 }else{
           other +=result.message+'\n'
            }
-          resolve()
+         }catch(e) {
+             $.logErr(e, response);
+         } finally {
+           resolve();
+         }
     })
    })
   }
@@ -472,6 +496,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(openboxurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs) $.log(data)
        other +='📣首页宝箱\n'
@@ -486,7 +511,11 @@ return new Promise((resolve, reject) => {
         other +="不在开宝箱时间\n"
            }
     }
-          resolve()
+        }catch(e) {
+            $.logErr(e, response);
+        } finally {
+          resolve();
+        }
     })
    })
   }
@@ -501,6 +530,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(openfarmboxurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs) $.log(data)
        other +='📣农场宝箱\n'
@@ -511,10 +541,15 @@ return new Promise((resolve, reject) => {
       else if(result.status_code == 5003){
         other +="已全部开启\n"
         }
-          resolve()
+      }catch(e) {
+          $.logErr(e, response);
+      } finally {
+        resolve();
+      }
     })
    })
   }
+
 function landwarer() {
 return new Promise((resolve, reject) => {
   let landwaterurl ={
@@ -524,6 +559,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(landwaterurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
         if(logs)$.log(data)
        other +='📣农场浇水\n'
@@ -534,7 +570,11 @@ return new Promise((resolve, reject) => {
       else{
         other +=result.message+'\n'
            }
-          resolve()
+         }catch(e) {
+           $.logErr(e, response);
+       } finally {
+         resolve();
+       }
     })
    })
   }
@@ -549,6 +589,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(double_rewardurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs) $.log(data)
         other +='📣农场视频双倍离线奖励\n'
@@ -561,7 +602,11 @@ return new Promise((resolve, reject) => {
         other +='📣农场视频双倍离线奖励\n'
         other +="无离线产量可领取\n"
            }
-          resolve()
+         }catch(e) {
+           $.logErr(e, response);
+       } finally {
+         resolve();
+       }
     })
    })
   }
@@ -577,6 +622,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.get(sleepstatusurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs)$.log(data)
       if(result.err_no == 0) {
@@ -607,7 +653,11 @@ if(result.data.history_amount!==0){
 }
 
      }
-          resolve()
+         }catch(e) {
+           $.logErr(e, response);
+       } finally {
+         resolve();
+       }
     })
    })
   }
@@ -621,6 +671,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(sleepstarturl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs) $.log(data)
       if(result.err_no == 0) {
@@ -631,7 +682,11 @@ return new Promise((resolve, reject) => {
            }else{
           other += '📣开始睡觉:'+'⚠️异常'
 }
-          resolve()
+        }catch(e) {
+          $.logErr(e, response);
+        } finally {
+        resolve();
+        }
     })
    })
   }
@@ -645,6 +700,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(sleepstopurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs) $.log(data)
       if(result.err_no == 0) {
@@ -655,7 +711,11 @@ return new Promise((resolve, reject) => {
            }else{
           other +='📣停止睡觉:'+'\n⚠️异常'
 }
-          resolve()
+      }catch(e) {
+        $.logErr(e, response);
+      } finally {
+      resolve();
+      }
     })
    })
   }
@@ -671,6 +731,7 @@ return new Promise((resolve, reject) => {
 }
 
    $.post(collectcoinsurl,(error, response, data) =>{
+    try{
      const result = JSON.parse(data)
        if(logs)$.log(data)
       if(result.err_no == 0) {
@@ -679,7 +740,11 @@ return new Promise((resolve, reject) => {
 }     else{
           other +='📣收取金币:'+'\n⚠️异常:'+result.err_tips+''
 }
-          resolve()
+      }catch(e) {
+        $.logErr(e, response);
+      } finally {
+      resolve();
+      }
     })
    })
   }
