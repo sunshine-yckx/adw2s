@@ -14,8 +14,8 @@ let ymmzqhb = ($.getval('ymmzqhb') || '48');  //兑换红包id，id 46 代表兑
 let ymmzqdh = ($.getval('ymmzqdh') || '5');  //提现id，14代表提现0.3元,15代表提现10元,16代表提现20元,17代表提现50元,18代表提现100元,19代表提现200元，模式提现id 14 提现0.3元，不想看广告想提现其他额度自己修改提现id运行脚本就可以
 var hour,minute,random
 
-let max = 60;
-let min = 35;
+let max = 45;
+let min = 32;
 
 if ($.isNode()) {
   hour = new Date(new Date().getTime() + 8 * 60 * 60 * 1000).getHours();

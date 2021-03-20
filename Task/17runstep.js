@@ -11,7 +11,7 @@ const notifyInterval = 1;
 let tz = '';
 let version = $.getval('version') || "1.5.1"; //APP版本号,更新请到APP更改
 
-let max = 30;
+let max = 25;
 let min = 15;
 //////////////////////////////////////////////////////////////////
 //hour&min

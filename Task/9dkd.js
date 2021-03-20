@@ -74,9 +74,8 @@ let dkdtxhd = $.getdata('dkdtxhd')
 let dkdvd_body = $.getdata('dkdvd_body')
 
 
-let max = 70;
-let min = 40;
-console.log('提现回执:失败🚫 ')
+let max = 50;
+let min = 35;
 const dkdurlArr = []
 const dkdhdArr = []
 const dkdbodyArr = []

@@ -63,8 +63,8 @@ const notifyInterval = 2; // 0为关闭通知，1为所有通知，2为12 23 点
 $.message = '', COOKIES_SPLIT = '', CASH = '', ddtime = '';
 CZ = 10
 
-let max = 70;
-let min = 4;
+let max = 35;
+let min = 20;
 
 const yuedongzutokenArr = [];
 let yuedongzutokenVal = ``;

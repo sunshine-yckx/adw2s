@@ -66,7 +66,7 @@ var cfzlb = '',cfzid = '',cfzmc = '',page = 1
 var sdid = '',sdlqid = '',tc = 0,ts = 0
 
 var hour,minute,random
-var max = 90;
+var max = 80;
 var min = 60;
 
 if ($.isNode()) {

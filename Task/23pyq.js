@@ -33,7 +33,7 @@ status = (status = ($.getval("pyqstatus") || "1") ) > 1 ? `${status}` : ""; // �
 pyqUAArr = [],pyqadArr = []
 let pyqUA = $.getdata('pyqUA')
 let pyqad = $.getdata('pyqad')
-let last_id = ($.getdata('last_id') || 1386250)
+let last_id = ($.getdata('last_id') || 1880000)
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
 const invite=1;//新用户自动邀请，0关闭，1默认开启
 const logs =0;//0为关闭日志，1为开启
@@ -43,8 +43,8 @@ var id = ''
 var texts = ["666真不错","真挺好","美丽啊","漂亮啊","说的对","整不错","真挺好","美丽啊","漂亮啊","说的对"]
 
 var random
-var max = 40;
-var min = 15;
+var max = 20;
+var min = 10;
 
 if ($.isNode()) {
    hour = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getHours();
@@ -146,7 +146,7 @@ function GetCookie() {
 
 async function control(){
 
-  id = Number(last_id) + Math.floor(Math.random()*(6600-2+1)+2)*1000;
+  id = Number(last_id) + Math.floor(Math.random()*(600-2+1)+2)*1000;
   $.setdata(`${id}`,'last_id')
   let index = Math.round(Math.random()*10)
   text = texts[index]
@@ -169,7 +169,7 @@ async function control(){
     await $.wait(random);
 
 
-    id = Number(id) + Math.floor(Math.random()*(4600-2+1)+2)*1000;
+    id = Number(id) + Math.floor(Math.random()*(600-2+1)+2)*1000;
     $.setdata(`${id}`,'last_id')
     }
 
@@ -192,7 +192,7 @@ async function control(){
     await $.wait(random);
 
     await ad()
-    id = Number(id) + Math.floor(Math.random()*(2600-2+1)+2)*1000;
+    id = Number(id) + Math.floor(Math.random()*(600-2+1)+2)*1000;
     $.setdata(`${id}`,'last_id')
     }
 

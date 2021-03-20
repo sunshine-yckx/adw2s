@@ -136,7 +136,7 @@ CZ = 10
 Length = 0
 
 
-let max = 60;
+let max = 45;
 let min = 30;
 
 

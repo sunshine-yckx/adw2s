@@ -103,8 +103,8 @@ let middleflwspBODY = [];
 let middleflwqwBODY = [];
 let middleflwydBODY = [];
 
-let max = 70;
-let min = 40;
+let max = 50;
+let min = 35;
 // 没有设置 FL_CASH 则默认为 0 不提现
 if ($.isNode()) {
   CASH = process.env.FL_CASH || 0;

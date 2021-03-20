@@ -47,8 +47,8 @@ let dkdhd = $.getdata('dkdhd')
 let bodys = $.getdata("dkdvd_body");
 let hbmiss = 0
 
-let max = 70;
-let min = 40;
+let max = 50;
+let min = 30;
 const dkdhdArr = []
 const dkdbodyArr = []
 const bodysArr = []

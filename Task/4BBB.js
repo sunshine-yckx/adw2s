@@ -32,8 +32,8 @@ const $ = new Env('步步寶')
 const notify = $.isNode() ?require('./sendNotify') : '';
 let notice = ''
 let CookieVal = $.getdata('bbb_ck')
-let max = 70;
-let min = 40;
+let max = 50;
+let min = 30;
 
 if ($.isNode()) {
       CookieVal = process.env.BBB_ck.split()

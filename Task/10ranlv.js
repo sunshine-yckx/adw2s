@@ -40,8 +40,8 @@ let cash = ($.getval('rlcash') || '1')//默认不自动提现
 const invite=0;//新用户自动邀请，0关闭，1默认开启
 const logs =0;//0为关闭日志，1为开启
 
-let max = 70;
-let min = 40;
+let max = 45;
+let min = 30;
 
 
 
@@ -256,9 +256,6 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
           if(Number(result.user.balance) > 10 ){cash = 10}
           else if(Number(result.user.balance) > 3 ){cash = 3}
           else{cash = 1}
-          random = Math.floor(Math.random()*(max-min+1)+min)*1000
-          console.log(random);
-          await $.wait(random);
           await wallet()
         }
         }else{
@@ -309,9 +306,6 @@ let headers = rlheader.replace(/acw_tc=\w+/,'')
         console.log(random);
         await $.wait(random);
         await video_info()
-        random = Math.floor(Math.random()*(max-min+1)+min)*1000
-        console.log(random);
-        await $.wait(random);
         await wxfx()
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
