@@ -267,9 +267,9 @@ $.log('点赞图文id为：'+id)
    $.post(tp_url,async(error, response, data) =>{
     try{
         //console.log("点赞图文"+data+'\n')
-        const result = JSON.parse(data)
+        //const result = JSON.parse(data)
         if(logs)$.log(data)
-        console.log(result.msg+'\n')
+        //console.log(result.msg+'\n')
       }catch(e) {
           $.logErr(e, response);
       } finally {
@@ -300,9 +300,9 @@ let uid = pyqad.match(/\d{6}/)
    $.post(tp_d_url,async(error, response, data) =>{
     try{
         //console.log("取消点赞"+data+'\n')
-        const result = JSON.parse(data)
+        //const result = JSON.parse(data)
         if(logs)$.log(data)
-        console.log(result.msg+'\n')
+        //console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
       } finally {
@@ -334,9 +334,9 @@ return new Promise((resolve) => {
   $.post(tp_d_url,async(error, response, data) =>{
    try{
        console.log("取消点赞"+data+'\n')
-       const result = JSON.parse(data)
+       //const result = JSON.parse(data)
        if(logs)$.log(data)
-       console.log(result.msg+'\n')
+       //console.log(result.msg+'\n')
        }catch(e) {
          $.logErr(e, response);
      } finally {
@@ -371,9 +371,9 @@ ${uid}
    $.post(comment_url,async(error, response, data) =>{
     try{
         console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
-        const result = JSON.parse(data)
+        //const result = JSON.parse(data)
         if(logs)$.log(data)
-        console.log(result.msg+'\n')
+        //console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
       } finally {
