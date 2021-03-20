@@ -161,49 +161,35 @@ async function control(){
   console.log(random);
   await $.wait(random);
 
-  random1 = Math.floor(Math.random()*(10-3+1)+3)*1000
-  for (let y = 0; y < random1; y++) {
-    await tp_d()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
+  await tp_d()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-    await tp()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
+  await tp()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-    id = Number(last_id) + Number(Math.floor(Math.random()*(200-2+1)+2)*1000);
-    $.setdata(`${id}`,'last_id')
-    console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
-    }
+  await comment()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-  random2 = Math.floor(Math.random()*(8-3+1)+3)*1000
-  for (let y = 0; y < random2; y++) {
-    await comment()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
+  await comment_list()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-    await comment_list()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
+  await fx()
+  random = Math.floor(Math.random()*(max-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
-    await fx()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
-
-    await ad()
-    random = Math.floor(Math.random()*(max+20-min+1)+min)*1000
-    console.log(random);
-    await $.wait(random);
-
-    id = Number(last_id) + Number(Math.floor(Math.random()*(200-2+1)+2)*1000);
-    $.setdata(`${id}`,'last_id')
-    console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
-    }
+  await ad()
+  random = Math.floor(Math.random()*(max+20-min+1)+min)*1000
+  console.log(random);
+  await $.wait(random);
 
   await tp_e()
 
