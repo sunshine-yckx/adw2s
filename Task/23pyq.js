@@ -43,8 +43,8 @@ var id = ''
 var texts = ["666真不错","真挺好","美丽啊","漂亮啊","说的对","整不错","真挺好","美丽啊","漂亮啊","说的对"]
 
 var random
-var max = 20;
-var min = 10;
+var max = 30;
+var min = 15;
 
 if ($.isNode()) {
    hour = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getHours();
@@ -123,7 +123,8 @@ if (!pyqUAArr[0] && !pyqadArr[0]) {
 
       for (let y = 0; y < 5; y++) {
           console.log('\n'+`开始【评有圈${$.index}】循环阅读，本次共执行5次，已执行${y+1}次`)
-        await control()
+          await control()
+          await $.wait(Math.floor(Math.random()*(120-50+1)+50)*1000);
         }
       //await showmsg()
   }
@@ -150,7 +151,7 @@ function GetCookie() {
 
 async function control(){
 
-  id = Number(last_id) + Math.floor(Math.random()*(600-2+1)+2)*1000;
+  id = Number(last_id) + Math.floor(Math.random()*(6000-2+1)+2)*1000;
   $.setdata(`${id}`,'last_id')
   let index = Math.round(Math.random()*10)
   text = texts[index]
@@ -160,32 +161,51 @@ async function control(){
   console.log(random);
   await $.wait(random);
 
-  await tp_d()
-  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-  console.log(random);
-  await $.wait(random);
+  random1 = Math.floor(Math.random()*(10-3+1)+3)*1000
+  for (let y = 0; y < random1; y++) {
+    await tp_d()
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
 
-  await tp()
-  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-  console.log(random);
-  await $.wait(random);
+    await tp()
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
 
-  await comment()
-  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-  console.log(random);
-  await $.wait(random);
+    id = Number(last_id) + Math.floor(Math.random()*(6000-2+1)+2)*1000;
+    $.setdata(`${id}`,'last_id')
+    console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
+    }
 
-  await comment_list()
-  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-  console.log(random);
-  await $.wait(random);
+  random2 = Math.floor(Math.random()*(8-3+1)+3)*1000
+  for (let y = 0; y < random2; y++) {
+    await comment()
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
 
-  await fx()
-  random = Math.floor(Math.random()*(max-min+1)+min)*1000
-  console.log(random);
-  await $.wait(random);
+    await comment_list()
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
 
-  await ad()
+    await fx()
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
+
+    await ad()
+    random = Math.floor(Math.random()*(max+20-min+1)+min)*1000
+    console.log(random);
+    await $.wait(random);
+
+    id = Number(last_id) + Math.floor(Math.random()*(6000-2+1)+2)*1000;
+    $.setdata(`${id}`,'last_id')
+    console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
+    }
+
+  await tp_e()
 
 }
 
@@ -243,7 +263,7 @@ $.log('点赞图文id为：'+id)
     	}
    $.post(tp_url,async(error, response, data) =>{
     try{
-        console.log("点赞图文"+data+'\n')
+        //console.log("点赞图文"+data+'\n')
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
@@ -254,7 +274,8 @@ $.log('点赞图文id为：'+id)
       }
     })
    })
-  }
+ }
+
 //tp_d
 async function tp_d(){
 $.log('取消点赞id为：'+last_id)
@@ -275,7 +296,7 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(tp_d_url,async(error, response, data) =>{
     try{
-        console.log("取消点赞"+data+'\n')
+        //console.log("取消点赞"+data+'\n')
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
@@ -287,6 +308,40 @@ let uid = pyqad.match(/\d{6}/)
     })
    })
   }
+
+
+//tp_e
+async function tp_e(){
+$.log('取消点赞id为：'+last_id)
+let uid = pyqad.match(/\d{6}/)
+return new Promise((resolve) => {
+   let tp_d_url = {
+     url: `https://pingyouquan.com/tp5/public/index.php/app/thunp/tp_d`,
+       headers: {
+         "Accept": "*/*",
+         "Accept-Encoding": "gzip, deflate, br",
+         "Accept-Language": "zh-Hans-CN;q=1",
+         "Connection": "keep-alive",
+         "Content-Type": "application/json",
+         "Host": "pingyouquan.com",
+         "User-Agent": `${pyqUA}`
+         },
+       body: `{"pid":${id},"uid":${uid},"type":1}`
+     }
+  $.post(tp_d_url,async(error, response, data) =>{
+   try{
+       console.log("取消点赞"+data+'\n')
+       const result = JSON.parse(data)
+       if(logs)$.log(data)
+       console.log(result.msg+'\n')
+       }catch(e) {
+         $.logErr(e, response);
+     } finally {
+       resolve();
+     }
+   })
+  })
+ }
 //comment
 async function comment(){
 $.log('评论内容为：'+text)
@@ -312,6 +367,7 @@ ${uid}
     	}
    $.post(comment_url,async(error, response, data) =>{
     try{
+        console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log(result.msg+'\n')
@@ -343,6 +399,7 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(comment_list_url,async(error, response, data) =>{
     try{
+        console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
         const result = JSON.parse(data)
         if(logs)$.log(data)
         let commentArr = result.list.find(item => item.uid == uid)
@@ -378,6 +435,7 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(commentdel_url,async(error, response, data) =>{
     try{
+        console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n'+'commentid为:'+commentid+'\n');
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log('评论'+result.msg+'\n')
@@ -408,6 +466,7 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(fx_url,async(error, response, data) =>{
     try{
+        console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
         const result = JSON.parse(data)
         if(logs)$.log(data)
         console.log('分享'+result.msg+'\n')
