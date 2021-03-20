@@ -1,12 +1,12 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: 9dkd(多看点)
+name: 24kkd(快看点)
 
 on:
   workflow_dispatch:
   schedule:
-     - cron: '35 0-16/2 * * *'
+     - cron: '10  0-16 * * *'
   watch:
     types: started
 #env:
@@ -15,20 +15,8 @@ on:
 jobs:
   build:
     env:
-      Dkdurl: ${{ secrets.Dkdurl }}
-      Dkdhd: ${{ secrets.Dkdhd }}
-      Dkdbody: ${{ secrets.Dkdbody }}
-      Dkdtxurl: ${{ secrets.Dkdtxurl }}
-      Dkdtxhd: ${{ secrets.Dkdtxhd }}
-      Dkdtxbody: ${{ secrets.Dkdtxbody }}
-
       PUSH_KEY: ${{ secrets.PUSH_KEY }}
       BARK_PUSH: ${{ secrets.BARK_PUSH }}
-      TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-      TG_USER_ID: ${{ secrets.TG_USER_ID }}
-      BARK_SOUND: ${{ secrets.BARK_SOUND }}
-      DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
-      DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
 
 
     runs-on: ubuntu-latest
@@ -41,20 +29,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+
       - name: npm install
         run: |
           cd ~/Scripts
           npm install -g npm
           npm update
 
-      - name: '运行 【dkd】'
+      - name: '运行 【24kkd】'
         run: |
           cd ~/Scripts
-          node Task/9dkd.js
+          node Task/24kkd.js
         env:
-          Dkdurl: ${{ secrets.Dkdurl }}
-          Dkdhd: ${{ secrets.Dkdhd }}
-          Dkdbody: ${{ secrets.Dkdbody }}
-          Dkdtxurl: ${{ secrets.Dkdtxurl }}
-          Dkdtxhd: ${{ secrets.Dkdtxhd }}
-          Dkdtxbody: ${{ secrets.Dkdtxbody }}
+          KKDHEADER: ${{ secrets.KKDHEADER }}
+          KKDCOOKIE: ${{ secrets.KKDCOOKIE }}
+          KKDSIGN: ${{ secrets.KKDSIGN }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          BARK_PUSH: ${{ secrets.BARK_PUSH }}
