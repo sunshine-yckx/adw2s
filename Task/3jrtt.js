@@ -87,7 +87,7 @@ let isGetCookie = typeof $request !== 'undefined'
 if (isGetCookie) {
    GetCookie();
    $.done()
-} 
+}
 if ($.isNode()) {
 //sign
   if (process.env.JRTTSIGNURL && process.env.JRTTSIGNURL.indexOf('#') > -1) {
@@ -298,7 +298,7 @@ return new Promise((resolve, reject) => {
           other +='签到完成\n'
           other +='获得'+result.data.score_amount+'金币\n'
           other +='连续签到'+result.data.sign_times+'天\n'
-  
+
 }else{
           other +='📣首页签到\n'
           other +='今日已完成签到\n'
@@ -306,7 +306,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 
 async function control(){
    if(collect == 0){
@@ -346,7 +346,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 function invitation() {
 return new Promise((resolve, reject) => {
   let invitatonurl ={
@@ -362,7 +362,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 
 function userinfo() {
 return new Promise((resolve, reject) => {
@@ -378,7 +378,7 @@ return new Promise((resolve, reject) => {
        if(logs) $.log(data)
       if(result.message == 'success') {
           other +='🎉'+result.data.name+'\n'
-  
+
 }     else if(result.message == 'error'){
           other += '⚠️异常:'+result.data.description+'\n'
            }else{
@@ -387,7 +387,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 
 function profit() {
 return new Promise((resolve, reject) => {
@@ -401,14 +401,14 @@ return new Promise((resolve, reject) => {
      const result = JSON.parse(data)
         if(logs)$.log(data)
       if(result.err_no == 0) {
-          other +='🎉金币收益:'+result.data.score.amount+'\n🎉估计兑换现金:'+(result.data.score.amount/30000).toFixed(2)+'\n🎉'+'现金收益:'+result.data.cash.amount+'\n'      
+          other +='🎉金币收益:'+result.data.score.amount+'\n🎉估计兑换现金:'+(result.data.score.amount/30000).toFixed(2)+'\n🎉'+'现金收益:'+result.data.cash.amount+'\n'
 }else{
           other += '⚠️异常\n'
            }
           resolve()
     })
    })
-  } 
+  }
 
 //文章阅读30篇每天
 function reading() {
@@ -438,7 +438,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 //农场签到
 function farm_sign_in() {
 return new Promise((resolve, reject) => {
@@ -454,14 +454,14 @@ return new Promise((resolve, reject) => {
        other +='📣农场签到\n'
       if(result.status_code == 0) {
           other +='签到完成\n'
-         
+
 }else{
           other +=result.message+'\n'
            }
           resolve()
     })
    })
-  } 
+  }
 
 function openbox() {
 return new Promise((resolve, reject) => {
@@ -489,7 +489,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  }  
+  }
 
 
 function openfarmbox() {
@@ -514,7 +514,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  }  
+  }
 function landwarer() {
 return new Promise((resolve, reject) => {
   let landwaterurl ={
@@ -537,7 +537,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 //done 这个离线奖励当宝箱全部开完后，需要进入农场再运行脚本，才能获取离线奖励，应该有一个判定，目前没有找到
 //利用浇水激活进农场状态获取离线奖励，目前测试每天离线奖励足够开启农场5个宝箱，不需要做游戏加快生产，具体情况看后期是否需要，再考虑加做除虫，开地，三餐奖励
 function double_reward() {
@@ -564,7 +564,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  }  
+  }
 
 
 //睡觉状态
@@ -587,7 +587,7 @@ return new Promise((resolve, reject) => {
         if(hour >= 20||hour<=2){
            collect=0 //await sleepstart()
            }else{
-if(result.data.history_amount!==0){ 
+if(result.data.history_amount!==0){
 //即使没有满足3600也在睡觉12小时后停止，以防封号
          coins=result.data.history_amount
          collect =3 //collect coins
@@ -599,18 +599,18 @@ if(result.data.history_amount!==0){
          other  +='当前状态:酣睡中,已睡'+parseInt(result.data.sleep_last_time/3600)+'小时'+parseInt((result.data.sleep_last_time%3600)/60)+'分钟'+parseInt((result.data.sleep_last_time%3600)%60)+'秒\n'
           other +='预计可得金币'+result.data.sleep_unexchanged_score+'\n'
           coins=result.data.sleep_unexchanged_score
-         if(result.data.sleep_unexchanged_score == 3600 || parseInt(result.data.sleep_last_time/3600) == 12){ 
+         if(result.data.sleep_unexchanged_score == 3600 || parseInt(result.data.sleep_last_time/3600) == 12){
 //即使没有满足3600也在睡觉12小时后停止，以防封号
          collect =1 //collect coins&sleepstop
           }else{
          collect =2
 }
-   
+
      }
           resolve()
     })
    })
-  } 
+  }
 //开始睡觉
 function sleepstart() {
 return new Promise((resolve, reject) => {
@@ -625,7 +625,7 @@ return new Promise((resolve, reject) => {
        if(logs) $.log(data)
       if(result.err_no == 0) {
           other +='📣开始睡觉\n该睡觉了，开始睡觉'+result.err_tips+'\n'
-  
+
 }     else if(result.err_no == 1052){
           other +='📣开始睡觉\n'+result.err_tips+'\n'
            }else{
@@ -634,7 +634,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 //停止睡觉
 function sleepstop() {
 return new Promise((resolve, reject) => {
@@ -649,7 +649,7 @@ return new Promise((resolve, reject) => {
        if(logs) $.log(data)
       if(result.err_no == 0) {
           other +='📣停止睡觉\n'+result.err_tips+'\n'
-          
+
 }     else if(result.err_no == 1052){
           other += '📣停止睡觉\n'+'还没开始睡觉\n'
            }else{
@@ -658,7 +658,7 @@ return new Promise((resolve, reject) => {
           resolve()
     })
    })
-  } 
+  }
 //收取睡觉金币
 function collectcoins(coins) {
 return new Promise((resolve, reject) => {
@@ -675,14 +675,14 @@ return new Promise((resolve, reject) => {
        if(logs)$.log(data)
       if(result.err_no == 0) {
           other +='📣收取金币\n'+result.err_tips+'     获得金币:'+coins
-          
+
 }     else{
           other +='📣收取金币:'+'\n⚠️异常:'+result.err_tips+''
 }
           resolve()
     })
    })
-  } 
+  }
 var Time = new Date(new Date().getTime() + 8 * 60 * 60 * 1000);
 async function showmsg(){
 if(tz==1){

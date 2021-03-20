@@ -72,6 +72,12 @@ if ($.isNode()) {
   } else {
    pyqUA = process.env.PYQUA.split()
   };
+  Object.keys(pyqUA).forEach((item) => {
+        if (pyqUA[item]) {
+          pyqUAArr.push(pyqUA[item])
+        }
+    });
+
   if (process.env.PYQAD && process.env.PYQAD.indexOf('#') > -1) {
    pyqad = process.env.PYQAD.split('#');
    console.log(`您选择的是用"#"隔开\n`)
@@ -82,6 +88,12 @@ if ($.isNode()) {
   } else {
    pyqad = process.env.PYQAD.split()
   };
+  Object.keys(pyqad).forEach((item) => {
+        if (pyqad[item]) {
+          pyqadArr.push(pyqad[item])
+        }
+    });
+
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
@@ -138,6 +150,7 @@ async function control(){
   $.setdata(`${id}`,'last_id')
   let index = Math.round(Math.random()*10)
   text = texts[index]
+
   await qd()
   random = Math.floor(Math.random()*(max-min+1)+min)*1000
   console.log(random);
