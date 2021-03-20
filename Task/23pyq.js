@@ -33,7 +33,7 @@ status = (status = ($.getval("pyqstatus") || "1") ) > 1 ? `${status}` : ""; // �
 pyqUAArr = [],pyqadArr = []
 let pyqUA = $.getdata('pyqUA')
 let pyqad = $.getdata('pyqad')
-let last_id = ($.getdata('last_id') || 1880000)
+let last_id = ($.getdata('last_id') || 1386250)
 let tz = ($.getval('tz') || '1');//0关闭通知，1默认开启
 const invite=1;//新用户自动邀请，0关闭，1默认开启
 const logs =0;//0为关闭日志，1为开启
@@ -146,7 +146,7 @@ function GetCookie() {
 
 async function control(){
 
-  id = Number(last_id) + 1;
+  id = Number(last_id) + Math.floor(Math.random()*(6600-2+1)+2)*1000;
   $.setdata(`${id}`,'last_id')
   let index = Math.round(Math.random()*10)
   text = texts[index]
@@ -167,6 +167,10 @@ async function control(){
     random = Math.floor(Math.random()*(max-min+1)+min)*1000
     console.log(random);
     await $.wait(random);
+
+
+    id = Number(id) + Math.floor(Math.random()*(4600-2+1)+2)*1000;
+    $.setdata(`${id}`,'last_id')
     }
 
 
@@ -188,6 +192,8 @@ async function control(){
     await $.wait(random);
 
     await ad()
+    id = Number(id) + Math.floor(Math.random()*(2600-2+1)+2)*1000;
+    $.setdata(`${id}`,'last_id')
     }
 
 }
@@ -214,8 +220,9 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(qd_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('签到data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log("签到"+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -245,8 +252,9 @@ $.log('点赞图文id为：'+id)
     	}
    $.post(tp_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('点赞图文data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -276,8 +284,9 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(tp_d_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('取消点赞data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -312,8 +321,9 @@ ${uid}
     	}
    $.post(comment_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('评论data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log(result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -343,8 +353,9 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(comment_list_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('删除评论data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         let commentArr = result.list.find(item => item.uid == uid)
         commentid = commentArr.id
         if(commentid){
@@ -378,8 +389,9 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(commentdel_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('删除评论data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log('评论'+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -408,8 +420,9 @@ let uid = pyqad.match(/\d{6}/)
     	}
    $.post(fx_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('分享data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log('分享'+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
@@ -437,8 +450,9 @@ async function ad(){
     	}
    $.post(ad_url,async(error, response, data) =>{
     try{
-        const result = JSON.parse(data)
-        if(logs)$.log(data)
+        console.log('观看广告data为：'+data+'\n')
+        //const result = JSON.parse(data)
+        //if(logs)$.log(data)
         console.log('广告'+result.msg+'\n')
         }catch(e) {
           $.logErr(e, response);
