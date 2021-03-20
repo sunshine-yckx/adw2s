@@ -165,16 +165,16 @@ async function control(){
   random1 = Math.floor(Math.random()*(10-3+1)+3)
   for (let y = 0; y < random1; y++) {
     await tp_d()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    random = Math.floor(Math.random()*(max-min+1)+min)*400
     console.log(random);
     await $.wait(random);
 
     await tp()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    random = Math.floor(Math.random()*(max-min+1)+min)*500
     console.log(random);
     await $.wait(random);
 
-    id = Number(last_id) + Number(Math.floor(Math.random()*(20-2+1)+2));
+    id = Number(last_id) + Number(Math.floor(Math.random()*(10-2+1)+2));
     //$.setdata(`${id}`,'last_id')
     last_id = id
     console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
@@ -188,21 +188,21 @@ async function control(){
     await $.wait(random);
 
     await comment_list()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    random = Math.floor(Math.random()*(max-min+1)+min)*800
     console.log(random);
     await $.wait(random);
 
     await fx()
-    random = Math.floor(Math.random()*(max-min+1)+min)*1000
+    random = Math.floor(Math.random()*(max-min+1)+min)*800
     console.log(random);
     await $.wait(random);
 
     await ad()
-    random = Math.floor(Math.random()*(max+20-min+1)+min)*1000
+    random = Math.floor(Math.random()*(max+20-min+1)+min)*1100
     console.log(random);
     await $.wait(random);
 
-    id = Number(last_id) + Number(Math.floor(Math.random()*(20-2+1)+2));
+    id = Number(last_id) + Number(Math.floor(Math.random()*(10-2+1)+2));
     //$.setdata(`${id}`,'last_id')
     last_id = id
     console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
