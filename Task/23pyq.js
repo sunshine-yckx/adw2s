@@ -151,7 +151,7 @@ function GetCookie() {
 
 async function control(){
 
-  id = Number(last_id) + Number(Math.floor(Math.random()*(2000-2+1)+2));
+  id = Number(last_id) + Number(Math.floor(Math.random()*(200-2+1)+2));
   //$.setdata(`${id}`,'last_id')
   last_id = id
   let index = Math.round(Math.random()*10)
@@ -162,7 +162,7 @@ async function control(){
   console.log(random);
   await $.wait(random);
 
-  random1 = Math.floor(Math.random()*(10-3+1)+3)*1000
+  random1 = Math.floor(Math.random()*(10-3+1)+3)
   for (let y = 0; y < random1; y++) {
     await tp_d()
     random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -174,13 +174,13 @@ async function control(){
     console.log(random);
     await $.wait(random);
 
-    id = Number(last_id) + Number(Math.floor(Math.random()*(2000-2+1)+2));
+    id = Number(last_id) + Number(Math.floor(Math.random()*(20-2+1)+2));
     //$.setdata(`${id}`,'last_id')
     last_id = id
     console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
     }
 
-  random2 = Math.floor(Math.random()*(8-3+1)+3)*1000
+  random2 = Math.floor(Math.random()*(8-3+1)+3)
   for (let y = 0; y < random2; y++) {
     await comment()
     random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -202,7 +202,7 @@ async function control(){
     console.log(random);
     await $.wait(random);
 
-    id = Number(last_id) + Number(Math.floor(Math.random()*(2000-2+1)+2));
+    id = Number(last_id) + Number(Math.floor(Math.random()*(20-2+1)+2));
     //$.setdata(`${id}`,'last_id')
     last_id = id
     console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
