@@ -51,13 +51,19 @@ let kkdheader = $.getdata('kkdheader')
 let kkdcookie = $.getdata('kkdcookie')
 let kkdsign = $.getdata('kkdsign')
 const logs = false //日志
-const invite = 1; //邀请码1为邀请
+const invite = 0; //邀请码1为邀请
 let tz = ($.getval('tz') || '1');//通知
 const invited = '';
 let lTadlist = '15884282854261489762';
 let gRadlist = '15884282854261489762';
 let eXadlist = '15884282854261489762';
 var message='';
+
+var kkdheader1 = '__clientSign2=k9shb2BW2bozMTgxMDQwNzI4YzVjNzA5ZGRhZGIzYzM2ZmU5MWIxMGQ3ZmUxMTIxZDk%3D&kkd_current_caid=f4cf5621df095960e15b0d2768e37364&did=5C8ED1C4-3F7D-4BAB-A96D-F66F1DFCA2C5&kpn=pearl&ve=3.16.1&nt=WIFI&fr=iOS&lon=&kkd_caid_version=&kpf=IPHONE&os=13.6.1&oc=apple&mi=BB69F700-679A-40BF-905E-18241BB18689&isp=460_11&sr=828*1792&lat=&ss=&dpbs=3sCt3iAAMzE4MTA0MTc4AQIQAIinM9cIsaW3TBAAAAC1e4eqFnhrRLWwUK%2BwfrGN&kkd_last_caid=503e55fa8a9cd231a37b11f4dc07b54a&md=iPhone%2011&app=pearl&egid=DFPBC510C63FC7D96598CF31940CFAE124437ABB6C03F8B16936580181811248'
+var kkdheader22 = '__clientSign2=Yzb5pWBW2fozMTgxMDQwNjY4YzUwNDE5YjJjZDg0ZjBlOTkzMTYyNzI5NGEzMzhhMTQ%3D&kkd_current_caid=f4cf5621df095960e15b0d2768e37364&did=5C8ED1C4-3F7D-4BAB-A96D-F66F1DFCA2C5&kpn=pearl&ve=3.16.1&nt=WIFI&fr=iOS&lon=&kkd_caid_version=&kpf=IPHONE&os=13.6.1&oc=apple&mi=BB69F700-679A-40BF-905E-18241BB18689&isp=460_11&sr=828*1792&_body=ea6038f2951327904d536a4b405de0a67d7f567dfe076ca6ff660dabc1ef2839&lat=&ss=&dpbs=3sCt3iAAMzE4MTA0MTc4AQIQAIinM9cIsaW3TBAAAAC1e4eqFnhrRLWwUK%2BwfrGN&kkd_last_caid=503e55fa8a9cd231a37b11f4dc07b54a&md=iPhone%2011&app=pearl&egid=DFPBC510C63FC7D96598CF31940CFAE124437ABB6C03F8B16936580181811248'
+
+
+var hour ,minute ,other ,lTpageId ,lTsubPageId
 
 if ($.isNode()) {
    hour = new Date( new Date().getTime() + 8 * 60 * 60 * 1000 ).getHours();
@@ -74,6 +80,7 @@ if (isGetCookie) {
    $.done()
 }
 if ($.isNode()) {
+  /*
   if (process.env.KKDHEADER && process.env.KKDHEADER.indexOf('#') > -1) {
    kkdheader = process.env.KKDHEADER.split('#');
    console.log(`您选择的是用"#"隔开\n`)
@@ -100,6 +107,7 @@ if ($.isNode()) {
   } else  {
    kkdsign = process.env.KKDSIGN.split()
   };
+
   Object.keys(kkdheader).forEach((item) => {
         if (kkdheader[item]) {
           kkdheaderArr.push(kkdheader[item])
@@ -115,6 +123,14 @@ if ($.isNode()) {
           kkdsignArr.push(kkdsign[item])
         }
     });
+  */
+
+  kkdheader = '__clientSign2=uISxLWBV9qIzMTgwOTg1MTY4YzViYWM2MjYxZDU1NTE4N2Q1ZDM0ZmNlMjNlMDAxNjY%3D&kkd_current_caid=&did=5C8ED1C4-3F7D-4BAB-A96D-F66F1DFCA2C5&kpn=pearl&ve=3.16.1&nt=WIFI&fr=iOS&lon=&kkd_caid_version=&kpf=IPHONE&os=13.6.1&oc=apple&mi=BB69F700-679A-40BF-905E-18241BB18689&isp=460_11&sr=828*1792&lat=&ss=&dpbs=3sCt3iAAMzE4MDk4NDYzAQIQAIinM9cIsaW3TBAAAAC1e4eqFnhrRLWwUK%2BwfrGN&kkd_last_caid=&md=iPhone%2011&app=pearl&egid=DFP9EE07ACDD8681F217B98C97D3C2549D7AF270DC32AA47115E4D6C935CCB26'
+  kkdcookie = 'did=5C8ED1C4-3F7D-4BAB-A96D-F66F1DFCA2C5;userId=62618545;pearl.api_st=CgxwZWFybC5hcGkuc3QSkAGsud3SrmoHPtjQj-kpE6k7y8PNGgK44_oywza2NoXHiWdfeFplKNCd9rTWJg2qVterc2BQ5nSCvtUTbCpGyO3mR2-013tcCw5N61JLEa4TIj8__261nyXkLnNYB986c96pbnYfix5AQxlcgU8v-TZpoYlO4GaDc5YJq4TOVviBf51SlJDW07BwCaMRL1hVWJsaEuIe9gQyFKh_lWZ44B5j2ch5XiIgFWJ3A3Adm3ZuolFbriIsgtZrGojYcqRKPUVnA4_nSb0oBTAB'
+  kkdsign = '__clientSign2=0QaGxmBV9hozMTgwOTg1MzM4YzUwOGIxOTQxYjZmYzgxMGZjNTU1MTM4OTBlODBhNjA%3D&kkd_current_caid=&did=5C8ED1C4-3F7D-4BAB-A96D-F66F1DFCA2C5&kpn=pearl&ve=3.16.1&nt=WIFI&fr=iOS&lon=&kkd_caid_version=&kpf=IPHONE&os=13.6.1&oc=apple&mi=BB69F700-679A-40BF-905E-18241BB18689&isp=460_11&sr=828*1792&lat=&ss=&dpbs=3sCt3iAAMzE4MDk4NDYzAQIQAIinM9cIsaW3TBAAAAC1e4eqFnhrRLWwUK%2BwfrGN&kkd_last_caid=&md=iPhone%2011&app=pearl&egid=DFP9EE07ACDD8681F217B98C97D3C2549D7AF270DC32AA47115E4D6C935CCB26'
+  kkdheaderArr.push(kkdheader)
+  kkdcookieArr.push(kkdcookie)
+  kkdsignArr.push(kkdsign)
     console.log(`============ 脚本执行-国际标准时间(UTC)：${new Date().toLocaleString()}  =============\n`)
     console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}  =============\n`)
  } else {
@@ -144,6 +160,9 @@ if (!kkdcookieArr[0]) {
       kkdsign = kkdsignArr[i];
       $.index = i + 1;
       console.log(`\n开始【快看点${$.index}】`)
+      await bank()
+      await $.wait(2000)
+      await bank_getman()
       await userinfo()
       await signin()
       //await control()
@@ -276,6 +295,89 @@ return new Promise((resolve, reject) => {
     })
    })
   }
+
+//大转盘22
+function bank() {
+return new Promise((resolve, reject) => {
+  let lotteryTableurl ={
+    url: `https://api.yuncheapp.cn/pearl-incentive/api/v1/bank/home?${kkdheader1}`,
+    headers: {
+              Cookie: kkdcookie,
+              'Connection': 'keep-alive',
+              'rbe-ty': 'k1',
+              'Content-Type': 'application/json',
+              'Host': 'api.yuncheapp.cn',
+              'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
+          },
+}
+
+   $.get(lotteryTableurl,(error, response, data) =>{
+      try{
+          console.log('bank——data为：'+data)
+           const result = JSON.parse(data)
+            if(logs) $.log(data)
+              message += '📣银行小游戏\n'
+            if(result.message == 'success') {
+              message += '🔔广告id获取成功:'+result.data.fullSpeedInfo.adPondInfo.adLlsid+'\n'
+              lTadlist = result.data.fullSpeedInfo.adPondInfo.adLlsid
+              lTpageId = result.data.fullSpeedInfo.adPondInfo.pageId
+              lTsubPageId = result.data.fullSpeedInfo.adPondInfo.subPageId
+              console.log('lTadlist为:'+lTadlist + ' ，lTpageId为:'+lTpageId + ' ，lTsubPageId为:'+lTsubPageId)
+              }
+            else{
+              message += '⚠️异常:'+result.message+'\n'
+              }
+          } catch (e) {
+            $.log(e, response);
+          } finally {
+            resolve()
+          }
+    })
+   })
+  }
+
+//大转盘双倍or神秘宝箱22
+function bank_getman() {
+//const lTbody = kkdbody.replace("GIFTRAIN_INCENTIVE","LOTTERYTABLE_INCENTIVE");
+//const lTbody = kkdbody.replace(/adLlsid":"\d+/,`adLlsid":"${lTadlist}`);
+//$.log('111111'+lTadlist)
+return new Promise((resolve, reject) => {
+  let lotteryTable_getcoinsurl ={
+    url: `https://api.yuncheapp.cn/pearl-incentive/api/v1/ad/finishV2?${kkdheader22}`,
+    headers: {
+      'Accept' : `*/*`,
+      'Cookie' : `did=5C8ED1C4-3F7D-4BAB-A96D-F66F1DFCA2C5;userId=62618545;pearl.api_st=CgxwZWFybC5hcGkuc3QSkAGsud3SrmoHPtjQj-kpE6k7y8PNGgK44_oywza2NoXHiWdfeFplKNCd9rTWJg2qVterc2BQ5nSCvtUTbCpGyO3mR2-013tcCw5N61JLEa4TIj8__261nyXkLnNYB986c96pbnYfix5AQxlcgU8v-TZpoYlO4GaDc5YJq4TOVviBf51SlJDW07BwCaMRL1hVWJsaEuIe9gQyFKh_lWZ44B5j2ch5XiIgFWJ3A3Adm3ZuolFbriIsgtZrGojYcqRKPUVnA4_nSb0oBTAB`,
+      'Connection' : `keep-alive`,
+      'Content-Type' : `application/json`,
+      'rbe-ty' : `k1`,
+      'Host' : `api.yuncheapp.cn`,
+      'User-Agent' : `Artemis/3.16.1 (iPhone; iOS 13.6.1; Scale/2.00)`,
+      'Accept-Language' : `zh-Hans-CN;q=1, zh-Hant-CN;q=0.9`,
+      'Accept-Encoding' : `gzip, deflate, br`
+          },
+     body:`{"adLlsid":"${lTadlist}","adPositionType":"BANK_INCENTIVE","adRet":true,"pageId":${lTpageId},"subPageId":${lTsubPageId}}`
+}
+    console.log('lotteryTable_getcoinsurl为：'+lotteryTable_getcoinsurl)
+   $.post(lotteryTable_getcoinsurl,(error, response, data) =>{
+     try{
+         console.log('bank_getman——data为：'+data)
+         const result = JSON.parse(data)
+          if(logs)  $.log(data)
+          if(result.message == 'success') {
+            message += +result.data.title+'银行满员体验\n'
+            }
+          else{
+            message +='⚠️bank_getman异常:'+result.message+'\n'
+               }
+       } catch (e) {
+         $.log(e, response);
+       } finally {
+         resolve()
+       }
+    })
+   })
+  }
+
 //大转盘
 function lotteryTable() {
 return new Promise((resolve, reject) => {

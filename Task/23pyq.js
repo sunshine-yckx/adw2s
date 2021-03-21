@@ -40,7 +40,7 @@ const logs =0;//0为关闭日志，1为开启
 var hour=''
 var minute=''
 var id = ''
-var texts = ["666真不错","真挺好","美丽啊","漂亮啊","说的对","整不错","真挺好","美丽啊","漂亮啊","说的对"]
+var texts = ["666真不错","真挺好","美丽啊","漂亮啊","说的对","整不错","说得真挺好","图片配得美丽啊","漂亮啊","讲得不错"]
 
 var random
 var max = 30;
@@ -121,8 +121,8 @@ if (!pyqUAArr[0] && !pyqadArr[0]) {
       $.index = i + 1;
       console.log(`\n开始【评有圈${$.index}】`)
 
-      for (let y = 0; y < 5; y++) {
-          console.log('\n'+`开始【评有圈${$.index}】循环阅读，本次共执行5次，已执行${y+1}次`)
+      for (let y = 0; y < 3; y++) {
+          console.log('\n'+`开始【评有圈${$.index}】循环阅读，本次共执行3次，已执行${y+1}次`)
           await control()
           await $.wait(Math.floor(Math.random()*(120-50+1)+50)*1000);
         }
@@ -162,7 +162,7 @@ async function control(){
   console.log(random);
   await $.wait(random);
 
-  random1 = Math.floor(Math.random()*(10-3+1)+3)
+  random1 = Math.floor(Math.random()*(6-2+1)+2)
   for (let y = 0; y < random1; y++) {
     await tp_d()
     random = Math.floor(Math.random()*(max-min+1)+min)*400
@@ -180,7 +180,7 @@ async function control(){
     console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
     }
 
-  random2 = Math.floor(Math.random()*(8-3+1)+3)
+  random2 = Math.floor(Math.random()*(5-1+1)+1)
   for (let y = 0; y < random2; y++) {
     await comment()
     random = Math.floor(Math.random()*(max-min+1)+min)*1000
@@ -188,12 +188,12 @@ async function control(){
     await $.wait(random);
 
     await comment_list()
-    random = Math.floor(Math.random()*(max-min+1)+min)*800
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
     console.log(random);
     await $.wait(random);
 
     await fx()
-    random = Math.floor(Math.random()*(max-min+1)+min)*800
+    random = Math.floor(Math.random()*(max-min+1)+min)*1000
     console.log(random);
     await $.wait(random);
 
