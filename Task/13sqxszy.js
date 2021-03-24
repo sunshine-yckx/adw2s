@@ -1699,6 +1699,7 @@ if (isGetCookie) {
 } else {
     !(async () => {
         await all();
+
         await msgShow();
     })()
     .catch((e) => {
@@ -1873,6 +1874,7 @@ async function all() {
 //通知
 function msgShow() {
     return new Promise(async resolve => {
+      /*
         if (notifyInterval != 1) {
             console.log($.name + '\n' + $.message);
         }
@@ -1885,7 +1887,8 @@ function msgShow() {
         if (notifyInterval == 3 && (nowTimes.getHours() === 6 || nowTimes.getHours() === 12 || nowTimes.getHours() === 18 || nowTimes.getHours() === 23) && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10)) {
             $.msg($.name, ``, $.message);
         }
-        if (notifyttt == 1 && $.isNode() && (nowTimes.getHours() === 12 || nowTimes.getHours() === 23) && (nowTimes.getMinutes() >= 0 && nowTimes.getMinutes() <= 10))
+        */
+        if (notifyttt == 1 && $.isNode() && (nowTimes.getHours() === 12 || nowTimes.getHours() === 23))
             await notify.sendNotify($.name, $.message);
         resolve()
     })
@@ -1907,7 +1910,7 @@ function user(timeout = 0) {
                     $.user = JSON.parse(data);
                     if ($.user.data.userid) {
                         userid = $.user.data.userid
-                        console.log(`\n${O}\n========== ${$.user.data.nickname} ==========\n注册时间：${$.user.data.registerTime}\n`)
+                        //console.log(`\n${O}\n========== ${$.user.data.nickname} ==========\n注册时间：${$.user.data.registerTime}\n`)
                         $.message += `\n${O}\n========== 【${$.user.data.nickname}】 ==========\n【注册时间】：${$.user.data.registerTime}\n`;
                         resolve(true);
                     }
@@ -1973,7 +1976,7 @@ function coin(timeout = 0) {
                     if (logs) $.log(`${O}, 用户收益🚩: ${decodeUnicode(data)}`);
                     $.coin = JSON.parse(data);
                     if ($.coin.status == 200) {
-                        console.log(`用户收益：今日${$.coin.data.ShuqiVipEntry.userinfo.coinInfo.todayWorthMoney}元，余额${$.coin.data.ShuqiVipEntry.userinfo.coinInfo.balanceWorthMoney}元\n`);
+                        //console.log(`用户收益：今日${$.coin.data.ShuqiVipEntry.userinfo.coinInfo.todayWorthMoney}元，余额${$.coin.data.ShuqiVipEntry.userinfo.coinInfo.balanceWorthMoney}元\n`);
                         $.message += `【用户收益】：今日${$.coin.data.ShuqiVipEntry.userinfo.coinInfo.todayWorthMoney}元，余额${$.coin.data.ShuqiVipEntry.userinfo.coinInfo.balanceWorthMoney}元\n`;
                     }
                 } catch (e) {
