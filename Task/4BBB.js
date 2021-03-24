@@ -92,8 +92,14 @@ $.msg($.name,"開始🎉🎉🎉")
 
 
 function showmsg(){
-    $.msg($.name, '', notice)
+
+  if ($.isNode()){
+    if ( $.isNode() && (nowTimes.getHours() === 23))
+        await notify.sendNotify($.name, '', notice)
      }
+   }
+  $.msg($.name, '', notice)
+ }
 
 var getBoxId = (function () {
     var i = 0;

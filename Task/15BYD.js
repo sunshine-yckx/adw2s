@@ -90,8 +90,8 @@ $.msg('现在时间为'+hour+':'+minute)
 
 
 function showmsg(){
-    $.msg($.name, '', notice , noticemsg)
-    if (hour >23){
+    //$.msg($.name, '', notice , noticemsg)
+    if (hour >22){
       notify.sendNotify(`${$.name}-账号${nickname} 今日收益为${today_gold}` , `${$.name}-账号${nickname}\n${notice} \n\n ${noticemsg}`)
     }
 }

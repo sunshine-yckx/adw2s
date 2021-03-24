@@ -203,7 +203,7 @@ async function index() {
             usercash = data.data.user.money
             $.log(`\n🔸用户信息`);
             $.log(`【用户名】:${data.data.user.nickname}`);
-            $.log(`【余额】:¥${data.data.user.money}`);
+            //$.log(`【余额】:¥${data.data.user.money}`);
             $.log(`【健康币】:$${data.data.user_detail.jkb}🏅`);
             $.log(`【步数】:${data.data.user_detail.step}👣`);
             $.log(`\n🙇查询签到状态`);
@@ -517,7 +517,8 @@ async function wheelindex() {
               }
             }
             if(wheeltotalnum <= 8){
-              await wheelincr();
+              $.log(`\n👧跳过兑换幸运转盘,进行下一个任务...\n`);
+              //await wheelincr();
             }else{
               $.log(`\n👧幸运转盘已达红包上限,进行下一个任务...\n`);
             }
@@ -1014,7 +1015,8 @@ async function gglindex() {
             }
             await ggledlist();
             if(ggltotalnum <= 21){
-              await gglincr();
+              $.log(`👧跳过兑换抽奖机会...\n`);
+              //await gglincr();
             }else{
               $.log(`👧摇一摇已达红包上限,进行下一个任务...\n`);
             }

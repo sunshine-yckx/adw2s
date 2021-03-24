@@ -924,15 +924,14 @@ async function showmsg(){
 if(tz==1){
     $.log(message+note)
     if ($.isNode()){
-    if (hour == 23) {
-       await notify.sendNotify($.name,message+note)
-     }
-   }else{
-     $.log(message+note)
-    //if ((hour == 12 && minute <= 20) || (hour == 23 && minute >= 40)) {
-       $.msg(zhiyi,'',message+note)
-//}
-}
+      if (hour == 23) {
+         await notify.sendNotify($.name,message+note)
+       }
+     }/*
+     else{
+             $.log(message+note)
+               $.msg(zhiyi,'',message+note)
+        }*/
    }else{
        $.log(message+note)
     }
