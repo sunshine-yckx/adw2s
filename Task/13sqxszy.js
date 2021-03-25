@@ -1843,6 +1843,23 @@ async function all() {
         if (shuqicjyurlVal && shuqicjyurlVal != '') {
             await lotteryinfo(); //抽奖页面
         }
+	    
+        //2
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
+        if (shuqisprwurlVal && shuqisprwurlVal != '') {
+            await videolist(); //视频任务
+        }
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
+
+        if (shuqicjyurlVal && shuqicjyurlVal != '') {
+            await lotteryinfo(); //抽奖页面
+        }
+	//2
+	    
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
       	await $.wait(random);
@@ -1855,6 +1872,14 @@ async function all() {
         if (shuqijssprwurlVal && shuqijssprwurlVal != '') {
             await jsvideolist() //极速版视频任务
         }
+	//2
+        random = Math.floor(Math.random()*(max-min+1)+min)*1000
+        console.log(random);
+      	await $.wait(random);
+        if (shuqijssprwurlVal && shuqijssprwurlVal != '') {
+            await jsvideolist() //极速版视频任务
+        }
+	    
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
       	await $.wait(random);
