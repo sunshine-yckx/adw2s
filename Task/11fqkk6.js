@@ -70,6 +70,7 @@ hostname = m.*
 
 const $ = new Env('番茄看看');
 const fqkkurlArr = [], fqkkhdArr = []
+
 let fqkk = $.getjson('fqkk', [])
 let fqkkBanfirstTask = $.getval('fqkkBanfirstTask') || 'false' // 禁止脚本执行首个任务，避免每日脚本跑首次任务导致微信限制
 let fqkkCkMoveFlag = $.getval('fqkkCkMove') || ''
@@ -77,6 +78,7 @@ let fqtx = ($.getval('fqtx') || '100');  // 此处修改提现金额，0.3元等
 let concurrency = ($.getval('fqkkConcurrency') || '1') - 0; // 并发执行任务的账号数，默单账号循环执行
 concurrency = concurrency < 1 ? 1 : concurrency;
 let fqkktz = ''
+
 
 if ($.isNode()) {
 
@@ -99,12 +101,16 @@ if ($.isNode()) {
 }
 
 !(async () => {
+  $.log('fqkk');
   if (fqkk == "") {
     await fqkkck();
   } else if (fqkkCkMoveFlag == 'true') {
     await fqkkCkMove();
   } else {
+    $.log(1);
     let acList = fqkk.filter(o => o.hd).map((o, i) => ({no: i+1, uid: o.uid, gold: 0, score: 0, rest: 0, num: 0, url: o.url, headers: JSON.parse(o.hd)}));
+
+    $.log(acList);
     let execAcList = [];
     let slot = acList.length % concurrency == 0 ? acList.length / concurrency : parseInt(acList.length / concurrency) + 1;
     acList.forEach((o, i) => {
@@ -340,6 +346,7 @@ function fqkk2(ac, fqkey) {
   })
 }
 
+
 //番茄看看key
 function fqkk1(ac, fqjs, timeout = 0) {
   return new Promise((resolve) => {
@@ -359,7 +366,7 @@ function fqkk1(ac, fqjs, timeout = 0) {
             let jumpObj = await fqkk2(ac, result.data.jkey);
             if (jumpObj) {
               $.log(`🌝账号${ac.no}等待10秒后提交本次阅读领取奖励`);
-              await $.wait(18000);
+              await $.wait(10000);
               m = await fqkk3(ac, result.data.jkey);
               f = ac.rest;
             } else {
