@@ -332,7 +332,7 @@ function ysm4(ac) {
             ac.last_gold = (result.data.last_gold || 0) - 0
             ac.day_read = (result.data.day_read || 0) - 0
             ac.day_gold = (result.data.day_gold || 0) - 0
-            ac.remain_read = (result.data.remain_read || 0) - 0
+            ac.remain_read = (result.data.remain_read || 0) + 60
           }
         }
       } catch (e) {
@@ -363,7 +363,7 @@ function ysm3(ac, time) {
             ac.last_gold = (result.data.last_gold || 0) - 0
             ac.day_read = (result.data.day_read || 0) - 0
             ac.day_gold = (result.data.day_gold || 0) - 0
-            ac.remain_read = (result.data.remain_read || 0) - 0
+            ac.remain_read = (result.data.remain_read || 0) + 60
             if (ac.remain_read <= 0) {
               f = 0
               $.msg(`${$.name}: 账号${ac.no}`, '', `今日阅读已达上限，请明日继续`)
