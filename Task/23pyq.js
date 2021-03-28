@@ -121,8 +121,8 @@ if (!pyqUAArr[0] && !pyqadArr[0]) {
       $.index = i + 1;
       console.log(`\n开始【评有圈${$.index}】`)
 
-      for (let y = 0; y < 3; y++) {
-          console.log('\n'+`开始【评有圈${$.index}】循环阅读，本次共执行3次，已执行${y+1}次`)
+      for (let y = 0; y < 2; y++) {
+          console.log('\n'+`开始【评有圈${$.index}】循环阅读，本次共执行2次，已执行${y+1}次`)
           await control()
           await $.wait(Math.floor(Math.random()*(120-50+1)+50)*1000);
         }
@@ -162,7 +162,7 @@ async function control(){
   console.log(random);
   await $.wait(random);
 
-  random1 = Math.floor(Math.random()*(6-2+1)+2)
+  random1 = Math.floor(Math.random()*(3-1+1)+1)
   for (let y = 0; y < random1; y++) {
     await tp_d()
     random = Math.floor(Math.random()*(max-min+1)+min)*400
@@ -180,7 +180,7 @@ async function control(){
     console.log('id为:'+id+'\n'+'last_id为:'+last_id+'\n');
     }
 
-  random2 = Math.floor(Math.random()*(5-1+1)+1)
+  random2 = Math.floor(Math.random()*(3-1+1)+1)
   for (let y = 0; y < random2; y++) {
     await comment()
     random = Math.floor(Math.random()*(max-min+1)+min)*1000
