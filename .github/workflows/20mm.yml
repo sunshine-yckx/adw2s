@@ -6,7 +6,7 @@ name: 20mm
 on:
   workflow_dispatch:
   schedule:
-     - cron: '40 2-16/4 * * *'
+     - cron: '40 5,11,14 * * *'
   watch:
     types: started
 #env:
