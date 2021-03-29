@@ -80,19 +80,19 @@ let fqkktz = ''
 
 if ($.isNode()) {
 
-  if (process.env.fqkkhd && process.env.fqkkhd.indexOf('#') > -1) {
-  fqkkhd = process.env.fqkkhd.split('#');
+  if (process.env.fqkkck && process.env.fqkkck.indexOf('#') > -1) {
+  fqkkck = process.env.fqkkck.split('#');
   console.log(`您选择的是用"#"隔开\n`)
   }
-  else if (process.env.fqkkhd && process.env.fqkkhd.indexOf('\n') > -1) {
-   fqkkhd = process.env.fqkkhd.split('\n');
+  else if (process.env.fqkkck && process.env.fqkkck.indexOf('\n') > -1) {
+   fqkkck = process.env.fqkkck.split('\n');
    console.log(`您选择的是用换行隔开\n`)
   } else {
-   fqkkhd = process.env.fqkkhd.split()
+   fqkkck = process.env.fqkkck.split()
   };
-  Object.keys(fqkkhd).forEach((item) => {
-        if (fqkkhd[item]) {
-          fqkk.push(JSON.parse(fqkkhd[item]))
+  Object.keys(fqkkck).forEach((item) => {
+        if (fqkkck[item]) {
+          fqkk.push(JSON.parse(fqkkck[item]))
         }
     });
 
