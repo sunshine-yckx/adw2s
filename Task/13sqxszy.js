@@ -44,6 +44,12 @@ boxjs链接  https://raw.githubusercontent.com/6Svip120apk69/gitee_q8qsTAUA_cThx
     shuqicjyurlVal👉  获取抽奖页url  点击福利转转转
     shuqicjcsbodyVal👉抽奖次数body   点击福利转转转 点击看视频抽奖
     shuqicjbodyVal👉  获取抽奖body   点击福利转转转 点击看视频抽奖
+    shuqitaskSendhd
+    shuqitaskSendbody
+    shuqiwithdrawurl
+    shuqiwithdrawhd
+    shuqiwithdrawbody
+
 
     shuqijsspbodyVal👉 极速版视频body   极速版点击福利 赚金币 看视频
     shuqijsydurlVal👉  极速版阅读url    极速版点进一本书 右上角转一圈，如没有圈圈，建议放弃，
@@ -1361,6 +1367,115 @@ function GetCookie() {
             };
         }
     }
+    //获取提现分享
+    if ($request && $request.url.indexOf("activity") >= 0 && $request.url.indexOf("task") >= 0) {
+        const shuqitaskSendhd = $request.headers;
+        const shuqitaskSendbody = $request.body;
+        if (shuqitaskSendbody) {
+            if (XH == 1) {
+                cookie()
+
+                function cookie() {
+                    bodys = $.getdata('shuqitaskSendbody' + $.idx);
+                    if (bodys) {
+                        if ($.idx == '') {
+                            $.idx = 2
+                            cookie()
+                        } else {
+                            $.idx = $.idx + 1
+                            cookie()
+                        }
+                    } else {
+                        $.setdata(shuqitaskSendhd, "shuqitaskSendhd" + $.idx);
+                        $.log(
+                            `[${$.name + $.idx}] 获取提现分享shuqitaskSendhd✅: 成功,shuqitaskSendhd: ${shuqitaskSendhd}`
+                        );
+                        $.msg($.name + $.idx, `获取提现分享shuqitaskSendhd: 成功🎉`, ``);
+                        $.setdata(shuqitaskSendbody, "shuqitaskSendbody" + $.idx);
+                        $.log(
+                            `[${$.name + $.idx}] 获取提现分享shuqitaskSendbody✅: 成功,shuqitaskSendbody: ${shuqitaskSendbody}`
+                        );
+                        $.msg($.name + $.idx, `获取提现分享shuqitaskSendbody: 成功🎉`, ``);
+                        $.done();
+                    };
+                }
+            } else {
+                $.setdata(shuqitaskSendhd, "shuqitaskSendhd" + $.idx);
+                $.log(
+                    `[${$.name + $.idx}] 获取提现分享shuqitaskSendhd✅: 成功,shuqitaskSendhd: ${shuqitaskSendhd}`
+                );
+                $.msg($.name + $.idx, `获取提现分享shuqitaskSendhd: 成功🎉`, ``);
+                $.setdata(shuqitaskSendbody, "shuqitaskSendbody" + $.idx);
+                $.log(
+                    `[${$.name + $.idx}] 获取提现分享shuqitaskSendbody✅: 成功,shuqitaskSendbody: ${shuqitaskSendbody}`
+                );
+                $.msg($.name + $.idx, `获取提现分享shuqitaskSendbody: 成功🎉`, ``);
+                $.done();
+            };
+        }
+    }
+    //获取提现
+    if ($request && $request.url.indexOf("/activity/xapi/gold/") >= 0 && $request.url.indexOf("withdraw?asac=") >= 0 ) {
+        const shuqiwithdrawurl = $request.url;
+        const shuqiwithdrawhd = $request.headers;
+        const shuqiwithdrawbody = $request.body;
+        if (shuqiwithdrawurl) {
+            if (XH == 1) {
+                cookie()
+
+                function cookie() {
+                    bodys = $.getdata('shuqiwithdrawurl' + $.idx);
+                    if (bodys) {
+                        if ($.idx == '') {
+                            $.idx = 2
+                            cookie()
+                        } else {
+                            $.idx = $.idx + 1
+                            cookie()
+                        }
+                    } else {
+                        $.setdata(shuqitaskSendhd, "shuqiwithdrawurl" + $.idx);
+                        $.log(
+                            `[${$.name + $.idx}] 获取提现shuqiwithdrawurl✅: 成功,shuqiwithdrawurl: ${shuqiwithdrawurl}`
+                        );
+                        $.msg($.name + $.idx, `获取提现shuqiwithdrawurl: 成功🎉`, ``);
+
+                        $.setdata(shuqiwithdrawhd, "shuqiwithdrawhd" + $.idx);
+                        $.log(
+                            `[${$.name + $.idx}] 获取提现shuqiwithdrawhd✅: 成功,shuqiwithdrawhd: ${shuqiwithdrawhd}`
+                        );
+                        $.msg($.name + $.idx, `shuqiwithdrawhd: 成功🎉`, ``);
+
+                        $.setdata(shuqiwithdrawbody, "shuqiwithdrawbody" + $.idx);
+                        $.log(
+                            `[${$.name + $.idx}] 获取提现shuqiwithdrawbody✅: 成功,shuqiwithdrawbody: ${shuqiwithdrawbody}`
+                        );
+                        $.msg($.name + $.idx, `shuqiwithdrawbody: 成功🎉`, ``);
+                        $.done();
+                    };
+                }
+            } else {
+                $.setdata(shuqitaskSendhd, "shuqiwithdrawurl" + $.idx);
+                $.log(
+                    `[${$.name + $.idx}] 获取提现shuqiwithdrawurl✅: 成功,shuqiwithdrawurl: ${shuqiwithdrawurl}`
+                );
+                $.msg($.name + $.idx, `获取提现shuqiwithdrawurl: 成功🎉`, ``);
+
+                $.setdata(shuqiwithdrawhd, "shuqiwithdrawhd" + $.idx);
+                $.log(
+                    `[${$.name + $.idx}] 获取提现shuqiwithdrawhd✅: 成功,shuqiwithdrawhd: ${shuqiwithdrawhd}`
+                );
+                $.msg($.name + $.idx, `shuqiwithdrawhd: 成功🎉`, ``);
+
+                $.setdata(shuqiwithdrawbody, "shuqiwithdrawbody" + $.idx);
+                $.log(
+                    `[${$.name + $.idx}] 获取提现shuqiwithdrawbody✅: 成功,shuqiwithdrawbody: ${shuqiwithdrawbody}`
+                );
+                $.msg($.name + $.idx, `shuqiwithdrawbody: 成功🎉`, ``);
+                $.done();
+            };
+        }
+    }
     //获取极速版视频
     if ($request && $request.url.indexOf("prize") >= 0 && $request.url.indexOf("lottery") >= 0 && $request.body.indexOf("resourceId=719") >= 0) {
         const shuqijsspbodyVal = $request.body;
@@ -1843,7 +1958,7 @@ async function all() {
         if (shuqicjyurlVal && shuqicjyurlVal != '') {
             await lotteryinfo(); //抽奖页面
         }
-	    
+
         //2
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
@@ -1859,7 +1974,7 @@ async function all() {
             await lotteryinfo(); //抽奖页面
         }
 	//2
-	    
+
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
       	await $.wait(random);
@@ -1879,7 +1994,7 @@ async function all() {
         if (shuqijssprwurlVal && shuqijssprwurlVal != '') {
             await jsvideolist() //极速版视频任务
         }
-	    
+
         random = Math.floor(Math.random()*(max-min+1)+min)*1000
         console.log(random);
       	await $.wait(random);
